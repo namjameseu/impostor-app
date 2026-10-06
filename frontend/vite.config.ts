@@ -11,9 +11,9 @@ export default defineConfig({
     react(),
     tailwindcss(),
     VitePWA({
-      // New versions install in the background and apply on the next launch/reload,
-      // so an update never interrupts a game in progress.
-      registerType: 'autoUpdate',
+      // The app decides when to switch to a new version (see components/UpdatePrompt.tsx):
+      // immediately outside a game, or when the players tap "Refresh" during one.
+      registerType: 'prompt',
       includeAssets: ['favicon.ico', 'favicon.svg', 'apple-touch-icon-180x180.png'],
       manifest: {
         name: 'Impostor',
