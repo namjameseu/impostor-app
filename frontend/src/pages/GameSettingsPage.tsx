@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { Button } from '../components/Button'
 import { ErrorMessage } from '../components/ErrorMessage'
-import { OptionButton, OptionGroup } from '../components/OptionGroup'
+import { CategoryPicker } from '../components/CategoryPicker'
+import { OptionGroup } from '../components/OptionGroup'
 import { RoundsInput } from '../components/RoundsInput'
 import { Screen } from '../components/Screen'
-import { Loading } from '../components/Spinner'
 import { useAction } from '../hooks/useAction'
 import { gameApi, libraryApi } from '../services/api'
 import { useSetup } from '../stores/setupContext'
@@ -93,29 +93,13 @@ export function GameSettingsPage() {
         }}
       />
 
-      <fieldset className="flex min-w-0 flex-col gap-2">
-        <legend className="mb-2 text-sm font-extrabold tracking-widest text-muted uppercase">
-          Categories
-        </legend>
-        <p className="-mt-1 mb-1 text-sm font-bold text-muted">
-          {isRandom
-            ? 'Random uses every category. Pick one or more to mix your own.'
-            : `Mixing ${selectedIds.length} ${selectedIds.length === 1 ? 'category' : 'categories'}.`}
-        </p>
-        <div className="grid grid-cols-2 gap-2">
-          <OptionButton selected={isRandom} label="🎲 Random" hint="All categories" onClick={chooseRandom} />
-          {categories === null && <Loading label="Loading categories…" className="col-span-2 py-6" />}
-          {categories?.map((c) => (
-            <OptionButton
-              key={c.id}
-              selected={!isRandom && selectedIds.includes(c.id)}
-              label={`${!isRandom && selectedIds.includes(c.id) ? '✓ ' : ''}${c.name}`}
-              hint={`${c.word_count} words`}
-              onClick={() => toggleCategory(c.id)}
-            />
-          ))}
-        </div>
-      </fieldset>
+      <CategoryPicker
+        categories={categories}
+        isRandom={isRandom}
+        selectedIds={selectedIds}
+        onRandom={chooseRandom}
+        onToggle={toggleCategory}
+      />
 
       <OptionGroup
         label="Impostors"
