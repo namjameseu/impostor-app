@@ -38,6 +38,11 @@
   #root {
     min-height: 100dvh;
   }
+  html,
+  body {
+    /* No pull-to-refresh or rubber-banding: a refresh mid-game would be disruptive. */
+    overscroll-behavior: none;
+  }
   body {
     @apply bg-ink font-sans text-white antialiased;
     background-image: radial-gradient(circle at 50% -20%, #2b2160 0%, transparent 60%);

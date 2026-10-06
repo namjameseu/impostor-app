@@ -7,6 +7,7 @@ import { Screen } from '../components/Screen'
 import { Loading } from '../components/Spinner'
 import { ScreenHeaderContext } from '../components/screenHeader'
 import { useGame } from '../hooks/useGame'
+import { useWakeLock } from '../hooks/useWakeLock'
 import type { GameState } from '../types/api'
 import { ClueRoundScreen } from './game/ClueRoundScreen'
 import { FinalGuessScreen } from './game/FinalGuessScreen'
@@ -34,6 +35,8 @@ const SCREENS: Record<GameState, ComponentType<ScreenProps>> = {
 export function GamePage() {
   const gameId = Number(useParams().gameId)
   const { game, setGame, error, reload } = useGame(gameId)
+  // The phone gets passed around and put down during clues; don't let it dim or lock.
+  useWakeLock()
 
   if (!game) {
     return (

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Button } from '../components/Button'
 import { Screen } from '../components/Screen'
+import { useInstallPrompt } from '../hooks/useInstallPrompt'
 import { gameApi } from '../services/api'
 import { useSetup } from '../stores/setupContext'
 
@@ -9,6 +10,7 @@ export function HomePage() {
   const navigate = useNavigate()
   const { activeGameId, setActiveGameId } = useSetup()
   const [resumable, setResumable] = useState(false)
+  const installPrompt = useInstallPrompt()
 
   useEffect(() => {
     if (activeGameId === null) return
@@ -29,6 +31,17 @@ export function HomePage() {
             </Button>
           )}
           <Button onClick={() => navigate('/setup')}>New game</Button>
+          {installPrompt.canInstall && (
+            <Button variant="secondary" size="md" onClick={installPrompt.install}>
+              📲 Install app
+            </Button>
+          )}
+          {installPrompt.showIosHint && (
+            <p className="text-center text-sm font-bold text-muted">
+              📲 Install: tap <span className="text-white">Share</span>, then{' '}
+              <span className="text-white">Add to Home Screen</span>
+            </p>
+          )}
           <Link
             to="/library"
             className="flex min-h-14 items-center justify-center font-display text-lg tracking-wide text-muted uppercase hover:text-white"

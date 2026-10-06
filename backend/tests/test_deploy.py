@@ -66,6 +66,8 @@ def test_serves_built_frontend_with_spa_fallback(tmp_path):
     (tmp_path / "index.html").write_text("<html>app</html>")
     (tmp_path / "assets" / "app.js").write_text("console.log(1)")
     (tmp_path / "favicon.svg").write_text("<svg/>")
+    (tmp_path / "sw.js").write_text("self.x=1")
+    (tmp_path / "manifest.webmanifest").write_text("{}")
     routes_before = list(app.router.routes)
     mount_frontend(tmp_path)
     try:
@@ -77,5 +79,10 @@ def test_serves_built_frontend_with_spa_fallback(tmp_path):
             assert client.get("/api/nope").status_code == 404  # API 404s stay JSON 404s
             assert client.get("/api/health").json() == {"status": "ok"}
             assert client.get("/../../etc/passwd").text == "<html>app</html>"
+            assert client.get("/").headers["cache-control"] == "no-cache"
+            assert client.get("/sw.js").headers["cache-control"] == "no-cache"
+            manifest = client.get("/manifest.webmanifest")
+            assert manifest.headers["content-type"].startswith("application/manifest+json")
+            assert "cache-control" not in client.get("/assets/app.js").headers
     finally:
         app.router.routes[:] = routes_before

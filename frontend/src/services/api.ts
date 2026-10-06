@@ -49,7 +49,7 @@ async function request<T>(method: string, path: string, body?: unknown): Promise
       body: body === undefined ? undefined : JSON.stringify(body),
     })
   } catch {
-    throw new ApiError(0, 'Could not reach the server. Is the backend running?')
+    throw new ApiError(0, "Can't reach the server. Check your internet connection and try again.")
   }
   if (response.status === 204) return undefined as T
   const data: unknown = await response.json().catch(() => null)

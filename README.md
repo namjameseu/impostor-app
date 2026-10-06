@@ -82,6 +82,32 @@ docker run --rm -p 8080:8000 --network impostor-app_default \
 # open http://localhost:8080
 ```
 
+## Install on a phone (PWA)
+
+The app is a Progressive Web App: on the deployed site, Android/Chrome shows **📲 Install app**
+on the home screen; on iPhone, tap **Share → Add to Home Screen**. It then opens full-screen
+like a native app. Notes:
+
+- The app shell is cached, so it opens instantly (and even offline), but games and words always
+  come live from the server - an internet connection is still needed to play.
+- New deploys download in the background and apply the next time the app is opened.
+- During a game the screen is kept awake (Screen Wake Lock), so it doesn't dim while the phone
+  is passed around or lying on the table.
+- Icons are generated from `frontend/public/favicon.svg`; after changing the logo run
+  `npx pwa-assets-generator` in `frontend/`.
+
+## Continuous integration
+
+`.github/workflows/ci.yml` runs on every push to `main` and on pull requests:
+
+- **Backend**: ruff lint/format, migrations up → down → up on a real Postgres, seed twice, pytest
+- **Frontend**: oxlint, type-check and build
+- **Docker**: the production image builds
+
+`render.yaml` sets `autoDeployTrigger: checksPass`, so Render only deploys commits whose checks
+all pass. A red ❌ next to a commit on GitHub means it was *not* deployed; the live site keeps
+running the last good version.
+
 ## Checks
 
 ```bash

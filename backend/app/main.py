@@ -43,6 +43,10 @@ def handle_game_error(_: Request, exc: GameError) -> JSONResponse:
 app.include_router(api_router)
 
 
+NO_CACHE = {"index.html", "sw.js", "registerSW.js", "manifest.webmanifest"}
+MEDIA_TYPES = {".webmanifest": "application/manifest+json"}
+
+
 def mount_frontend(static_dir: Path) -> None:
     """Serve the built React app; unknown non-API paths get index.html (client-side routes)."""
     app.mount("/assets", StaticFiles(directory=static_dir / "assets"), name="assets")
@@ -53,9 +57,11 @@ def mount_frontend(static_dir: Path) -> None:
         if path.startswith("api/") or path == "api":
             raise HTTPException(status_code=404)
         file = (root / path).resolve()
-        if path and file.is_file() and root in file.parents:
-            return FileResponse(file)
-        return FileResponse(root / "index.html")
+        if not (path and file.is_file() and root in file.parents):
+            file = root / "index.html"
+        # Always revalidate the app shell and service worker so new deploys reach phones.
+        headers = {"Cache-Control": "no-cache"} if file.name in NO_CACHE else None
+        return FileResponse(file, headers=headers, media_type=MEDIA_TYPES.get(file.suffix))
 
 
 if STATIC_DIR and Path(STATIC_DIR, "index.html").is_file():
