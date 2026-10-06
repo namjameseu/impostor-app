@@ -1,7 +1,7 @@
 export type Difficulty = 'easy' | 'medium' | 'hard'
 export type CategoryMode = 'random' | 'specific'
 export type ImpostorHint = 'none' | 'category'
-export type RoundOutcome = 'group_wins' | 'impostor_escaped' | 'impostor_guessed_word'
+export type RoundOutcome = 'group_wins' | 'impostors_win' | 'split'
 
 export type GameState =
   | 'SETUP'
@@ -60,6 +60,8 @@ export interface GameSettings {
   /** Categories to mix when category_mode is 'specific'. Empty for random. */
   category_ids: number[]
   impostor_hint: ImpostorHint
+  impostor_count: number
+  impostors_know_each_other: boolean
 }
 
 export interface Player {
@@ -76,13 +78,13 @@ export interface Round {
   revealer_id: number | null
   next_revealer_id: number | null
   revealed_count: number
-  suspect_id: number | null
-  impostor_id: number | null
-  impostor_caught: boolean | null
+  suspect_ids: number[]
+  impostor_ids: number[] | null
+  caught_impostor_ids: number[] | null
   word_revealed: boolean
   secret_word: string | null
   category: string | null
-  final_guess_correct: boolean | null
+  guessed_word_ids: number[] | null
   outcome: RoundOutcome | null
   points: Record<string, number> | null
   explanation: string | null
@@ -100,7 +102,7 @@ export interface Game {
 
 export type PlayerRole =
   | { role: 'player'; category: string; word: string }
-  | { role: 'impostor'; category?: string }
+  | { role: 'impostor'; category?: string; fellow_impostors?: string[] }
 
 export interface Standing {
   rank: number
@@ -113,9 +115,9 @@ export interface RoundSummary {
   round_number: number
   category: string
   secret_word: string
-  impostor_id: number
-  impostor_name: string
-  suspect_id: number | null
+  impostor_ids: number[]
+  impostor_names: string[]
+  suspect_ids: number[]
   outcome: RoundOutcome
   explanation: string
 }

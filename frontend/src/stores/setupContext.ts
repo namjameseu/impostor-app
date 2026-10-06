@@ -11,6 +11,8 @@ export const DEFAULT_SETTINGS: GameSettings = {
   category_mode: 'random',
   category_ids: [],
   impostor_hint: 'category',
+  impostor_count: 1,
+  impostors_know_each_other: false,
 }
 
 export interface SetupState {

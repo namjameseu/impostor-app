@@ -1,58 +1,93 @@
-from collections.abc import Sequence
+"""Scoring, worked out per Impostor so it generalises to any number of them."""
+
+from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from enum import StrEnum
 
 IMPOSTOR_ESCAPED_POINTS = 2
 IMPOSTOR_GUESSED_POINTS = 1
-GROUP_WIN_POINTS = 1
+CREW_POINTS_PER_CATCH = 1
+
+
+class ImpostorResult(StrEnum):
+    ESCAPED = "escaped"
+    CAUGHT_GUESSED = "caught_guessed"
+    CAUGHT_MISSED = "caught_missed"
 
 
 class RoundOutcome(StrEnum):
-    GROUP_WINS = "group_wins"
-    IMPOSTOR_ESCAPED = "impostor_escaped"
-    IMPOSTOR_GUESSED_WORD = "impostor_guessed_word"
+    """Round summary: did the group or the Impostors come out ahead?"""
+
+    GROUP_WINS = "group_wins"  # every Impostor caught and missed the word
+    IMPOSTORS_WIN = "impostors_win"  # no Impostor was caught-and-missed
+    SPLIT = "split"  # some of each (only possible with several Impostors)
 
 
-def determine_outcome(impostor_caught: bool, final_guess_correct: bool | None) -> RoundOutcome:
-    if not impostor_caught:
-        return RoundOutcome.IMPOSTOR_ESCAPED
-    if final_guess_correct is None:
+def impostor_result(caught: bool, guessed_word: bool | None) -> ImpostorResult:
+    if not caught:
+        return ImpostorResult.ESCAPED
+    if guessed_word is None:
         raise ValueError("A caught Impostor's final guess must be recorded first.")
-    return RoundOutcome.IMPOSTOR_GUESSED_WORD if final_guess_correct else RoundOutcome.GROUP_WINS
+    return ImpostorResult.CAUGHT_GUESSED if guessed_word else ImpostorResult.CAUGHT_MISSED
 
 
 def round_points(
-    player_ids: Sequence[int], impostor_id: int, outcome: RoundOutcome
+    player_ids: Sequence[int], results: Mapping[int, ImpostorResult]
 ) -> dict[int, int]:
-    """Points each player earns for a round (0 for players who earn nothing)."""
+    """Points each player earns for a round, given each Impostor's result.
+
+    - Escaped Impostor: +2 to that Impostor.
+    - Caught Impostor who guessed the word: +1 to that Impostor.
+    - Caught Impostor who missed: +1 to every non-Impostor.
+    """
     points = dict.fromkeys(player_ids, 0)
-    if outcome == RoundOutcome.GROUP_WINS:
-        for pid in player_ids:
-            if pid != impostor_id:
-                points[pid] = GROUP_WIN_POINTS
-    elif outcome == RoundOutcome.IMPOSTOR_ESCAPED:
-        points[impostor_id] = IMPOSTOR_ESCAPED_POINTS
-    else:
-        points[impostor_id] = IMPOSTOR_GUESSED_POINTS
+    crew = [pid for pid in player_ids if pid not in results]
+    for impostor_id, result in results.items():
+        if result == ImpostorResult.ESCAPED:
+            points[impostor_id] += IMPOSTOR_ESCAPED_POINTS
+        elif result == ImpostorResult.CAUGHT_GUESSED:
+            points[impostor_id] += IMPOSTOR_GUESSED_POINTS
+        else:
+            for pid in crew:
+                points[pid] += CREW_POINTS_PER_CATCH
     return points
 
 
-def explain_outcome(outcome: RoundOutcome, impostor_name: str) -> str:
-    match outcome:
-        case RoundOutcome.GROUP_WINS:
-            return (
-                f"The group caught {impostor_name} and they missed the word. "
-                f"Everyone else gets +{GROUP_WIN_POINTS}."
-            )
-        case RoundOutcome.IMPOSTOR_ESCAPED:
-            return (
-                f"{impostor_name} escaped undetected! +{IMPOSTOR_ESCAPED_POINTS} for the Impostor."
-            )
-        case RoundOutcome.IMPOSTOR_GUESSED_WORD:
-            return (
-                f"{impostor_name} was caught but guessed the word! "
-                f"+{IMPOSTOR_GUESSED_POINTS} for the Impostor."
-            )
+def round_outcome(results: Mapping[int, ImpostorResult]) -> RoundOutcome:
+    missed = sum(r == ImpostorResult.CAUGHT_MISSED for r in results.values())
+    if missed == len(results):
+        return RoundOutcome.GROUP_WINS
+    if missed == 0:
+        return RoundOutcome.IMPOSTORS_WIN
+    return RoundOutcome.SPLIT
+
+
+def _join(names: Sequence[str]) -> str:
+    return names[0] if len(names) == 1 else ", ".join(names[:-1]) + " and " + names[-1]
+
+
+def explain_round(results: Mapping[int, ImpostorResult], names: Mapping[int, str]) -> str:
+    """One short sentence per kind of result, e.g. for the round-results screen."""
+    by_result = {
+        kind: [names[pid] for pid, r in results.items() if r == kind] for kind in ImpostorResult
+    }
+    sentences = []
+    for name in by_result[ImpostorResult.ESCAPED]:
+        sentences.append(f"{name} escaped undetected! +{IMPOSTOR_ESCAPED_POINTS} for {name}.")
+    for name in by_result[ImpostorResult.CAUGHT_GUESSED]:
+        sentences.append(
+            f"{name} was caught but guessed the word! +{IMPOSTOR_GUESSED_POINTS} for {name}."
+        )
+    missed = by_result[ImpostorResult.CAUGHT_MISSED]
+    if missed:
+        crew_points = CREW_POINTS_PER_CATCH * len(missed)
+        caught = (
+            f"The group caught {missed[0]} and they missed the word."
+            if len(missed) == 1
+            else f"The group caught {_join(missed)} and none of them guessed the word."
+        )
+        sentences.append(f"{caught} Everyone else gets +{crew_points}.")
+    return " ".join(sentences)
 
 
 @dataclass(frozen=True)

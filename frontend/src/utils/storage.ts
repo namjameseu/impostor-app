@@ -16,3 +16,21 @@ export function saveJson(key: string, value: unknown): void {
     // ignore
   }
 }
+
+// Per-tab storage for things that shouldn't outlive the browser session (e.g. admin passcode).
+export function loadSession(key: string): string | null {
+  try {
+    return sessionStorage.getItem(key)
+  } catch {
+    return null
+  }
+}
+
+export function saveSession(key: string, value: string | null): void {
+  try {
+    if (value === null) sessionStorage.removeItem(key)
+    else sessionStorage.setItem(key, value)
+  } catch {
+    // ignore
+  }
+}

@@ -62,14 +62,14 @@ def start_voting(game_id: int, db: DB):
     return svc.to_game_read(svc.start_voting(db, game_id))
 
 
-@router.put(CURRENT + "/suspect", response_model=GameRead)
-def select_suspect(game_id: int, data: SuspectSelect, db: DB):
-    return svc.to_game_read(svc.select_suspect(db, game_id, data.player_id))
+@router.put(CURRENT + "/suspects", response_model=GameRead)
+def select_suspects(game_id: int, data: SuspectSelect, db: DB):
+    return svc.to_game_read(svc.select_suspects(db, game_id, data.player_ids))
 
 
-@router.post(CURRENT + "/reveal-impostor", response_model=GameRead)
-def reveal_impostor(game_id: int, db: DB):
-    return svc.to_game_read(svc.reveal_impostor(db, game_id))
+@router.post(CURRENT + "/reveal-impostors", response_model=GameRead)
+def reveal_impostors(game_id: int, db: DB):
+    return svc.to_game_read(svc.reveal_impostors(db, game_id))
 
 
 @router.post(CURRENT + "/reveal-word", response_model=GameRead)
@@ -79,7 +79,7 @@ def reveal_word(game_id: int, db: DB):
 
 @router.post(CURRENT + "/final-guess", response_model=GameRead)
 def record_final_guess(game_id: int, data: FinalGuessResult, db: DB):
-    return svc.to_game_read(svc.record_final_guess(db, game_id, data.correct))
+    return svc.to_game_read(svc.record_final_guess(db, game_id, data.correct_player_ids))
 
 
 @router.post("/{game_id}/rounds", response_model=GameRead, status_code=status.HTTP_201_CREATED)

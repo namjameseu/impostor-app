@@ -11,11 +11,21 @@ from app.game.game_engine import (
     GameState,
     is_impostor_visible,
     is_word_visible,
+    max_impostors,
     transition,
+    validate_impostor_count,
     validate_player_names,
 )
-from app.game.round_manager import build_role_view, choose_impostor, choose_starting_player
-from app.game.scoring import RoundOutcome, determine_outcome, rank_players, round_points
+from app.game.round_manager import build_role_view, choose_impostors, choose_starting_player
+from app.game.scoring import (
+    ImpostorResult,
+    RoundOutcome,
+    explain_round,
+    impostor_result,
+    rank_players,
+    round_outcome,
+    round_points,
+)
 from app.game.word_selector import WordCandidate, select_word
 
 PLAYERS = [10, 11, 12, 13, 14]
@@ -27,26 +37,50 @@ PLAYERS = [10, 11, 12, 13, 14]
 def test_impostor_is_one_of_the_players():
     rng = random.Random(1)
     for _ in range(200):
-        assert choose_impostor(PLAYERS, None, rng) in PLAYERS
+        assert choose_impostors(PLAYERS, 1, (), rng)[0] in PLAYERS
 
 
 def test_impostor_never_repeats_consecutively():
     rng = random.Random(2)
-    previous = None
+    previous: list[int] = []
     for _ in range(500):
-        impostor = choose_impostor(PLAYERS, previous, rng)
-        assert impostor != previous
-        previous = impostor
+        impostors = choose_impostors(PLAYERS, 1, previous, rng)
+        assert impostors != previous
+        previous = impostors
 
 
 def test_impostor_selection_reaches_every_other_player():
     rng = random.Random(3)
-    picks = {choose_impostor(PLAYERS, 10, rng) for _ in range(500)}
+    picks = {choose_impostors(PLAYERS, 1, [10], rng)[0] for _ in range(500)}
     assert picks == {11, 12, 13, 14}
 
 
-def test_impostor_repeat_allowed_when_no_alternative():
-    assert choose_impostor([7], 7, random.Random(0)) == 7
+def test_multiple_impostors_are_distinct_and_avoid_last_round():
+    rng = random.Random(4)
+    for _ in range(300):
+        picks = choose_impostors(PLAYERS, 2, [10, 11], rng)
+        assert len(set(picks)) == 2
+        assert not set(picks) & {10, 11}
+
+
+def test_impostors_repeat_only_when_not_enough_fresh_players():
+    # 5 players, 3 Impostors, 3 were Impostors last round: only 2 fresh players exist.
+    picks = choose_impostors(PLAYERS, 3, [10, 11, 12], random.Random(5))
+    assert {13, 14} <= set(picks) and len(set(picks)) == 3
+
+
+@pytest.mark.parametrize("count", [0, 5])
+def test_impostor_count_must_leave_a_non_impostor(count):
+    with pytest.raises(ValueError):
+        choose_impostors(PLAYERS, count)
+
+
+@pytest.mark.parametrize(("players", "limit"), [(3, 1), (4, 1), (5, 2), (6, 2), (7, 3), (20, 9)])
+def test_impostors_are_always_outnumbered(players, limit):
+    assert max_impostors(players) == limit
+    validate_impostor_count(limit, players)
+    with pytest.raises(GameValidationError):
+        validate_impostor_count(limit + 1, players)
 
 
 # --- Starting player ----------------------------------------------------------
@@ -150,28 +184,50 @@ def test_secret_visibility_by_state():
 
 # --- Scoring ------------------------------------------------------------------
 
+ESCAPED, GUESSED, MISSED = (
+    ImpostorResult.ESCAPED,
+    ImpostorResult.CAUGHT_GUESSED,
+    ImpostorResult.CAUGHT_MISSED,
+)
 
-def test_outcome_determination():
-    assert determine_outcome(False, None) == RoundOutcome.IMPOSTOR_ESCAPED
-    assert determine_outcome(True, False) == RoundOutcome.GROUP_WINS
-    assert determine_outcome(True, True) == RoundOutcome.IMPOSTOR_GUESSED_WORD
+
+def test_impostor_result():
+    assert impostor_result(False, None) == ESCAPED
+    assert impostor_result(True, False) == MISSED
+    assert impostor_result(True, True) == GUESSED
     with pytest.raises(ValueError):
-        determine_outcome(True, None)
+        impostor_result(True, None)
 
 
 def test_group_win_gives_every_non_impostor_one_point():
-    points = round_points(PLAYERS, 12, RoundOutcome.GROUP_WINS)
+    points = round_points(PLAYERS, {12: MISSED})
     assert points == {10: 1, 11: 1, 12: 0, 13: 1, 14: 1}
+    assert round_outcome({12: MISSED}) == RoundOutcome.GROUP_WINS
 
 
 def test_escaped_impostor_gets_two_points():
-    points = round_points(PLAYERS, 12, RoundOutcome.IMPOSTOR_ESCAPED)
-    assert points == {10: 0, 11: 0, 12: 2, 13: 0, 14: 0}
+    assert round_points(PLAYERS, {12: ESCAPED}) == {10: 0, 11: 0, 12: 2, 13: 0, 14: 0}
+    assert round_outcome({12: ESCAPED}) == RoundOutcome.IMPOSTORS_WIN
 
 
 def test_caught_impostor_guessing_word_gets_one_point():
-    points = round_points(PLAYERS, 12, RoundOutcome.IMPOSTOR_GUESSED_WORD)
-    assert points == {10: 0, 11: 0, 12: 1, 13: 0, 14: 0}
+    assert round_points(PLAYERS, {12: GUESSED}) == {10: 0, 11: 0, 12: 1, 13: 0, 14: 0}
+    assert round_outcome({12: GUESSED}) == RoundOutcome.IMPOSTORS_WIN
+
+
+def test_points_add_up_per_impostor():
+    # Two Impostors caught and missing: every non-Impostor gets +1 per Impostor.
+    assert round_points(PLAYERS, {12: MISSED, 13: MISSED}) == {10: 2, 11: 2, 12: 0, 13: 0, 14: 2}
+    # Mixed: one escaped (+2), one caught-and-missed (crew +1).
+    assert round_points(PLAYERS, {12: ESCAPED, 13: MISSED}) == {10: 1, 11: 1, 12: 2, 13: 0, 14: 1}
+    assert round_outcome({12: ESCAPED, 13: MISSED}) == RoundOutcome.SPLIT
+
+
+def test_explanations_name_each_impostor():
+    names = {12: "Sarah", 13: "Mark", 14: "Anna"}
+    text = explain_round({12: ESCAPED, 13: MISSED, 14: MISSED}, names)
+    assert "Sarah escaped" in text
+    assert "Mark and Anna" in text and "+2" in text
 
 
 def test_rankings_sort_by_score_and_share_ties():
@@ -211,3 +267,22 @@ def test_invalid_player_lists_are_rejected(names):
 
 def test_player_names_are_trimmed():
     assert validate_player_names(["  Ann ", "Bob", "Cy  Lee"]) == ["Ann", "Bob", "Cy Lee"]
+
+
+def test_fellow_impostors_only_given_to_impostors():
+    crew = build_role_view(
+        is_impostor=False,
+        secret_word="Penguin",
+        category="Animals",
+        impostor_hint="category",
+        fellow_impostors=["Mark"],
+    )
+    assert "fellow_impostors" not in crew.as_dict()
+    impostor = build_role_view(
+        is_impostor=True,
+        secret_word="Penguin",
+        category="Animals",
+        impostor_hint="none",
+        fellow_impostors=["Mark"],
+    )
+    assert impostor.as_dict() == {"role": "impostor", "fellow_impostors": ["Mark"]}

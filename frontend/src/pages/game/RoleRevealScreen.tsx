@@ -6,7 +6,7 @@ import { BigName, Kicker, Screen } from '../../components/Screen'
 import { useAction } from '../../hooks/useAction'
 import { gameApi } from '../../services/api'
 import type { Game, PlayerRole } from '../../types/api'
-import { playerName } from '../../utils/players'
+import { joinNames, playerName } from '../../utils/players'
 import type { ScreenProps } from './types'
 
 type Step = 'pass' | 'hold' | 'hidden'
@@ -81,7 +81,7 @@ export function RoleRevealScreen({ game, onUpdate }: ScreenProps) {
           <BigName className="text-4xl sm:text-5xl">{name}</BigName>
         </div>
         <HoldToReveal disabled={!role} loading={!role && !error} onRevealed={() => setHasPeeked(true)}>
-          {role && <RoleCard role={role} />}
+          {role && <RoleCard role={role} impostorCount={game.settings.impostor_count} />}
         </HoldToReveal>
       </Screen>
     )
@@ -104,15 +104,29 @@ export function RoleRevealScreen({ game, onUpdate }: ScreenProps) {
   )
 }
 
-function RoleCard({ role }: { role: PlayerRole }) {
+function RoleCard({ role, impostorCount }: { role: PlayerRole; impostorCount: number }) {
   if (role.role === 'impostor') {
     return (
       <div className="flex flex-col items-center gap-4">
         <span className="text-6xl" aria-hidden="true">🕵️</span>
         <p className="font-display text-4xl leading-tight text-impostor">
-          You are the Impostor
+          {impostorCount > 1 ? 'You are an Impostor' : 'You are the Impostor'}
         </p>
         {role.category && <p className="text-lg font-extrabold">Category: {role.category}</p>}
+        {role.fellow_impostors && role.fellow_impostors.length > 0 ? (
+          <div className="rounded-xl border border-impostor/50 bg-impostor/10 px-4 py-2">
+            <p className="text-xs font-extrabold tracking-widest text-muted uppercase">
+              Your fellow {role.fellow_impostors.length > 1 ? 'Impostors' : 'Impostor'}
+            </p>
+            <p className="text-lg font-extrabold text-impostor">{joinNames(role.fellow_impostors)}</p>
+          </div>
+        ) : (
+          impostorCount > 1 && (
+            <p className="text-sm font-bold text-muted">
+              There are {impostorCount} Impostors. You don&apos;t know who the others are.
+            </p>
+          )
+        )}
         <p className="font-bold text-muted">Blend in!</p>
       </div>
     )

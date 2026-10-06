@@ -3,7 +3,7 @@ import { ErrorMessage } from '../../components/ErrorMessage'
 import { Kicker, Screen } from '../../components/Screen'
 import { useAction } from '../../hooks/useAction'
 import { gameApi } from '../../services/api'
-import { playerName } from '../../utils/players'
+import { joinNames, playerNames } from '../../utils/players'
 import type { ScreenProps } from './types'
 
 export function RoundResultsScreen({ game, onUpdate }: ScreenProps) {
@@ -31,7 +31,8 @@ export function RoundResultsScreen({ game, onUpdate }: ScreenProps) {
       <div className="text-center">
         <Kicker>Round {round.round_number} results</Kicker>
         <p className="mt-3 text-lg font-bold text-muted">
-          Impostor: <span className="text-impostor">{playerName(game.players, round.impostor_id)}</span>
+          {(round.impostor_ids?.length ?? 0) > 1 ? 'Impostors' : 'Impostor'}:{' '}
+          <span className="text-impostor">{joinNames(playerNames(game.players, round.impostor_ids))}</span>
           {' · '}
           Word: <span className="text-crew">{round.secret_word}</span>
         </p>

@@ -10,6 +10,7 @@ from sqlalchemy import (
     String,
     Table,
     UniqueConstraint,
+    false,
     func,
 )
 from sqlalchemy.orm import Mapped, mapped_column, relationship
@@ -45,6 +46,7 @@ class Game(TimestampMixin, Base):
         CheckConstraint(f"category_mode IN {_in(CategoryMode)}", name="category_mode_valid"),
         CheckConstraint(f"impostor_hint IN {_in(ImpostorHint)}", name="impostor_hint_valid"),
         CheckConstraint("total_rounds > 0", name="total_rounds_positive"),
+        CheckConstraint("impostor_count > 0", name="impostor_count_positive"),
     )
 
     id: Mapped[int] = mapped_column(primary_key=True)
@@ -52,6 +54,9 @@ class Game(TimestampMixin, Base):
     total_rounds: Mapped[int]
     category_mode: Mapped[str] = mapped_column(String(20))
     impostor_hint: Mapped[str] = mapped_column(String(20))
+    impostor_count: Mapped[int] = mapped_column(default=1, server_default="1")
+    # When true, each Impostor's private role lists the other Impostors.
+    impostors_know_each_other: Mapped[bool] = mapped_column(default=False, server_default=false())
     current_round_number: Mapped[int] = mapped_column(default=0)
     finished_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 

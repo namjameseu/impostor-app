@@ -3,6 +3,7 @@ import { ErrorMessage } from '../../components/ErrorMessage'
 import { BigName, Kicker, Screen } from '../../components/Screen'
 import { useAction } from '../../hooks/useAction'
 import { gameApi } from '../../services/api'
+import { plural } from '../../utils/players'
 import type { ScreenProps } from './types'
 
 export function LobbyScreen({ game, onUpdate }: ScreenProps) {
@@ -29,6 +30,11 @@ export function LobbyScreen({ game, onUpdate }: ScreenProps) {
       </p>
       <ul className="flex flex-col gap-1 font-bold text-muted">
         <li>{settings.total_rounds} rounds</li>
+        <li>
+          {plural(settings.impostor_count, 'Impostor')}
+          {settings.impostor_count > 1 &&
+            (settings.impostors_know_each_other ? ' who know each other' : ' working alone')}
+        </li>
         <li>
           {settings.category_mode === 'random'
             ? 'Random categories'

@@ -1,0 +1,14 @@
+# Render Blueprint: https://render.com/docs/blueprint-spec
+# New > Blueprint in the Render dashboard, pick this repo, then fill in the secrets it asks for.
+services:
+  - type: web
+    name: impostor
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    envVars:
+      - key: DATABASE_URL # Neon connection string (postgresql://...?sslmode=require)
+        sync: false
+      - key: ADMIN_PASSCODE # passcode for editing the word library
+        sync: false

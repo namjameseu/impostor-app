@@ -64,7 +64,7 @@ def downgrade() -> None:
         "WHERE category_mode = 'specific' AND category_id IS NULL"
     )
     op.create_check_constraint(
-        'ck_games_specific_category_set',
+        op.f('ck_games_specific_category_set'),
         'games',
         "category_mode = 'random' OR category_id IS NOT NULL",
     )

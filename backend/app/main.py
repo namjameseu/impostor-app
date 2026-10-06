@@ -1,9 +1,12 @@
-from fastapi import FastAPI, Request
+from pathlib import Path
+
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import FileResponse, JSONResponse
+from fastapi.staticfiles import StaticFiles
 
 from app.api.router import api_router
-from app.core.config import CORS_ORIGINS
+from app.core.config import CORS_ORIGINS, STATIC_DIR
 from app.game.errors import (
     ConflictError,
     GameError,
@@ -38,3 +41,22 @@ def handle_game_error(_: Request, exc: GameError) -> JSONResponse:
 
 
 app.include_router(api_router)
+
+
+def mount_frontend(static_dir: Path) -> None:
+    """Serve the built React app; unknown non-API paths get index.html (client-side routes)."""
+    app.mount("/assets", StaticFiles(directory=static_dir / "assets"), name="assets")
+    root = static_dir.resolve()
+
+    @app.get("/{path:path}", include_in_schema=False)
+    def frontend(path: str) -> FileResponse:
+        if path.startswith("api/") or path == "api":
+            raise HTTPException(status_code=404)
+        file = (root / path).resolve()
+        if path and file.is_file() and root in file.parents:
+            return FileResponse(file)
+        return FileResponse(root / "index.html")
+
+
+if STATIC_DIR and Path(STATIC_DIR, "index.html").is_file():
+    mount_frontend(Path(STATIC_DIR))

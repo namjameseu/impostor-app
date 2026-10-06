@@ -69,6 +69,19 @@ def is_impostor_visible(state: str) -> bool:
     return GameState(state) in IMPOSTOR_VISIBLE_STATES
 
 
+def max_impostors(player_count: int) -> int:
+    """Impostors must always be outnumbered: 1 for 3-4 players, 2 for 5-6, 3 for 7-8..."""
+    return max(1, (player_count - 1) // 2)
+
+
+def validate_impostor_count(impostor_count: int, player_count: int) -> None:
+    limit = max_impostors(player_count)
+    if not 1 <= impostor_count <= limit:
+        raise GameValidationError(
+            f"{player_count} players can have 1 to {limit} Impostor{'s' if limit > 1 else ''}."
+        )
+
+
 def validate_player_names(names: Iterable[str]) -> list[str]:
     cleaned = [" ".join(name.split()) for name in names]
     if any(not name for name in cleaned):

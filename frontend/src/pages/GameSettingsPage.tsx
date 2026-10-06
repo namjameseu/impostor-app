@@ -10,7 +10,7 @@ import { useAction } from '../hooks/useAction'
 import { gameApi, libraryApi } from '../services/api'
 import { useSetup } from '../stores/setupContext'
 import type { Category } from '../types/api'
-import { MIN_PLAYERS } from '../utils/players'
+import { MIN_PLAYERS, maxImpostors, plural } from '../utils/players'
 import { BackHeader } from './PlayerSetupPage'
 
 export function GameSettingsPage() {
@@ -47,6 +47,9 @@ export function GameSettingsPage() {
     })
   }
 
+  const impostorLimit = maxImpostors(players.length)
+  const impostorCount = Math.min(settings.impostor_count, impostorLimit)
+
   const startGame = () =>
     run(async () => {
       const created = await gameApi.create(
@@ -55,6 +58,8 @@ export function GameSettingsPage() {
           ...settings,
           category_mode: isRandom ? 'random' : 'specific',
           category_ids: isRandom ? [] : selectedIds,
+          impostor_count: impostorCount,
+          impostors_know_each_other: impostorCount > 1 && settings.impostors_know_each_other,
         },
       )
       await gameApi.start(created.id)
@@ -109,6 +114,36 @@ export function GameSettingsPage() {
       </fieldset>
 
       <OptionGroup
+        label="Impostors"
+        value={impostorCount}
+        onChange={(impostor_count) => setSettings({ ...settings, impostor_count })}
+        columns={Math.min(impostorLimit, 4)}
+        options={Array.from({ length: impostorLimit }, (_, i) => ({
+          value: i + 1,
+          label: String(i + 1),
+        }))}
+      />
+      {impostorLimit === 1 && (
+        <p className="-mt-4 text-sm font-bold text-muted">Add 5+ players to play with 2 Impostors.</p>
+      )}
+
+      <OptionGroup
+        label="Impostors know each other?"
+        disabled={impostorCount < 2}
+        value={impostorCount > 1 && settings.impostors_know_each_other ? 'yes' : 'no'}
+        onChange={(v) => setSettings({ ...settings, impostors_know_each_other: v === 'yes' })}
+        options={[
+          { value: 'no', label: 'No', hint: 'Each works alone' },
+          { value: 'yes', label: 'Yes', hint: 'They see their team' },
+        ]}
+      />
+      {impostorCount < 2 && (
+        <p className="-mt-4 text-sm font-bold text-muted">
+          Choose 2 or more Impostors to turn this on.
+        </p>
+      )}
+
+      <OptionGroup
         label="Impostor hint"
         value={settings.impostor_hint}
         onChange={(impostor_hint) => setSettings({ ...settings, impostor_hint })}
@@ -119,7 +154,7 @@ export function GameSettingsPage() {
       />
 
       <p className="text-sm font-bold text-muted">
-        {players.length} players · 1 Impostor
+        {players.length} players · {plural(impostorCount, 'Impostor')}
       </p>
     </Screen>
   )

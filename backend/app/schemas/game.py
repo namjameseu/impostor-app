@@ -12,6 +12,9 @@ class GameSettings(BaseModel):
     # Categories to mix when category_mode is 'specific'; ignored for 'random' (all categories).
     category_ids: list[int] = Field(default_factory=list, max_length=100)
     impostor_hint: ImpostorHint = ImpostorHint.CATEGORY
+    # Upper limit depends on the number of players; checked when the game is created.
+    impostor_count: int = Field(default=1, ge=1, le=9)
+    impostors_know_each_other: bool = False
 
     @model_validator(mode="after")
     def _category_matches_mode(self) -> "GameSettings":
@@ -33,11 +36,15 @@ class PlayersUpdate(BaseModel):
 
 
 class SuspectSelect(BaseModel):
-    player_id: int
+    """The group's accused players; exactly one per Impostor."""
+
+    player_ids: list[int] = Field(min_length=1)
 
 
 class FinalGuessResult(BaseModel):
-    correct: bool
+    """Caught Impostors whose spoken guess was right; every other caught Impostor missed."""
+
+    correct_player_ids: list[int] = []
 
 
 class PlayerRead(BaseModel):
@@ -58,6 +65,8 @@ class SettingsRead(BaseModel):
     category_ids: list[int]
     categories: list[CategoryRef]
     impostor_hint: ImpostorHint
+    impostor_count: int
+    impostors_know_each_other: bool
 
 
 class RoundRead(BaseModel):
@@ -68,13 +77,13 @@ class RoundRead(BaseModel):
     revealer_id: int | None = None
     next_revealer_id: int | None = None
     revealed_count: int
-    suspect_id: int | None = None
-    impostor_id: int | None = None
-    impostor_caught: bool | None = None
+    suspect_ids: list[int] = []
+    impostor_ids: list[int] | None = None
+    caught_impostor_ids: list[int] | None = None
     word_revealed: bool = False
     secret_word: str | None = None
     category: str | None = None
-    final_guess_correct: bool | None = None
+    guessed_word_ids: list[int] | None = None
     outcome: str | None = None
     points: dict[int, int] | None = None
     explanation: str | None = None
@@ -94,6 +103,8 @@ class RoleRead(BaseModel):
     role: Literal["player", "impostor"]
     category: str | None = None
     word: str | None = None
+    # Other Impostors' names; only for Impostors, only when the game allows it.
+    fellow_impostors: list[str] | None = None
 
 
 class StandingRead(BaseModel):
@@ -107,9 +118,9 @@ class RoundSummary(BaseModel):
     round_number: int
     category: str
     secret_word: str
-    impostor_id: int
-    impostor_name: str
-    suspect_id: int | None
+    impostor_ids: list[int]
+    impostor_names: list[str]
+    suspect_ids: list[int]
     outcome: str
     explanation: str
 

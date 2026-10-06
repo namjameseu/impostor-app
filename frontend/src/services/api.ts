@@ -9,6 +9,13 @@ import type {
   WordFilters,
   WordInput,
 } from '../types/api'
+import { loadSession, saveSession } from '../utils/storage'
+
+const PASSCODE_KEY = 'impostor.adminPasscode'
+export const ADMIN_LOCKED_EVENT = 'impostor:admin-locked'
+
+export const getAdminPasscode = () => loadSession(PASSCODE_KEY)
+export const setAdminPasscode = (passcode: string | null) => saveSession(PASSCODE_KEY, passcode)
 
 export class ApiError extends Error {
   readonly status: number
@@ -32,9 +39,13 @@ function errorMessage(body: unknown, fallback: string): string {
 async function request<T>(method: string, path: string, body?: unknown): Promise<T> {
   let response: Response
   try {
+    const headers: Record<string, string> = {}
+    if (body !== undefined) headers['Content-Type'] = 'application/json'
+    const passcode = getAdminPasscode()
+    if (passcode) headers['X-Admin-Passcode'] = passcode
     response = await fetch(`/api${path}`, {
       method,
-      headers: body === undefined ? undefined : { 'Content-Type': 'application/json' },
+      headers,
       body: body === undefined ? undefined : JSON.stringify(body),
     })
   } catch {
@@ -42,6 +53,11 @@ async function request<T>(method: string, path: string, body?: unknown): Promise
   }
   if (response.status === 204) return undefined as T
   const data: unknown = await response.json().catch(() => null)
+  if (response.status === 401 && path !== '/admin/verify') {
+    // Passcode missing or changed on the server: forget it so the UI locks again.
+    setAdminPasscode(null)
+    window.dispatchEvent(new Event(ADMIN_LOCKED_EVENT))
+  }
   if (!response.ok) throw new ApiError(response.status, errorMessage(data, response.statusText))
   return data as T
 }
@@ -71,6 +87,11 @@ export const libraryApi = {
   deleteWord: (id: number) => request<void>('DELETE', `/words/${id}`),
 }
 
+export const adminApi = {
+  status: () => request<{ passcode_required: boolean }>('GET', '/admin/status'),
+  verify: (passcode: string) => request<void>('POST', '/admin/verify', { passcode }),
+}
+
 export const gameApi = {
   create: (players: string[], settings: GameSettings) =>
     request<Game>('POST', '/games', { players, settings }),
@@ -84,12 +105,16 @@ export const gameApi = {
 
   startClues: (gameId: number) => request<Game>('POST', `${current(gameId)}/start-clues`),
   startVoting: (gameId: number) => request<Game>('POST', `${current(gameId)}/start-voting`),
-  selectSuspect: (gameId: number, playerId: number) =>
-    request<Game>('PUT', `${current(gameId)}/suspect`, { player_id: playerId }),
-  revealImpostor: (gameId: number) => request<Game>('POST', `${current(gameId)}/reveal-impostor`),
+  selectSuspects: (gameId: number, playerIds: number[]) =>
+    request<Game>('PUT', `${current(gameId)}/suspects`, { player_ids: playerIds }),
+  revealImpostors: (gameId: number) =>
+    request<Game>('POST', `${current(gameId)}/reveal-impostors`),
   revealWord: (gameId: number) => request<Game>('POST', `${current(gameId)}/reveal-word`),
-  recordFinalGuess: (gameId: number, correct: boolean) =>
-    request<Game>('POST', `${current(gameId)}/final-guess`, { correct }),
+  /** `correctPlayerIds`: caught Impostors whose spoken guess was right. */
+  recordFinalGuess: (gameId: number, correctPlayerIds: number[]) =>
+    request<Game>('POST', `${current(gameId)}/final-guess`, {
+      correct_player_ids: correctPlayerIds,
+    }),
 
   nextRound: (gameId: number) => request<Game>('POST', `/games/${gameId}/rounds`),
   finish: (gameId: number) => request<Game>('POST', `/games/${gameId}/finish`),

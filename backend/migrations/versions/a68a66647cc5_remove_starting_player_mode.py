@@ -36,7 +36,7 @@ def downgrade() -> None:
         ),
     )
     op.create_check_constraint(
-        "ck_games_starting_player_mode_valid",
+        op.f("ck_games_starting_player_mode_valid"),
         "games",
         "starting_player_mode IN ('random', 'after_impostor')",
     )

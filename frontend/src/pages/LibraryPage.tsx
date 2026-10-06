@@ -7,6 +7,7 @@ import { OptionGroup } from '../components/OptionGroup'
 import { Screen } from '../components/Screen'
 import { Loading, Spinner } from '../components/Spinner'
 import { useAction } from '../hooks/useAction'
+import { useAdmin } from '../hooks/useAdmin'
 import { libraryApi } from '../services/api'
 import type { Category, Difficulty, Word } from '../types/api'
 import { BackHeader } from './PlayerSetupPage'
@@ -27,7 +28,9 @@ export function LibraryPage() {
   const [tab, setTab] = useState<Tab>('words')
   const [categories, setCategories] = useState<Category[]>([])
   const [categoriesLoaded, setCategoriesLoaded] = useState(false)
+  const [unlocking, setUnlocking] = useState(false)
   const { run, error } = useAction()
+  const admin = useAdmin()
 
   const loadCategories = useCallback(
     () =>
@@ -59,19 +62,50 @@ export function LibraryPage() {
           </button>
         ))}
       </div>
+      {admin.passcodeRequired && (
+        <div className="flex items-center gap-3 rounded-2xl border border-line bg-panel px-4 py-3">
+          <span className="text-2xl" aria-hidden="true">{admin.unlocked ? '🔓' : '🔒'}</span>
+          <p className="flex-1 text-sm font-bold text-muted">
+            {admin.unlocked ? 'Editing unlocked on this device.' : 'Editing the library needs the admin passcode.'}
+          </p>
+          {admin.unlocked ? (
+            <button type="button" onClick={admin.lock} className="min-h-10 rounded-lg bg-panel-2 px-3 text-xs font-extrabold text-muted hover:text-white">
+              Lock
+            </button>
+          ) : (
+            <button type="button" onClick={() => setUnlocking(true)} className="min-h-10 rounded-lg bg-accent px-3 font-display text-xs text-ink uppercase">
+              Unlock
+            </button>
+          )}
+        </div>
+      )}
       <ErrorMessage error={error} />
       {tab === 'words' ? (
-        <WordsTab categories={categories} onChanged={loadCategories} />
+        <WordsTab categories={categories} canEdit={admin.canEdit} onChanged={loadCategories} />
       ) : (
-        <CategoriesTab categories={categories} loaded={categoriesLoaded} onChanged={loadCategories} />
+        <CategoriesTab
+          categories={categories}
+          loaded={categoriesLoaded}
+          canEdit={admin.canEdit}
+          onChanged={loadCategories}
+        />
       )}
+      {unlocking && <UnlockForm onUnlock={admin.unlock} onClose={() => setUnlocking(false)} />}
     </Screen>
   )
 }
 
 // --- Words --------------------------------------------------------------------
 
-function WordsTab({ categories, onChanged }: { categories: Category[]; onChanged: () => void }) {
+function WordsTab({
+  categories,
+  canEdit,
+  onChanged,
+}: {
+  categories: Category[]
+  canEdit: boolean
+  onChanged: () => void
+}) {
   const [words, setWords] = useState<Word[]>([])
   const [search, setSearch] = useState('')
   const [categoryId, setCategoryId] = useState<number | ''>('')
@@ -155,7 +189,7 @@ function WordsTab({ categories, onChanged }: { categories: Category[]; onChanged
           <option value="hard">Hard</option>
         </select>
       </div>
-      <Button size="md" onClick={() => setEditing('new')} disabled={categories.length === 0}>
+      <Button size="md" onClick={() => setEditing('new')} disabled={!canEdit || categories.length === 0}>
         + Add word
       </Button>
       <ErrorMessage error={error} />
@@ -185,6 +219,7 @@ function WordsTab({ categories, onChanged }: { categories: Category[]; onChanged
               </p>
             </div>
             <RowActions
+              disabled={!canEdit}
               enabled={word.enabled}
               onToggle={() => toggle(word)}
               onEdit={() => setEditing(word)}
@@ -287,10 +322,12 @@ function WordForm({
 function CategoriesTab({
   categories,
   loaded,
+  canEdit,
   onChanged,
 }: {
   categories: Category[]
   loaded: boolean
+  canEdit: boolean
   onChanged: () => void
 }) {
   const [editing, setEditing] = useState<Category | 'new' | null>(null)
@@ -304,7 +341,7 @@ function CategoriesTab({
 
   return (
     <div className="flex flex-col gap-4">
-      <Button size="md" onClick={() => setEditing('new')}>
+      <Button size="md" onClick={() => setEditing('new')} disabled={!canEdit}>
         + Add category
       </Button>
       <ErrorMessage error={error} />
@@ -324,6 +361,7 @@ function CategoriesTab({
               </p>
             </div>
             <RowActions
+              disabled={!canEdit}
               enabled={category.enabled}
               onToggle={() => toggle(category)}
               onEdit={() => setEditing(category)}
@@ -400,28 +438,71 @@ function CategoryForm({
 
 // --- Shared ---------------------------------------------------------------------
 
+function UnlockForm({
+  onUnlock,
+  onClose,
+}: {
+  onUnlock: (passcode: string) => Promise<void>
+  onClose: () => void
+}) {
+  const [passcode, setPasscode] = useState('')
+  const { run, pending, error } = useAction()
+
+  const submit = (e: FormEvent) => {
+    e.preventDefault()
+    run(async () => {
+      await onUnlock(passcode)
+      onClose()
+    })
+  }
+
+  return (
+    <Modal title="Unlock editing" onClose={onClose}>
+      <form onSubmit={submit} className="flex flex-col gap-4">
+        <input
+          type="password"
+          value={passcode}
+          onChange={(e) => setPasscode(e.target.value)}
+          placeholder="Admin passcode"
+          autoFocus
+          autoComplete="current-password"
+          aria-label="Admin passcode"
+          className={inputClass}
+        />
+        <ErrorMessage error={error} />
+        <Button type="submit" size="md" loading={pending} disabled={!passcode}>
+          Unlock
+        </Button>
+      </form>
+    </Modal>
+  )
+}
+
 function RowActions({
   enabled,
+  disabled,
   onToggle,
   onEdit,
   onDelete,
 }: {
   enabled: boolean
+  disabled: boolean
   onToggle: () => void
   onEdit: () => void
   onDelete?: () => void
 }) {
-  const base = 'min-h-10 rounded-lg bg-panel-2 px-3 text-xs font-extrabold text-muted hover:text-white'
+  const base =
+    'min-h-10 rounded-lg bg-panel-2 px-3 text-xs font-extrabold text-muted enabled:hover:text-white disabled:opacity-30'
   return (
     <div className="flex shrink-0 gap-1">
-      <button type="button" onClick={onEdit} className={base}>
+      <button type="button" onClick={onEdit} disabled={disabled} className={base}>
         Edit
       </button>
-      <button type="button" onClick={onToggle} className={base}>
+      <button type="button" onClick={onToggle} disabled={disabled} className={base}>
         {enabled ? 'Disable' : 'Enable'}
       </button>
       {onDelete && (
-        <button type="button" onClick={onDelete} aria-label="Delete" className={`${base} hover:text-rose-300`}>
+        <button type="button" onClick={onDelete} disabled={disabled} aria-label="Delete" className={`${base} enabled:hover:text-rose-300`}>
           ✕
         </button>
       )}

@@ -15,12 +15,13 @@ from app.game.game_engine import (
     is_word_visible,
     require_state,
     transition,
+    validate_impostor_count,
     validate_player_names,
 )
 from app.game.round_manager import RoleView, system_rng
 from app.game.settings import CategoryMode
 from app.game.word_selector import WordCandidate, select_word
-from app.models import Category, Game, GamePlayer, Round, Word
+from app.models import Category, Game, GamePlayer, Round, RoundImpostor, RoundSuspect, Word
 from app.schemas.game import (
     CategoryRef,
     GameRead,
@@ -86,6 +87,7 @@ def _set_players(game: Game, names: list[str]) -> None:
 
 def create_game(db: Session, names: list[str], settings: GameSettings) -> Game:
     cleaned = validate_player_names(names)
+    validate_impostor_count(settings.impostor_count, len(cleaned))
     categories = _selected_categories(db, settings)
     game = Game(state=GameState.SETUP, **settings.model_dump(exclude={"category_ids"}))
     game.categories = categories
@@ -99,6 +101,7 @@ def replace_players(db: Session, game_id: int, names: list[str]) -> Game:
     game = get_game(db, game_id, lock=True)
     require_state(game.state, GameState.SETUP, action="change players")
     cleaned = validate_player_names(names)
+    validate_impostor_count(game.impostor_count, len(cleaned))
     game.players = []
     db.flush()  # delete old rows first so (game_id, order_index) stays unique
     _set_players(game, cleaned)
@@ -125,6 +128,8 @@ def play_again(db: Session, game_id: int) -> Game:
         category_mode=CategoryMode.SPECIFIC if category_ids else CategoryMode.RANDOM,
         category_ids=category_ids,
         impostor_hint=old.impostor_hint,
+        impostor_count=old.impostor_count,
+        impostors_know_each_other=old.impostors_know_each_other,
     )
     return create_game(db, [p.name for p in old.players], settings)
 
@@ -151,8 +156,8 @@ def _generate_round(db: Session, game: Game, rng: random.Random) -> Round:
     word = select_word(_word_candidates(db, game), used_word_ids, rng)
 
     ordered_ids = [p.id for p in game.players]
-    impostor_id = round_manager.choose_impostor(
-        ordered_ids, previous.impostor_id if previous else None, rng
+    impostor_ids = round_manager.choose_impostors(
+        ordered_ids, game.impostor_count, previous.impostor_ids if previous else (), rng
     )
     starting_id = round_manager.choose_starting_player(ordered_ids, rng)
 
@@ -164,8 +169,8 @@ def _generate_round(db: Session, game: Game, rng: random.Random) -> Round:
         category_name=word.category_name,
         word_id=word.id,
         secret_word=word.word,
-        impostor_id=impostor_id,
         starting_player_id=starting_id,
+        impostors=[RoundImpostor(player_id=pid) for pid in impostor_ids],
     )
     game.rounds.append(new_round)
     return new_round
@@ -188,11 +193,18 @@ def _require_revealer(game: Game, player_id: int) -> Round:
 def get_player_role(db: Session, game_id: int, player_id: int) -> RoleView:
     game = get_game(db, game_id)
     current = _require_revealer(game, player_id)
+    is_impostor = player_id in current.impostor_ids
+    fellows = None
+    if is_impostor and game.impostors_know_each_other and game.impostor_count > 1:
+        fellows = [
+            p.name for p in game.players if p.id in current.impostor_ids and p.id != player_id
+        ]
     return round_manager.build_role_view(
-        is_impostor=current.impostor_id == player_id,
+        is_impostor=is_impostor,
         secret_word=current.secret_word,
         category=current.category_name,
         impostor_hint=game.impostor_hint,
+        fellow_impostors=fellows,
     )
 
 
@@ -227,34 +239,50 @@ def start_voting(db: Session, game_id: int) -> Game:
     return game
 
 
-def select_suspect(db: Session, game_id: int, player_id: int) -> Game:
+def select_suspects(db: Session, game_id: int, player_ids: list[int]) -> Game:
     game = get_game(db, game_id, lock=True)
-    require_state(game.state, GameState.VOTING, action="select a suspect")
-    _player(game, player_id)
-    _current_round(game).suspect_id = player_id
+    require_state(game.state, GameState.VOTING, action="select suspects")
+    if len(set(player_ids)) != len(player_ids):
+        raise GameValidationError("Each suspect can only be chosen once.")
+    if len(player_ids) != game.impostor_count:
+        raise GameValidationError(
+            f"Choose exactly {game.impostor_count} suspect"
+            f"{'s' if game.impostor_count > 1 else ''}, one per Impostor."
+        )
+    for pid in player_ids:
+        _player(game, pid)
+    _current_round(game).suspects = [RoundSuspect(player_id=pid) for pid in player_ids]
     game.state = transition(game.state, GameState.IMPOSTOR_REVEAL)
     db.commit()
     return game
 
 
-def _finish_round(game: Game, current: Round, outcome: scoring.RoundOutcome) -> None:
-    points = scoring.round_points([p.id for p in game.players], current.impostor_id, outcome)
+def _impostor_results(current: Round) -> dict[int, scoring.ImpostorResult]:
+    return {
+        i.player_id: scoring.impostor_result(current.is_caught(i.player_id), i.guessed_word)
+        for i in current.impostors
+    }
+
+
+def _finish_round(game: Game, current: Round) -> None:
+    results = _impostor_results(current)
+    points = scoring.round_points([p.id for p in game.players], results)
     for player in game.players:
         player.score += points[player.id]
-    current.outcome = outcome
+    current.outcome = scoring.round_outcome(results)
     current.completed_at = datetime.now(UTC)
     game.state = transition(game.state, GameState.ROUND_RESULTS)
 
 
-def reveal_impostor(db: Session, game_id: int) -> Game:
+def reveal_impostors(db: Session, game_id: int) -> Game:
+    """Reveal who the Impostors were. Caught Impostors get a final guess; else score now."""
     game = get_game(db, game_id, lock=True)
-    require_state(game.state, GameState.IMPOSTOR_REVEAL, action="reveal the Impostor")
+    require_state(game.state, GameState.IMPOSTOR_REVEAL, action="reveal the Impostors")
     current = _current_round(game)
-    current.impostor_caught = current.suspect_id == current.impostor_id
-    if current.impostor_caught:
+    if any(current.is_caught(pid) for pid in current.impostor_ids):
         game.state = transition(game.state, GameState.FINAL_GUESS)
     else:
-        _finish_round(game, current, scoring.determine_outcome(False, None))
+        _finish_round(game, current)
     db.commit()
     return game
 
@@ -267,14 +295,18 @@ def reveal_word(db: Session, game_id: int) -> Game:
     return game
 
 
-def record_final_guess(db: Session, game_id: int, correct: bool) -> Game:
+def record_final_guess(db: Session, game_id: int, correct_player_ids: list[int]) -> Game:
     game = get_game(db, game_id, lock=True)
     require_state(game.state, GameState.FINAL_GUESS, action="record the final guess")
     current = _current_round(game)
     if not current.word_revealed:
         raise InvalidStateError("Reveal the word before recording the final guess.")
-    current.final_guess_correct = correct
-    _finish_round(game, current, scoring.determine_outcome(True, correct))
+    caught = [i for i in current.impostors if current.is_caught(i.player_id)]
+    if not set(correct_player_ids) <= {i.player_id for i in caught}:
+        raise GameValidationError("Only caught Impostors can make a final guess.")
+    for impostor in caught:
+        impostor.guessed_word = impostor.player_id in correct_player_ids
+    _finish_round(game, current)
     db.commit()
     return game
 
@@ -310,13 +342,17 @@ def finish_game(db: Session, game_id: int) -> Game:
 # ---------------------------------------------------------------------------
 
 
+def _in_player_order(game: Game, ids: list[int]) -> list[int]:
+    return [p.id for p in game.players if p.id in ids]
+
+
 def _round_read(game: Game, current: Round) -> RoundRead:
     players = game.players
     view = RoundRead(
         round_number=current.round_number,
         starting_player_id=current.starting_player_id,
         revealed_count=current.reveal_index,
-        suspect_id=current.suspect_id,
+        suspect_ids=_in_player_order(game, current.suspect_ids),
         word_revealed=current.word_revealed,
     )
     if game.state == GameState.ROLE_REVEAL:
@@ -324,17 +360,20 @@ def _round_read(game: Game, current: Round) -> RoundRead:
         if current.reveal_index + 1 < len(players):
             view.next_revealer_id = players[current.reveal_index + 1].id
     if is_impostor_visible(game.state):
-        view.impostor_id = current.impostor_id
-        view.impostor_caught = current.impostor_caught
+        view.impostor_ids = _in_player_order(game, current.impostor_ids)
+        view.caught_impostor_ids = [pid for pid in view.impostor_ids if current.is_caught(pid)]
     if is_word_visible(game.state, current.word_revealed):
         view.secret_word = current.secret_word
         view.category = current.category_name
     if current.outcome is not None:
-        outcome = scoring.RoundOutcome(current.outcome)
-        view.final_guess_correct = current.final_guess_correct
-        view.outcome = outcome
-        view.points = scoring.round_points([p.id for p in players], current.impostor_id, outcome)
-        view.explanation = scoring.explain_outcome(outcome, _player(game, current.impostor_id).name)
+        results = _impostor_results(current)
+        names = {p.id: p.name for p in players}
+        view.guessed_word_ids = _in_player_order(
+            game, [pid for pid, r in results.items() if r == scoring.ImpostorResult.CAUGHT_GUESSED]
+        )
+        view.outcome = current.outcome
+        view.points = scoring.round_points([p.id for p in players], results)
+        view.explanation = scoring.explain_round(results, names)
     return view
 
 
@@ -350,6 +389,8 @@ def to_game_read(game: Game) -> GameRead:
             category_ids=[c.id for c in game.categories],
             categories=[CategoryRef(id=c.id, name=c.name) for c in game.categories],
             impostor_hint=game.impostor_hint,
+            impostor_count=game.impostor_count,
+            impostors_know_each_other=game.impostors_know_each_other,
         ),
         players=[
             PlayerRead(id=p.id, name=p.name, order_index=p.order_index, score=p.score)
@@ -372,13 +413,11 @@ def get_results(db: Session, game_id: int) -> GameResults:
                 round_number=r.round_number,
                 category=r.category_name,
                 secret_word=r.secret_word,
-                impostor_id=r.impostor_id,
-                impostor_name=names[r.impostor_id],
-                suspect_id=r.suspect_id,
+                impostor_ids=_in_player_order(game, r.impostor_ids),
+                impostor_names=[names[pid] for pid in _in_player_order(game, r.impostor_ids)],
+                suspect_ids=_in_player_order(game, r.suspect_ids),
                 outcome=r.outcome,
-                explanation=scoring.explain_outcome(
-                    scoring.RoundOutcome(r.outcome), names[r.impostor_id]
-                ),
+                explanation=scoring.explain_round(_impostor_results(r), names),
             )
             for r in game.rounds
             if r.outcome is not None

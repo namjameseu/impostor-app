@@ -30,6 +30,9 @@ function loadState(): SetupState {
       category_ids:
         settings.category_ids ?? (settings.category_id ? [settings.category_id] : []),
       impostor_hint: settings.impostor_hint ?? DEFAULT_SETTINGS.impostor_hint,
+      impostor_count: settings.impostor_count ?? DEFAULT_SETTINGS.impostor_count,
+      impostors_know_each_other:
+        settings.impostors_know_each_other ?? DEFAULT_SETTINGS.impostors_know_each_other,
     },
   }
 }

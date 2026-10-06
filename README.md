@@ -1,7 +1,10 @@
 # Impostor
 
-A single-device, pass-the-phone party game. Everyone gets the secret word except one
-Impostor; players give spoken clues, vote, and try to catch the liar.
+A single-device, pass-the-phone party game. Everyone gets the secret word except the
+Impostor(s); players give spoken clues, vote, and try to catch the liars.
+
+Games can have several Impostors (always fewer than everyone else: 1 for 3-4 players,
+2 for 5-6, 3 for 7-8...), and optionally let the Impostors know who their teammates are.
 
 - **frontend/** – React + TypeScript + Vite + Tailwind CSS (http://localhost:5173)
 - **backend/** – FastAPI + SQLAlchemy + Alembic (http://localhost:8000, API docs at `/docs`)
@@ -37,6 +40,48 @@ npm run dev
 
 Don't run the Docker `backend`/`frontend` services at the same time as the local ones — they share ports 8000/5173.
 
+## Deploy for free (Render + Neon)
+
+The root `Dockerfile` builds one production container: the React app is built and served by
+FastAPI next to the API, so there is a single URL and no CORS setup. On start it runs the
+migrations and the (idempotent) word seed.
+
+**1. Database: [Neon](https://neon.com)** (free Postgres that doesn't expire)
+
+1. Sign up and create a project (pick the region closest to your players).
+2. On the project dashboard click **Connect** and copy the connection string. It looks like
+   `postgresql://user:password@ep-xxxx.region.aws.neon.tech/neondb?sslmode=require`.
+   Use it as-is; the app switches it to the right driver itself.
+
+**2. App: [Render](https://render.com)** (free web service)
+
+1. Push this repo to GitHub, sign in to Render with GitHub.
+2. **New → Blueprint**, pick the repo. Render reads `render.yaml` and asks for:
+   - `DATABASE_URL`: the Neon connection string
+   - `ADMIN_PASSCODE`: a passcode of your choice for editing the word library
+3. **Apply**. The first build takes a few minutes; you then get a URL like
+   `https://impostor-xxxx.onrender.com`. Open it on your phone and play.
+
+Every `git push` to `main` redeploys automatically.
+
+Free-tier notes:
+- The Render service sleeps after 15 minutes without visitors; the first visit after that
+  takes about a minute to wake up. Open it a minute before you play.
+- Neon's free plan has ~0.5 GB storage, far more than this app needs.
+- Without `ADMIN_PASSCODE`, anyone with the link can edit or delete words. With it, the
+  Word library shows **Unlock** and asks for the passcode (remembered until the browser tab closes).
+
+To try the production image locally:
+
+```bash
+docker compose up -d db
+docker build -t impostor-prod .
+docker run --rm -p 8080:8000 --network impostor-app_default \
+  -e DATABASE_URL=postgresql://impostor:impostor@db:5432/impostor \
+  -e ADMIN_PASSCODE=letmein impostor-prod
+# open http://localhost:8080
+```
+
 ## Checks
 
 ```bash
@@ -65,16 +110,20 @@ player whose turn it is can fetch their role (**403** otherwise), and only once.
 
 - The secret word and the Impostor's identity are never in the public game payload until the
   state allows it (`FINAL_GUESS` after the explicit word reveal, or `ROUND_RESULTS`).
-- `GET …/players/{id}/role` is the only endpoint that returns a word, and for the Impostor it
-  returns `{"role": "impostor", "category"?: …}` — the word is never sent to that client.
+- `GET …/players/{id}/role` is the only endpoint that returns a word, and for an Impostor it
+  returns `{"role": "impostor", "category"?: …, "fellow_impostors"?: [...]}` — the word is never
+  sent to that client. `fellow_impostors` is only included when "Impostors know each other" is on.
 
 ### Scoring
 
-| Outcome | Points |
+The group accuses one suspect per Impostor. Each caught Impostor then gets one spoken guess
+at the word. Points are worked out per Impostor and added together:
+
+| Each Impostor who… | Points |
 | --- | --- |
-| Impostor caught and misses the word | every other player +1 |
-| Impostor not caught | Impostor +2 |
-| Impostor caught but guesses the word | Impostor +1 |
+| was caught and missed the word | every non-Impostor +1 |
+| was not caught | that Impostor +2 |
+| was caught but guessed the word | that Impostor +1 |
 
 ### API
 
@@ -92,13 +141,15 @@ player whose turn it is can fetch their role (**403** otherwise), and only once.
 | POST | `/api/games/{id}/rounds/current/players/{pid}/reveal-complete` | hand the phone on |
 | POST | `/api/games/{id}/rounds/current/start-clues` | `READY → CLUE_ROUND` |
 | POST | `/api/games/{id}/rounds/current/start-voting` | `CLUE_ROUND → VOTING` |
-| PUT | `/api/games/{id}/rounds/current/suspect` | lock in the group's suspect |
-| POST | `/api/games/{id}/rounds/current/reveal-impostor` | reveal; scores if the Impostor escaped |
+| PUT | `/api/games/{id}/rounds/current/suspects` | `{"player_ids": [...]}`, one per Impostor |
+| POST | `/api/games/{id}/rounds/current/reveal-impostors` | reveal; scores now if nobody was caught |
 | POST | `/api/games/{id}/rounds/current/reveal-word` | show the word for the final guess |
-| POST | `/api/games/{id}/rounds/current/final-guess` | `{"correct": bool}`; scores the round |
+| POST | `/api/games/{id}/rounds/current/final-guess` | `{"correct_player_ids": [...]}`; scores the round |
 | POST | `/api/games/{id}/rounds` | start the next round |
 | POST | `/api/games/{id}/finish` | end after the last round |
 | GET | `/api/games/{id}/results` | standings + round history |
+| GET | `/api/admin/status` | whether library edits need a passcode |
+| POST | `/api/admin/verify` | check a passcode (send it as `X-Admin-Passcode` on library edits) |
 | POST | `/api/games/{id}/play-again` | new game, same players and settings |
 
 ### Code layout
@@ -108,7 +159,8 @@ backend/app/
   game/        pure rules: state machine, round_manager, word_selector, scoring (no DB/HTTP)
   services/    loads/saves models and calls the game rules; builds secret-safe views
   api/         thin FastAPI routers
-  models/      SQLAlchemy models (categories, words, games, game_categories, game_players, rounds)
+  models/      SQLAlchemy models (categories, words, games, game_categories, game_players,
+               rounds, round_impostors, round_suspects)
   schemas/     Pydantic request/response models
   db/          engine/session, seed data
 frontend/src/

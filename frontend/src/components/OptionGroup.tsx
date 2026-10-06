@@ -10,6 +10,7 @@ interface OptionGroupProps<T> {
   value: T
   onChange: (value: T) => void
   columns?: number
+  disabled?: boolean
 }
 
 export function OptionGroup<T extends string | number>({
@@ -18,9 +19,10 @@ export function OptionGroup<T extends string | number>({
   value,
   onChange,
   columns = options.length,
+  disabled = false,
 }: OptionGroupProps<T>) {
   return (
-    <fieldset className="flex min-w-0 flex-col gap-2">
+    <fieldset disabled={disabled} className="flex min-w-0 flex-col gap-2 disabled:opacity-45">
       <legend className="mb-2 text-sm font-extrabold tracking-widest text-muted uppercase">{label}</legend>
       <div className="grid gap-2" style={{ gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))` }}>
         {options.map((option) => {
@@ -52,8 +54,10 @@ export function OptionButton({ selected, label, hint, onClick }: OptionButtonPro
       type="button"
       aria-pressed={selected}
       onClick={onClick}
-      className={`min-h-14 rounded-xl border-2 px-3 py-2 text-left font-extrabold transition-colors ${
-        selected ? 'border-accent bg-accent/20 text-white' : 'border-line bg-panel text-muted hover:text-white'
+      className={`min-h-14 rounded-xl border-2 px-3 py-2 text-left font-extrabold transition-colors disabled:cursor-not-allowed ${
+        selected
+          ? 'border-accent bg-accent/20 text-white'
+          : 'border-line bg-panel text-muted enabled:hover:text-white'
       }`}
     >
       <span className="block">{label}</span>
