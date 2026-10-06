@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button } from '../../components/Button'
 import { ErrorMessage } from '../../components/ErrorMessage'
 import { BigName, Kicker, Screen } from '../../components/Screen'
 import { useAction } from '../../hooks/useAction'
 import { gameApi } from '../../services/api'
+import { feedback } from '../../utils/feedback'
 import { joinNames, playerName, playerNames } from '../../utils/players'
 import type { ScreenProps } from './types'
 
@@ -15,7 +16,19 @@ export function FinalGuessScreen({ game, onUpdate }: ScreenProps) {
   const several = caught.length > 1
   const totalImpostors = game.settings.impostor_count
 
-  const revealWord = () => run(async () => onUpdate(await gameApi.revealWord(game.id)))
+  const similarMode = game.settings.impostor_mode === 'similar_word'
+
+  // A single caught Impostor skips the verdict screen, so celebrate the catch here.
+  useEffect(() => {
+    if (!round.word_revealed && totalImpostors === 1) feedback.caught()
+  }, [round.word_revealed, totalImpostors])
+
+  const revealWord = () =>
+    run(async () => {
+      const updated = await gameApi.revealWord(game.id)
+      feedback.wordRevealed()
+      onUpdate(updated)
+    })
   const record = (correctIds: number[]) =>
     run(async () => onUpdate(await gameApi.recordFinalGuess(game.id, correctIds)))
 
@@ -41,7 +54,7 @@ export function FinalGuessScreen({ game, onUpdate }: ScreenProps) {
           But {several ? 'they each have' : `${names} has`} one last chance…
         </p>
         <p className="animate-rise text-2xl font-extrabold [animation-delay:900ms]">
-          Can you guess the secret word?
+          {similarMode ? 'Can you guess what everyone else had?' : 'Can you guess the secret word?'}
         </p>
         <p className="animate-rise font-bold text-muted [animation-delay:900ms]">
           {several ? 'Each of you says one guess out loud!' : 'Say it out loud!'}
@@ -70,17 +83,30 @@ export function FinalGuessScreen({ game, onUpdate }: ScreenProps) {
         </>
       }
     >
-      <WordReveal word={round.secret_word} category={round.category} />
+      <WordReveal word={round.secret_word} category={round.category} impostorWord={round.impostor_word} />
     </Screen>
   )
 }
 
-function WordReveal({ word, category }: { word: string | null; category: string | null }) {
+function WordReveal({
+  word,
+  category,
+  impostorWord,
+}: {
+  word: string | null
+  category: string | null
+  impostorWord: string | null
+}) {
   return (
     <>
       <Kicker>The word was…</Kicker>
       <BigName className="animate-pop text-crew">{word}</BigName>
       <p className="font-bold text-muted">Category: {category}</p>
+      {impostorWord && (
+        <p className="font-bold text-muted">
+          The Impostor&apos;s word: <span className="text-impostor">{impostorWord}</span>
+        </p>
+      )}
     </>
   )
 }
@@ -118,7 +144,7 @@ function MultiGuess({
       }
     >
       <div className="text-center">
-        <WordReveal word={round.secret_word} category={round.category} />
+        <WordReveal word={round.secret_word} category={round.category} impostorWord={round.impostor_word} />
       </div>
       <p className="text-center text-lg font-extrabold">Who guessed correctly?</p>
       <ul className="flex flex-col gap-3">

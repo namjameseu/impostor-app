@@ -1,5 +1,7 @@
 """Idempotent seed: adds any missing seed categories/words, never overwrites edits.
 
+Related words (Similar Word mode) are only filled in where a word has none yet.
+
 Run with: python -m app.db.seed
 """
 
@@ -7,6 +9,7 @@ from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
 from app.db.seed_data import SEED_DATA
+from app.db.seed_similar import SIMILAR_WORDS
 from app.db.session import SessionLocal
 from app.models import Category, Word
 
@@ -23,15 +26,21 @@ def seed(db: Session) -> tuple[int, int]:
             db.flush()
             added_categories += 1
 
+        similar = {w.lower(): s for w, s in SIMILAR_WORDS.get(name, {}).items()}
         existing = {
-            w.lower() for w in db.scalars(select(Word.word).where(Word.category_id == category.id))
+            w.word.lower(): w
+            for w in db.scalars(select(Word).where(Word.category_id == category.id))
         }
         for difficulty, words in words_by_difficulty.items():
             for word in words:
-                if word.lower() not in existing:
-                    db.add(Word(category_id=category.id, word=word, difficulty=difficulty))
-                    existing.add(word.lower())
+                row = existing.get(word.lower())
+                if row is None:
+                    row = Word(category_id=category.id, word=word, difficulty=difficulty)
+                    db.add(row)
+                    existing[word.lower()] = row
                     added_words += 1
+                if row.similar_word is None and word.lower() in similar:
+                    row.similar_word = similar[word.lower()]
     db.commit()
     return added_categories, added_words
 

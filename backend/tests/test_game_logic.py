@@ -26,7 +26,7 @@ from app.game.scoring import (
     round_outcome,
     round_points,
 )
-from app.game.word_selector import WordCandidate, select_word
+from app.game.word_selector import WordCandidate, choose_impostor_word, select_word
 
 PLAYERS = [10, 11, 12, 13, 14]
 
@@ -286,3 +286,46 @@ def test_fellow_impostors_only_given_to_impostors():
         fellow_impostors=["Mark"],
     )
     assert impostor.as_dict() == {"role": "impostor", "fellow_impostors": ["Mark"]}
+
+
+# --- Similar Word mode -------------------------------------------------------
+
+
+def test_impostor_word_uses_curated_similar_word():
+    penguin = WordCandidate(1, "Penguin", 1, "Animals", similar_word="Puffin")
+    assert choose_impostor_word(penguin, _candidates()) == "Puffin"
+
+
+def test_impostor_word_falls_back_to_same_category():
+    penguin = WordCandidate(1, "Penguin", 1, "Animals")
+    rng = random.Random(9)
+    for _ in range(50):
+        assert choose_impostor_word(penguin, _candidates(), rng) == "Dolphin"
+
+
+def test_impostor_word_ignores_similar_word_equal_to_secret():
+    penguin = WordCandidate(1, "Penguin", 1, "Animals", similar_word="penguin")
+    assert choose_impostor_word(penguin, _candidates(), random.Random(1)) == "Dolphin"
+
+
+def test_impostor_word_last_resort_and_error():
+    pizza = WordCandidate(3, "Pizza", 2, "Food")
+    assert choose_impostor_word(pizza, _candidates(), random.Random(1)) in {"Penguin", "Dolphin"}
+    with pytest.raises(GameValidationError):
+        choose_impostor_word(pizza, [pizza])
+
+
+def test_similar_mode_impostor_role_looks_like_a_normal_player():
+    impostor = build_role_view(
+        is_impostor=True,
+        secret_word="Penguin",
+        category="Animals",
+        impostor_hint="none",
+        fellow_impostors=["Mark"],
+        impostor_word="Puffin",
+    ).as_dict()
+    crew = build_role_view(
+        is_impostor=False, secret_word="Penguin", category="Animals", impostor_hint="none"
+    ).as_dict()
+    assert impostor == {"role": "player", "category": "Animals", "word": "Puffin"}
+    assert set(impostor) == set(crew)

@@ -6,7 +6,8 @@ import { BigName, Kicker, Screen } from '../../components/Screen'
 import { useAction } from '../../hooks/useAction'
 import { gameApi } from '../../services/api'
 import type { Game, PlayerRole } from '../../types/api'
-import { joinNames, playerName } from '../../utils/players'
+import { feedback } from '../../utils/feedback'
+import { activePlayers, joinNames, playerName } from '../../utils/players'
 import type { ScreenProps } from './types'
 
 type Step = 'pass' | 'hold' | 'hidden'
@@ -53,7 +54,7 @@ export function RoleRevealScreen({ game, onUpdate }: ScreenProps) {
         }
       >
         <p className="text-sm font-extrabold text-muted">
-          Player {round.revealed_count + 1} of {game.players.length}
+          Player {round.revealed_count + 1} of {activePlayers(game.players).length}
         </p>
         <Kicker>Pass the phone to</Kicker>
         <BigName className="animate-pop text-crew">{name}</BigName>
@@ -80,7 +81,11 @@ export function RoleRevealScreen({ game, onUpdate }: ScreenProps) {
           <Kicker>Only for</Kicker>
           <BigName className="text-4xl sm:text-5xl">{name}</BigName>
         </div>
-        <HoldToReveal disabled={!role} loading={!role && !error} onRevealed={() => setHasPeeked(true)}>
+        <HoldToReveal disabled={!role} loading={!role && !error} onRevealed={() => {
+            // Same buzz for everyone, so it can't give the Impostor away.
+            feedback.roleShown()
+            setHasPeeked(true)
+          }}>
           {role && <RoleCard role={role} impostorCount={game.settings.impostor_count} />}
         </HoldToReveal>
       </Screen>

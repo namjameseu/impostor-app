@@ -13,6 +13,7 @@ export const DEFAULT_SETTINGS: GameSettings = {
   impostor_hint: 'category',
   impostor_count: 1,
   impostors_know_each_other: false,
+  impostor_mode: 'classic',
 }
 
 export interface SetupState {

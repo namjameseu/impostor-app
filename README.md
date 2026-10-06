@@ -3,8 +3,17 @@
 A single-device, pass-the-phone party game. Everyone gets the secret word except the
 Impostor(s); players give spoken clues, vote, and try to catch the liars.
 
-Games can have several Impostors (always fewer than everyone else: 1 for 3-4 players,
-2 for 5-6, 3 for 7-8...), and optionally let the Impostors know who their teammates are.
+Features:
+
+- Several Impostors (always fewer than everyone else: 1 for 3-4 players, 2 for 5-6, 3 for
+  7-8...), optionally knowing who their teammates are.
+- **Classic** mode (Impostors get no word, optionally the category) or **Similar word** mode
+  (Impostors get a related word - Penguin → Puffin - and aren't told they're the Impostor).
+  Every built-in word has a curated similar word, editable in the Word library.
+- Vote confirmation, sound and vibration on the reveals (with a mute toggle; private role
+  screens only ever use the same neutral buzz for everyone).
+- Players can leave or join between rounds; past rounds keep their saved points.
+- Player stats (wins, points, best liar, ...) from the games played on each device.
 
 - **frontend/** – React + TypeScript + Vite + Tailwind CSS (http://localhost:5173)
 - **backend/** – FastAPI + SQLAlchemy + Alembic (http://localhost:8000, API docs at `/docs`)
@@ -68,6 +77,9 @@ Free-tier notes:
 - The Render service sleeps after 15 minutes without visitors; the first visit after that
   takes about a minute to wake up. Open it a minute before you play.
 - Neon's free plan has ~0.5 GB storage, far more than this app needs.
+- Old games are cleaned up on every start (on the free tier, whenever the app wakes up):
+  unfinished games untouched for 7 days and finished games older than 365 days. Override
+  with the `ABANDONED_GAME_DAYS` / `FINISHED_GAME_DAYS` environment variables.
 - Without `ADMIN_PASSCODE`, anyone with the link can edit or delete words. With it, the
   Word library shows **Unlock** and asks for the passcode (remembered until the browser tab closes).
 
@@ -174,6 +186,9 @@ at the word. Points are worked out per Impostor and added together:
 | POST | `/api/games/{id}/rounds` | start the next round |
 | POST | `/api/games/{id}/finish` | end after the last round |
 | GET | `/api/games/{id}/results` | standings + round history |
+| POST | `/api/games/{id}/players` | `{"name": ...}` late arrival (setup / between rounds) |
+| DELETE | `/api/games/{id}/players/{pid}` | player leaves (setup / between rounds); history kept |
+| GET | `/api/stats?game_ids=1&game_ids=2` | player stats across those games |
 | GET | `/api/admin/status` | whether library edits need a passcode |
 | POST | `/api/admin/verify` | check a passcode (send it as `X-Admin-Passcode` on library edits) |
 | POST | `/api/games/{id}/play-again` | new game, same players and settings |
@@ -187,8 +202,8 @@ backend/app/
   api/         thin FastAPI routers
   models/      SQLAlchemy models (categories, words, games, game_categories, game_players,
                rounds, round_impostors, round_suspects)
+  db/          engine/session, seed data (+ similar words), old-game cleanup
   schemas/     Pydantic request/response models
-  db/          engine/session, seed data
 frontend/src/
   pages/game/  one screen per game state
   services/    API client

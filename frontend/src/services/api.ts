@@ -5,6 +5,7 @@ import type {
   GameResults,
   GameSettings,
   PlayerRole,
+  Stats,
   Word,
   WordFilters,
   WordInput,
@@ -87,6 +88,11 @@ export const libraryApi = {
   deleteWord: (id: number) => request<void>('DELETE', `/words/${id}`),
 }
 
+export const statsApi = {
+  forGames: (gameIds: number[]) =>
+    request<Stats>('GET', `/stats?${gameIds.map((id) => `game_ids=${id}`).join('&')}`),
+}
+
 export const adminApi = {
   status: () => request<{ passcode_required: boolean }>('GET', '/admin/status'),
   verify: (passcode: string) => request<void>('POST', '/admin/verify', { passcode }),
@@ -97,6 +103,11 @@ export const gameApi = {
     request<Game>('POST', '/games', { players, settings }),
   get: (gameId: number) => request<Game>('GET', `/games/${gameId}`),
   start: (gameId: number) => request<Game>('POST', `/games/${gameId}/start`),
+  /** Setup or between rounds only. */
+  addPlayer: (gameId: number, name: string) =>
+    request<Game>('POST', `/games/${gameId}/players`, { name }),
+  removePlayer: (gameId: number, playerId: number) =>
+    request<Game>('DELETE', `/games/${gameId}/players/${playerId}`),
 
   getRole: (gameId: number, playerId: number) =>
     request<PlayerRole>('GET', `${current(gameId)}/players/${playerId}/role`),

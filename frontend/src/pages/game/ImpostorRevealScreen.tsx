@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button } from '../../components/Button'
 import { ErrorMessage } from '../../components/ErrorMessage'
 import { BigName, Kicker, Screen } from '../../components/Screen'
 import { useAction } from '../../hooks/useAction'
 import { gameApi } from '../../services/api'
 import type { Game } from '../../types/api'
+import { feedback } from '../../utils/feedback'
 import { joinNames, playerName, playerNames } from '../../utils/players'
 import type { ScreenProps } from './types'
 
@@ -16,6 +17,7 @@ export function ImpostorRevealScreen({ game, onUpdate }: ScreenProps) {
 
   const reveal = () =>
     run(async () => {
+      feedback.drumroll()
       const updated = await gameApi.revealImpostors(game.id)
       // With one Impostor who was caught, the final-guess screen already shows the verdict.
       if (single && updated.state === 'FINAL_GUESS') onUpdate(updated)
@@ -52,6 +54,11 @@ function Verdict({ game, onContinue }: { game: Game; onContinue: () => void }) {
   const escaped = impostorIds.filter((id) => !caught.includes(id))
   const single = impostorIds.length === 1
   const finalGuess = game.state === 'FINAL_GUESS'
+
+  useEffect(() => {
+    const timer = setTimeout(caught.length > 0 ? feedback.caught : feedback.escaped, 400)
+    return () => clearTimeout(timer)
+  }, [caught.length])
 
   const headline = single
     ? `${playerName(game.players, round.suspect_ids[0])} was not the Impostor!`
@@ -96,6 +103,12 @@ function Verdict({ game, onContinue }: { game: Game; onContinue: () => void }) {
         <div className="animate-rise rounded-2xl border border-line bg-panel px-6 py-4 [animation-delay:1900ms]">
           <Kicker>The word was</Kicker>
           <p className="font-display text-3xl text-crew">{round.secret_word}</p>
+          {round.impostor_word && (
+            <p className="mt-1 font-bold text-muted">
+              Impostor{impostorIds.length > 1 ? 's' : ''} had:{' '}
+              <span className="text-impostor">{round.impostor_word}</span>
+            </p>
+          )}
         </div>
       )}
     </Screen>

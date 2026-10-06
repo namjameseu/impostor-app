@@ -13,6 +13,7 @@ class WordCandidate:
     word: str
     category_id: int
     category_name: str
+    similar_word: str | None = None
 
 
 def select_word(
@@ -35,3 +36,24 @@ def select_word(
 
     category_id = rng.choice(sorted(by_category))
     return rng.choice(by_category[category_id])
+
+
+def choose_impostor_word(
+    secret: WordCandidate,
+    candidates: Sequence[WordCandidate],
+    rng: random.Random = system_rng,
+) -> str:
+    """The related word Impostors get in Similar Word mode.
+
+    Uses the word's curated similar word; otherwise another word from the same category
+    (so it fits the category everyone is told), and as a last resort any other word.
+    """
+    curated = (secret.similar_word or "").strip()
+    if curated and curated.casefold() != secret.word.casefold():
+        return curated
+    others = [c for c in candidates if c.word.casefold() != secret.word.casefold()]
+    same_category = [c for c in others if c.category_id == secret.category_id]
+    pool = same_category or others
+    if not pool:
+        raise GameValidationError("Similar Word mode needs at least two different words.")
+    return rng.choice(pool).word

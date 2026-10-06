@@ -3,13 +3,13 @@ import { ErrorMessage } from '../../components/ErrorMessage'
 import { BigName, Kicker, Screen } from '../../components/Screen'
 import { useAction } from '../../hooks/useAction'
 import { gameApi } from '../../services/api'
-import { orderFrom } from '../../utils/players'
+import { activePlayers, orderFrom } from '../../utils/players'
 import type { ScreenProps } from './types'
 
 export function ClueRoundScreen({ game, onUpdate }: ScreenProps) {
   const { run, pending, error } = useAction()
   const round = game.round!
-  const order = orderFrom(game.players, round.starting_player_id)
+  const order = orderFrom(activePlayers(game.players), round.starting_player_id)
   const toVoting = () => run(async () => onUpdate(await gameApi.startVoting(game.id)))
 
   return (

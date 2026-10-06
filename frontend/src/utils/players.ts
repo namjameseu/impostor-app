@@ -14,6 +14,9 @@ export function joinNames(names: string[]): string {
   return names.length <= 1 ? (names[0] ?? '') : `${names.slice(0, -1).join(', ')} & ${names.at(-1)}`
 }
 
+/** Players still in the game (people who left are kept only for history). */
+export const activePlayers = (players: Player[]) => players.filter((p) => p.active)
+
 export function playerNames(players: Player[], ids: number[] | null | undefined): string[] {
   return (ids ?? []).map((id) => playerName(players, id))
 }

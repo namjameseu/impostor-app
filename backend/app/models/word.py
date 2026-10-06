@@ -22,6 +22,8 @@ class Word(TimestampMixin, Base):
     word: Mapped[str] = mapped_column(String(80))
     difficulty: Mapped[str] = mapped_column(String(10), default="medium", index=True)
     enabled: Mapped[bool] = mapped_column(default=True, server_default=true())
+    # Related word given to Impostors in Similar Word mode (e.g. Penguin -> Puffin).
+    similar_word: Mapped[str | None] = mapped_column(String(80))
 
     category: Mapped["Category"] = relationship(back_populates="words")
 

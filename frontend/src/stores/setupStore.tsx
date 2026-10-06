@@ -33,6 +33,7 @@ function loadState(): SetupState {
       impostor_count: settings.impostor_count ?? DEFAULT_SETTINGS.impostor_count,
       impostors_know_each_other:
         settings.impostors_know_each_other ?? DEFAULT_SETTINGS.impostors_know_each_other,
+      impostor_mode: settings.impostor_mode ?? DEFAULT_SETTINGS.impostor_mode,
     },
   }
 }

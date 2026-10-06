@@ -1,14 +1,18 @@
 import { useState } from 'react'
 import { Button } from '../../components/Button'
 import { ErrorMessage } from '../../components/ErrorMessage'
+import { Modal } from '../../components/Modal'
 import { Kicker, Screen } from '../../components/Screen'
 import { useAction } from '../../hooks/useAction'
 import { gameApi } from '../../services/api'
+import { feedback } from '../../utils/feedback'
+import { activePlayers, joinNames, playerNames } from '../../utils/players'
 import type { ScreenProps } from './types'
 
 export function VotingScreen({ game, onUpdate }: ScreenProps) {
   const needed = game.settings.impostor_count
   const [suspects, setSuspects] = useState<number[]>([])
+  const [confirming, setConfirming] = useState(false)
   const { run, pending, error } = useAction()
   const full = suspects.length === needed
 
@@ -18,14 +22,18 @@ export function VotingScreen({ game, onUpdate }: ScreenProps) {
     if (!full) setSuspects([...suspects, id])
   }
 
-  const lockIn = () => full && run(async () => onUpdate(await gameApi.selectSuspects(game.id, suspects)))
+  const lockIn = () =>
+    run(async () => {
+      feedback.tap()
+      onUpdate(await gameApi.selectSuspects(game.id, suspects))
+    })
 
   return (
     <Screen
       actions={
         <>
           <ErrorMessage error={error} />
-          <Button variant="danger" onClick={lockIn} disabled={!full} loading={pending}>
+          <Button variant="danger" onClick={() => setConfirming(true)} disabled={!full}>
             {needed > 1 && !full ? `Pick ${needed - suspects.length} more` : 'Reveal'}
           </Button>
         </>
@@ -42,7 +50,7 @@ export function VotingScreen({ game, onUpdate }: ScreenProps) {
         aria-label="Suspected Impostors"
         className="flex flex-col gap-2"
       >
-        {game.players.map((player) => {
+        {activePlayers(game.players).map((player) => {
           const selected = suspects.includes(player.id)
           const locked = !selected && full && needed > 1
           return (
@@ -67,6 +75,26 @@ export function VotingScreen({ game, onUpdate }: ScreenProps) {
           )
         })}
       </div>
+      {confirming && (
+        <Modal title="Lock in your vote?" onClose={() => setConfirming(false)}>
+          <p className="mb-5 text-lg font-bold text-muted">
+            Accuse{' '}
+            <span className="font-extrabold text-impostor">
+              {joinNames(playerNames(game.players, suspects))}
+            </span>
+            ? This can&apos;t be undone.
+          </p>
+          <ErrorMessage error={error} />
+          <div className="mt-3 grid grid-cols-2 gap-3">
+            <Button variant="secondary" size="md" onClick={() => setConfirming(false)} disabled={pending}>
+              Go back
+            </Button>
+            <Button variant="danger" size="md" onClick={lockIn} loading={pending}>
+              Yes, accuse
+            </Button>
+          </div>
+        </Modal>
+      )}
     </Screen>
   )
 }

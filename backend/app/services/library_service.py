@@ -26,6 +26,7 @@ def _word_read(word: Word) -> WordRead:
         word=word.word,
         difficulty=word.difficulty,
         enabled=word.enabled,
+        similar_word=word.similar_word,
         created_at=word.created_at,
         updated_at=word.updated_at,
     )

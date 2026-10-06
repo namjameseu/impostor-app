@@ -20,7 +20,7 @@ export function Screen({ children, actions, header, center = false }: ScreenProp
         {children}
       </main>
       {actions && (
-        <div className="sticky bottom-0 -mx-4 flex flex-col gap-3 bg-gradient-to-t from-ink via-ink/95 to-transparent px-4 pt-6 pb-[max(1.25rem,env(safe-area-inset-bottom))]">
+        <div data-screen-actions className="sticky bottom-0 -mx-4 flex flex-col gap-3 bg-gradient-to-t from-ink via-ink/95 to-transparent px-4 pt-6 pb-[max(1.25rem,env(safe-area-inset-bottom))]">
           {actions}
         </div>
       )}

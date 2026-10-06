@@ -82,7 +82,7 @@ def validate_impostor_count(impostor_count: int, player_count: int) -> None:
         )
 
 
-def validate_player_names(names: Iterable[str]) -> list[str]:
+def validate_player_names(names: Iterable[str], minimum: int = MIN_PLAYERS) -> list[str]:
     cleaned = [" ".join(name.split()) for name in names]
     if any(not name for name in cleaned):
         raise GameValidationError("Player names cannot be empty.")
@@ -90,6 +90,6 @@ def validate_player_names(names: Iterable[str]) -> list[str]:
         raise GameValidationError(f"Player names must be at most {MAX_NAME_LENGTH} characters.")
     if len({name.casefold() for name in cleaned}) != len(cleaned):
         raise GameValidationError("Player names must be unique.")
-    if not MIN_PLAYERS <= len(cleaned) <= MAX_PLAYERS:
+    if not minimum <= len(cleaned) <= MAX_PLAYERS:
         raise GameValidationError(f"A game needs {MIN_PLAYERS} to {MAX_PLAYERS} players.")
     return cleaned

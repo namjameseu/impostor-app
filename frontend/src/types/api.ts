@@ -1,6 +1,7 @@
 export type Difficulty = 'easy' | 'medium' | 'hard'
 export type CategoryMode = 'random' | 'specific'
 export type ImpostorHint = 'none' | 'category'
+export type ImpostorMode = 'classic' | 'similar_word'
 export type RoundOutcome = 'group_wins' | 'impostors_win' | 'split'
 
 export type GameState =
@@ -37,6 +38,8 @@ export interface Word {
   word: string
   difficulty: Difficulty
   enabled: boolean
+  /** Related word for Similar Word mode. */
+  similar_word: string | null
   created_at: string
   updated_at: string
 }
@@ -46,6 +49,7 @@ export interface WordInput {
   word: string
   difficulty: Difficulty
   enabled?: boolean
+  similar_word?: string | null
 }
 
 export interface WordFilters {
@@ -62,6 +66,7 @@ export interface GameSettings {
   impostor_hint: ImpostorHint
   impostor_count: number
   impostors_know_each_other: boolean
+  impostor_mode: ImpostorMode
 }
 
 export interface Player {
@@ -69,6 +74,8 @@ export interface Player {
   name: string
   order_index: number
   score: number
+  /** False once the player has left the game. */
+  active: boolean
 }
 
 /** Public round data. Secret fields are null until the backend allows showing them. */
@@ -83,6 +90,8 @@ export interface Round {
   caught_impostor_ids: number[] | null
   word_revealed: boolean
   secret_word: string | null
+  /** Similar Word mode: the Impostors' related word (once the word is revealed). */
+  impostor_word: string | null
   category: string | null
   guessed_word_ids: number[] | null
   outcome: RoundOutcome | null
@@ -115,6 +124,7 @@ export interface RoundSummary {
   round_number: number
   category: string
   secret_word: string
+  impostor_word: string | null
   impostor_ids: number[]
   impostor_names: string[]
   suspect_ids: number[]
@@ -127,4 +137,22 @@ export interface GameResults {
   state: GameState
   standings: Standing[]
   rounds: RoundSummary[]
+}
+
+export interface PlayerStats {
+  name: string
+  games: number
+  wins: number
+  rounds: number
+  points: number
+  impostor_rounds: number
+  escaped: number
+  caught: number
+  guessed_word: number
+}
+
+export interface Stats {
+  games: number
+  finished_games: number
+  players: PlayerStats[]
 }

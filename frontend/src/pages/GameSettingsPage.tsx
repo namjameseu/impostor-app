@@ -10,6 +10,7 @@ import { useAction } from '../hooks/useAction'
 import { gameApi, libraryApi } from '../services/api'
 import { useSetup } from '../stores/setupContext'
 import type { Category } from '../types/api'
+import { rememberGame } from '../utils/history'
 import { MIN_PLAYERS, maxImpostors, plural } from '../utils/players'
 import { BackHeader } from './PlayerSetupPage'
 
@@ -49,6 +50,7 @@ export function GameSettingsPage() {
 
   const impostorLimit = maxImpostors(players.length)
   const impostorCount = Math.min(settings.impostor_count, impostorLimit)
+  const similarMode = settings.impostor_mode === 'similar_word'
 
   const startGame = () =>
     run(async () => {
@@ -59,11 +61,13 @@ export function GameSettingsPage() {
           category_mode: isRandom ? 'random' : 'specific',
           category_ids: isRandom ? [] : selectedIds,
           impostor_count: impostorCount,
-          impostors_know_each_other: impostorCount > 1 && settings.impostors_know_each_other,
+          impostors_know_each_other:
+            impostorCount > 1 && !similarMode && settings.impostors_know_each_other,
         },
       )
       await gameApi.start(created.id)
       setActiveGameId(created.id)
+      rememberGame(created.id)
       navigate(`/game/${created.id}`)
     })
 
@@ -128,23 +132,41 @@ export function GameSettingsPage() {
       )}
 
       <OptionGroup
+        label="Impostor mode"
+        value={settings.impostor_mode}
+        onChange={(impostor_mode) => setSettings({ ...settings, impostor_mode })}
+        options={[
+          { value: 'classic', label: 'Classic', hint: 'Impostors get no word' },
+          { value: 'similar_word', label: 'Similar word', hint: "They get a close word and don't know" },
+        ]}
+      />
+      {similarMode && (
+        <p className="-mt-4 text-sm font-bold text-muted">
+          Impostors see a related word (Penguin → Puffin) and aren&apos;t told they&apos;re the Impostor.
+        </p>
+      )}
+
+      <OptionGroup
         label="Impostors know each other?"
-        disabled={impostorCount < 2}
-        value={impostorCount > 1 && settings.impostors_know_each_other ? 'yes' : 'no'}
+        disabled={impostorCount < 2 || similarMode}
+        value={impostorCount > 1 && !similarMode && settings.impostors_know_each_other ? 'yes' : 'no'}
         onChange={(v) => setSettings({ ...settings, impostors_know_each_other: v === 'yes' })}
         options={[
           { value: 'no', label: 'No', hint: 'Each works alone' },
           { value: 'yes', label: 'Yes', hint: 'They see their team' },
         ]}
       />
-      {impostorCount < 2 && (
+      {(impostorCount < 2 || similarMode) && (
         <p className="-mt-4 text-sm font-bold text-muted">
-          Choose 2 or more Impostors to turn this on.
+          {similarMode
+            ? "Not used in Similar word mode: Impostors don't know they're Impostors."
+            : 'Choose 2 or more Impostors to turn this on.'}
         </p>
       )}
 
       <OptionGroup
         label="Impostor hint"
+        disabled={similarMode}
         value={settings.impostor_hint}
         onChange={(impostor_hint) => setSettings({ ...settings, impostor_hint })}
         options={[

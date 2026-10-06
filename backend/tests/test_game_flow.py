@@ -35,7 +35,7 @@ def assert_no_secret_word(payload):
 def reveal_all_roles(client, game):
     """Walk through role reveal. Returns (game, {player_id: role})."""
     roles = {}
-    for player in game["players"]:
+    for player in [p for p in game["players"] if p["active"]]:
         assert game["round"]["revealer_id"] == player["id"]
         role = client.get(url(game, f"/players/{player['id']}/role"))
         assert role.status_code == 200, role.text

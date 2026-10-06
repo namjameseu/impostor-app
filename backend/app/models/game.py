@@ -12,12 +12,13 @@ from sqlalchemy import (
     UniqueConstraint,
     false,
     func,
+    true,
 )
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base import Base, TimestampMixin
 from app.game.game_engine import GameState
-from app.game.settings import CategoryMode, ImpostorHint
+from app.game.settings import CategoryMode, ImpostorHint, ImpostorMode
 
 if TYPE_CHECKING:
     from app.models.category import Category
@@ -47,6 +48,7 @@ class Game(TimestampMixin, Base):
         CheckConstraint(f"impostor_hint IN {_in(ImpostorHint)}", name="impostor_hint_valid"),
         CheckConstraint("total_rounds > 0", name="total_rounds_positive"),
         CheckConstraint("impostor_count > 0", name="impostor_count_positive"),
+        CheckConstraint(f"impostor_mode IN {_in(ImpostorMode)}", name="impostor_mode_valid"),
     )
 
     id: Mapped[int] = mapped_column(primary_key=True)
@@ -57,6 +59,9 @@ class Game(TimestampMixin, Base):
     impostor_count: Mapped[int] = mapped_column(default=1, server_default="1")
     # When true, each Impostor's private role lists the other Impostors.
     impostors_know_each_other: Mapped[bool] = mapped_column(default=False, server_default=false())
+    impostor_mode: Mapped[str] = mapped_column(
+        String(20), default=ImpostorMode.CLASSIC, server_default=ImpostorMode.CLASSIC.value
+    )
     current_round_number: Mapped[int] = mapped_column(default=0)
     finished_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 
@@ -86,6 +91,8 @@ class GamePlayer(TimestampMixin, Base):
     name: Mapped[str] = mapped_column(String(30))
     score: Mapped[int] = mapped_column(default=0)
     order_index: Mapped[int]
+    # False once a player leaves mid-game; their history and score are kept.
+    active: Mapped[bool] = mapped_column(default=True, server_default=true())
 
     game: Mapped[Game] = relationship(back_populates="players")
 

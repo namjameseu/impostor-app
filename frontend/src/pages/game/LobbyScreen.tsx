@@ -3,12 +3,13 @@ import { ErrorMessage } from '../../components/ErrorMessage'
 import { BigName, Kicker, Screen } from '../../components/Screen'
 import { useAction } from '../../hooks/useAction'
 import { gameApi } from '../../services/api'
-import { plural } from '../../utils/players'
+import { activePlayers, plural } from '../../utils/players'
 import type { ScreenProps } from './types'
 
 export function LobbyScreen({ game, onUpdate }: ScreenProps) {
   const { run, pending, error } = useAction()
   const { settings } = game
+  const players = activePlayers(game.players)
   const start = () => run(async () => onUpdate(await gameApi.start(game.id)))
 
   return (
@@ -24,23 +25,25 @@ export function LobbyScreen({ game, onUpdate }: ScreenProps) {
       }
     >
       <Kicker>Ready to play?</Kicker>
-      <BigName>{game.players.length} players</BigName>
-      <p className="text-lg font-bold text-muted">
-        {game.players.map((p) => p.name).join(' · ')}
-      </p>
+      <BigName>{players.length} players</BigName>
+      <p className="text-lg font-bold text-muted">{players.map((p) => p.name).join(' · ')}</p>
       <ul className="flex flex-col gap-1 font-bold text-muted">
         <li>{settings.total_rounds} rounds</li>
         <li>
           {plural(settings.impostor_count, 'Impostor')}
           {settings.impostor_count > 1 &&
+            settings.impostor_mode === 'classic' &&
             (settings.impostors_know_each_other ? ' who know each other' : ' working alone')}
         </li>
+        {settings.impostor_mode === 'similar_word' && <li>Similar word mode</li>}
         <li>
           {settings.category_mode === 'random'
             ? 'Random categories'
             : settings.categories.map((c) => c.name).join(', ')}
         </li>
-        <li>{settings.impostor_hint === 'category' ? 'Impostor sees the category' : 'No hint for the Impostor'}</li>
+        {settings.impostor_mode === 'classic' && (
+          <li>{settings.impostor_hint === 'category' ? 'Impostor sees the category' : 'No hint for the Impostor'}</li>
+        )}
       </ul>
     </Screen>
   )

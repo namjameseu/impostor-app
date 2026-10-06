@@ -9,6 +9,7 @@ from app.schemas.game import (
     GameCreate,
     GameRead,
     GameResults,
+    PlayerAdd,
     PlayersUpdate,
     RoleRead,
     SuspectSelect,
@@ -33,6 +34,18 @@ def get_game(game_id: int, db: DB):
 @router.put("/{game_id}/players", response_model=GameRead)
 def replace_players(game_id: int, data: PlayersUpdate, db: DB):
     return svc.to_game_read(svc.replace_players(db, game_id, data.players))
+
+
+@router.post("/{game_id}/players", response_model=GameRead, status_code=status.HTTP_201_CREATED)
+def add_player(game_id: int, data: PlayerAdd, db: DB):
+    """Add a late arrival (setup or between rounds)."""
+    return svc.to_game_read(svc.add_player(db, game_id, data.name))
+
+
+@router.delete("/{game_id}/players/{player_id}", response_model=GameRead)
+def remove_player(game_id: int, player_id: int, db: DB):
+    """A player leaves (setup or between rounds); their history is kept."""
+    return svc.to_game_read(svc.remove_player(db, game_id, player_id))
 
 
 @router.post("/{game_id}/start", response_model=GameRead)

@@ -3,7 +3,7 @@ from typing import Literal
 from pydantic import BaseModel, Field, model_validator
 
 from app.game.game_engine import GameState
-from app.game.settings import CategoryMode, ImpostorHint
+from app.game.settings import CategoryMode, ImpostorHint, ImpostorMode
 
 
 class GameSettings(BaseModel):
@@ -15,6 +15,7 @@ class GameSettings(BaseModel):
     # Upper limit depends on the number of players; checked when the game is created.
     impostor_count: int = Field(default=1, ge=1, le=9)
     impostors_know_each_other: bool = False
+    impostor_mode: ImpostorMode = ImpostorMode.CLASSIC
 
     @model_validator(mode="after")
     def _category_matches_mode(self) -> "GameSettings":
@@ -23,6 +24,9 @@ class GameSettings(BaseModel):
             raise ValueError("Choose at least one category, or use random.")
         if self.category_mode == CategoryMode.RANDOM:
             self.category_ids = []
+        if self.impostor_mode == ImpostorMode.SIMILAR_WORD:
+            # Impostors don't know they're Impostors, so they can't know each other either.
+            self.impostors_know_each_other = False
         return self
 
 
@@ -33,6 +37,10 @@ class GameCreate(BaseModel):
 
 class PlayersUpdate(BaseModel):
     players: list[str]
+
+
+class PlayerAdd(BaseModel):
+    name: str
 
 
 class SuspectSelect(BaseModel):
@@ -52,6 +60,7 @@ class PlayerRead(BaseModel):
     name: str
     order_index: int
     score: int
+    active: bool = True
 
 
 class CategoryRef(BaseModel):
@@ -67,6 +76,7 @@ class SettingsRead(BaseModel):
     impostor_hint: ImpostorHint
     impostor_count: int
     impostors_know_each_other: bool
+    impostor_mode: ImpostorMode
 
 
 class RoundRead(BaseModel):
@@ -82,6 +92,8 @@ class RoundRead(BaseModel):
     caught_impostor_ids: list[int] | None = None
     word_revealed: bool = False
     secret_word: str | None = None
+    # Similar Word mode: the Impostors' related word, shown alongside the secret word.
+    impostor_word: str | None = None
     category: str | None = None
     guessed_word_ids: list[int] | None = None
     outcome: str | None = None
@@ -118,6 +130,7 @@ class RoundSummary(BaseModel):
     round_number: int
     category: str
     secret_word: str
+    impostor_word: str | None = None
     impostor_ids: list[int]
     impostor_names: list[str]
     suspect_ids: list[int]

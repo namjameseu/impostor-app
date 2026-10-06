@@ -56,11 +56,16 @@ def build_role_view(
     category: str,
     impostor_hint: str,
     fellow_impostors: Sequence[str] | None = None,
+    impostor_word: str | None = None,
 ) -> RoleView:
     """The only place a player's private role is assembled. The Impostor never gets the word.
 
     `fellow_impostors` (the other Impostors' names) is only ever given to an Impostor.
+    With `impostor_word` (Similar Word mode) an Impostor's role is shaped exactly like a normal
+    player's, carrying the related word, so neither the screen nor the response gives them away.
     """
+    if is_impostor and impostor_word is not None:
+        return RoleView(role="player", category=category, word=impostor_word)
     if is_impostor:
         hint = category if impostor_hint == ImpostorHint.CATEGORY else None
         fellows = tuple(fellow_impostors) if fellow_impostors is not None else None

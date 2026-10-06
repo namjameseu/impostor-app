@@ -37,6 +37,7 @@ class WordCreate(BaseModel):
     word: WordText
     difficulty: Difficulty = "medium"
     enabled: bool = True
+    similar_word: WordText | None = None
 
 
 class WordUpdate(BaseModel):
@@ -44,6 +45,7 @@ class WordUpdate(BaseModel):
     word: WordText | None = None
     difficulty: Difficulty | None = None
     enabled: bool | None = None
+    similar_word: WordText | None = None
 
 
 class WordRead(BaseModel):
@@ -55,5 +57,6 @@ class WordRead(BaseModel):
     word: str
     difficulty: Difficulty
     enabled: bool
+    similar_word: str | None
     created_at: datetime
     updated_at: datetime

@@ -209,7 +209,14 @@ function WordsTab({
             className={`flex items-center gap-3 rounded-xl bg-panel px-4 py-3 ${word.enabled ? '' : 'opacity-50'}`}
           >
             <div className="min-w-0 flex-1">
-              <p className="truncate text-lg font-extrabold">{word.word}</p>
+              <p className="truncate text-lg font-extrabold">
+                {word.word}
+                {word.similar_word && (
+                  <span className="ml-2 text-sm font-bold text-muted" title="Similar word mode">
+                    ≈ {word.similar_word}
+                  </span>
+                )}
+              </p>
               <p className="flex flex-wrap items-center gap-2 text-xs font-bold text-muted">
                 {word.category_name}
                 <span className={`rounded-full px-2 py-0.5 capitalize ${DIFFICULTY_STYLES[word.difficulty]}`}>
@@ -261,11 +268,17 @@ function WordForm({
   const [text, setText] = useState(word?.word ?? '')
   const [categoryId, setCategoryId] = useState(word?.category_id ?? defaultCategoryId ?? 0)
   const [difficulty, setDifficulty] = useState<Difficulty>(word?.difficulty ?? 'medium')
+  const [similar, setSimilar] = useState(word?.similar_word ?? '')
   const { run, pending, error } = useAction()
 
   const save = (e: FormEvent) => {
     e.preventDefault()
-    const data = { word: text.trim(), category_id: categoryId, difficulty }
+    const data = {
+      word: text.trim(),
+      category_id: categoryId,
+      difficulty,
+      similar_word: similar.trim() || null,
+    }
     run(async () => {
       if (word) await libraryApi.updateWord(word.id, data)
       else await libraryApi.createWord(data)
@@ -283,6 +296,14 @@ function WordForm({
           maxLength={80}
           autoFocus
           aria-label="Word"
+          className={inputClass}
+        />
+        <input
+          value={similar}
+          onChange={(e) => setSimilar(e.target.value)}
+          placeholder="Similar word (optional), e.g. Puffin"
+          maxLength={80}
+          aria-label="Similar word"
           className={inputClass}
         />
         <select
