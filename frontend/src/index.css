@@ -1,0 +1,58 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-display: 'Bungee', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Nunito', ui-sans-serif, system-ui, sans-serif;
+
+  --color-ink: #0c0a1d;
+  --color-panel: #1a1633;
+  --color-panel-2: #251f47;
+  --color-line: #3a3266;
+  --color-muted: #a59ed1;
+  --color-impostor: #f43f5e;
+  --color-crew: #22d3ee;
+  --color-gold: #fbbf24;
+  --color-accent: #a78bfa;
+
+  --animate-pop: pop 420ms cubic-bezier(0.2, 1.4, 0.4, 1) both;
+  --animate-rise: rise 360ms ease-out both;
+  --animate-drumroll: drumroll 900ms ease-in-out infinite;
+
+  @keyframes pop {
+    0% { transform: scale(0.6); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  @keyframes rise {
+    0% { transform: translateY(16px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+  @keyframes drumroll {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.06); }
+  }
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    min-height: 100dvh;
+  }
+  body {
+    @apply bg-ink font-sans text-white antialiased;
+    background-image: radial-gradient(circle at 50% -20%, #2b2160 0%, transparent 60%);
+    -webkit-tap-highlight-color: transparent;
+  }
+  button {
+    cursor: pointer;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
