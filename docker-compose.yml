@@ -23,6 +23,8 @@ services:
     environment:
       DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-impostor}:${POSTGRES_PASSWORD:-impostor}@db:5432/${POSTGRES_DB:-impostor}
       CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:5173}
+      # Set in .env to hide the words behind a passcode; empty = library open to everyone.
+      ADMIN_PASSCODE: ${ADMIN_PASSCODE:-}
       WATCHFILES_FORCE_POLLING: "true"
     command: >
       sh -c "alembic upgrade head && python -m app.db.seed &&

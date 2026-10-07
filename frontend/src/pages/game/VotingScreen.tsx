@@ -5,7 +5,6 @@ import { Modal } from '../../components/Modal'
 import { Kicker, Screen } from '../../components/Screen'
 import { useAction } from '../../hooks/useAction'
 import { gameApi } from '../../services/api'
-import { feedback } from '../../utils/feedback'
 import { activePlayers, joinNames, playerNames } from '../../utils/players'
 import type { ScreenProps } from './types'
 
@@ -24,7 +23,6 @@ export function VotingScreen({ game, onUpdate }: ScreenProps) {
 
   const lockIn = () =>
     run(async () => {
-      feedback.tap()
       onUpdate(await gameApi.selectSuspects(game.id, suspects))
     })
 

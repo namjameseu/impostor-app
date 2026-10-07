@@ -8,13 +8,22 @@ interface CategoryPickerProps {
   /** null while loading */
   categories: Category[] | null
   isRandom: boolean
+  /** Show how many words each category has (hidden from players without the admin passcode). */
+  showCounts: boolean
   selectedIds: number[]
   onRandom: () => void
   onToggle: (id: number) => void
 }
 
 /** Compact dropdown: one summary row; the choices open in their own scrollable panel. */
-export function CategoryPicker({ categories, isRandom, selectedIds, onRandom, onToggle }: CategoryPickerProps) {
+export function CategoryPicker({
+  categories,
+  isRandom,
+  showCounts,
+  selectedIds,
+  onRandom,
+  onToggle,
+}: CategoryPickerProps) {
   const [open, setOpen] = useState(false)
   const panelId = useId()
   const panelRef = useRef<HTMLDivElement>(null)
@@ -70,7 +79,7 @@ export function CategoryPicker({ categories, isRandom, selectedIds, onRandom, on
                     key={c.id}
                     selected={selected}
                     label={`${selected ? '✓ ' : ''}${c.name}`}
-                    hint={`${c.word_count} words`}
+                    hint={showCounts ? `${c.word_count} words` : undefined}
                     onClick={() => onToggle(c.id)}
                   />
                 )

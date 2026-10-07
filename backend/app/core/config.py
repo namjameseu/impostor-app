@@ -21,7 +21,7 @@ CORS_ORIGINS = [
     for origin in os.getenv("CORS_ORIGINS", "http://localhost:5173").split(",")
     if origin.strip()
 ]
-# When set, changing the word library requires this passcode. Unset = open (local dev).
+# When set, seeing the words and changing the library require this passcode. Unset = open.
 ADMIN_PASSCODE = os.getenv("ADMIN_PASSCODE") or None
 # Built frontend to serve from the API (production image). Unset in development.
 STATIC_DIR = os.getenv("STATIC_DIR") or None

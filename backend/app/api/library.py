@@ -18,7 +18,8 @@ from app.services import library_service
 
 router = APIRouter(tags=["library"])
 DB = Annotated[Session, Depends(get_db)]
-# Reads are public; changes need the admin passcode when one is configured.
+# Categories are public (the game settings list them); the words themselves and every change
+# need the admin passcode when one is configured, so players can't browse the answers.
 ADMIN = [Depends(require_admin)]
 
 
@@ -42,7 +43,7 @@ def update_category(category_id: int, data: CategoryUpdate, db: DB):
     return library_service.update_category(db, category_id, data)
 
 
-@router.get("/words", response_model=list[WordRead])
+@router.get("/words", response_model=list[WordRead], dependencies=ADMIN)
 def list_words(
     db: DB,
     category_id: int | None = None,

@@ -1,7 +1,10 @@
 import { useCallback, useEffect, useState } from 'react'
 import { ADMIN_LOCKED_EVENT, adminApi, getAdminPasscode, setAdminPasscode } from '../services/api'
 
-/** Whether the word library can be edited, and unlocking it with the admin passcode. */
+/**
+ * Whether the word library can be seen and edited, and unlocking it with the admin passcode.
+ * With a passcode set, the words (and how many each category has) stay hidden from players.
+ */
 export function useAdmin() {
   const [required, setRequired] = useState<boolean | null>(null)
   const [unlocked, setUnlocked] = useState(() => getAdminPasscode() !== null)

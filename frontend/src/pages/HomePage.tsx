@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Button } from '../components/Button'
 import { Screen } from '../components/Screen'
+import { SoundButton } from '../components/SoundButton'
+import { ThemeButton } from '../components/ThemePicker'
 import { useInstallPrompt } from '../hooks/useInstallPrompt'
 import { gameApi } from '../services/api'
 import { useSetup } from '../stores/setupContext'
@@ -23,6 +25,12 @@ export function HomePage() {
   return (
     <Screen
       center
+      header={
+        <header className="flex justify-between pt-1">
+          <SoundButton />
+          <ThemeButton />
+        </header>
+      }
       actions={
         <>
           {resumable && (

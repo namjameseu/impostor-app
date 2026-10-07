@@ -9,7 +9,8 @@ export function revealAboveActions(el: HTMLElement): void {
     const hidden = el.getBoundingClientRect().bottom - limit + 12
     if (hidden > 0) {
       // Never scroll the top of the section out of view.
-      window.scrollBy({ top: Math.min(hidden, el.getBoundingClientRect().top - 12), behavior: 'smooth' })
+      const scroller = el.closest('[data-screen-scroll]') ?? window
+      scroller.scrollBy({ top: Math.min(hidden, el.getBoundingClientRect().top - 12), behavior: 'smooth' })
     }
   })
 }

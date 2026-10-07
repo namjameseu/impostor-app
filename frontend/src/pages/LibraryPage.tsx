@@ -66,29 +66,36 @@ export function LibraryPage() {
         <div className="flex items-center gap-3 rounded-2xl border border-line bg-panel px-4 py-3">
           <span className="text-2xl" aria-hidden="true">{admin.unlocked ? '🔓' : '🔒'}</span>
           <p className="flex-1 text-sm font-bold text-muted">
-            {admin.unlocked ? 'Editing unlocked on this device.' : 'Editing the library needs the admin passcode.'}
+            {admin.unlocked
+              ? 'Words are visible on this device. Hide them before handing the phone over.'
+              : 'Words are hidden. Enter the admin passcode to see and edit them.'}
           </p>
           {admin.unlocked ? (
-            <button type="button" onClick={admin.lock} className="min-h-10 rounded-lg bg-panel-2 px-3 text-xs font-extrabold text-muted hover:text-white">
-              Lock
+            // Forgets the passcode on this device, so it has to be entered again to see the words.
+            <button type="button" onClick={admin.lock} className="min-h-10 shrink-0 rounded-lg border-2 border-accent px-3 font-display text-xs text-accent uppercase">
+              Hide words
             </button>
           ) : (
-            <button type="button" onClick={() => setUnlocking(true)} className="min-h-10 rounded-lg bg-accent px-3 font-display text-xs text-ink uppercase">
-              Unlock
+            <button type="button" onClick={() => setUnlocking(true)} className="min-h-10 shrink-0 rounded-lg bg-accent px-3 font-display text-xs text-ink uppercase">
+              Show words
             </button>
           )}
         </div>
       )}
       <ErrorMessage error={error} />
-      {tab === 'words' ? (
-        <WordsTab categories={categories} canEdit={admin.canEdit} onChanged={loadCategories} />
-      ) : (
+      {tab === 'categories' ? (
         <CategoriesTab
           categories={categories}
           loaded={categoriesLoaded}
           canEdit={admin.canEdit}
           onChanged={loadCategories}
         />
+      ) : admin.passcodeRequired === null ? (
+        <Loading label="Loading words…" />
+      ) : admin.canEdit ? (
+        <WordsTab categories={categories} canEdit={admin.canEdit} onChanged={loadCategories} />
+      ) : (
+        <p className="py-10 text-center font-bold text-muted">🔒 Tap Show words and enter the passcode to see them.</p>
       )}
       {unlocking && <UnlockForm onUnlock={admin.unlock} onClose={() => setUnlocking(false)} />}
     </Screen>
@@ -376,9 +383,13 @@ function CategoriesTab({
             <div className="min-w-0 flex-1">
               <p className="truncate text-lg font-extrabold">{category.name}</p>
               <p className="truncate text-xs font-bold text-muted">
-                {category.word_count} active words
-                {category.description ? ` · ${category.description}` : ''}
-                {category.enabled ? '' : ' · Disabled'}
+                {[
+                  canEdit && `${category.word_count} active words`,
+                  category.description,
+                  !category.enabled && 'Disabled',
+                ]
+                  .filter(Boolean)
+                  .join(' · ')}
               </p>
             </div>
             <RowActions
@@ -478,7 +489,7 @@ function UnlockForm({
   }
 
   return (
-    <Modal title="Unlock editing" onClose={onClose}>
+    <Modal title="Show words" onClose={onClose}>
       <form onSubmit={submit} className="flex flex-col gap-4">
         <input
           type="password"
@@ -492,7 +503,7 @@ function UnlockForm({
         />
         <ErrorMessage error={error} />
         <Button type="submit" size="md" loading={pending} disabled={!passcode}>
-          Unlock
+          Show words
         </Button>
       </form>
     </Modal>

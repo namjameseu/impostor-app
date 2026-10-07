@@ -4,10 +4,11 @@ import { Spinner } from './Spinner'
 type Variant = 'primary' | 'secondary' | 'danger' | 'ghost' | 'crew'
 
 const VARIANTS: Record<Variant, string> = {
-  primary: 'bg-accent text-ink shadow-[0_6px_0_#6d4fd1] active:shadow-[0_2px_0_#6d4fd1]',
+  primary:
+    'bg-accent text-ink shadow-[0_6px_0_var(--color-accent-shade)] active:shadow-[0_2px_0_var(--color-accent-shade)]',
   crew: 'bg-crew text-ink shadow-[0_6px_0_#0e8ea3] active:shadow-[0_2px_0_#0e8ea3]',
   danger: 'bg-impostor text-white shadow-[0_6px_0_#a8183a] active:shadow-[0_2px_0_#a8183a]',
-  secondary: 'bg-panel-2 text-white shadow-[0_6px_0_#120f26] active:shadow-[0_2px_0_#120f26]',
+  secondary: 'bg-panel-2 text-white shadow-[0_6px_0_var(--color-deep)] active:shadow-[0_2px_0_var(--color-deep)]',
   ghost: 'bg-transparent text-muted hover:text-white',
 }
 

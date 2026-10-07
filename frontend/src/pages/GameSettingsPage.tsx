@@ -7,6 +7,7 @@ import { OptionGroup } from '../components/OptionGroup'
 import { RoundsInput } from '../components/RoundsInput'
 import { Screen } from '../components/Screen'
 import { useAction } from '../hooks/useAction'
+import { useAdmin } from '../hooks/useAdmin'
 import { gameApi, libraryApi } from '../services/api'
 import { useSetup } from '../stores/setupContext'
 import type { Category } from '../types/api'
@@ -21,6 +22,7 @@ export function GameSettingsPage() {
   const [categories, setCategories] = useState<Category[] | null>(null)
   const [roundsValid, setRoundsValid] = useState(true)
   const { run, pending, error, setError } = useAction()
+  const admin = useAdmin()
 
   useEffect(() => {
     libraryApi
@@ -96,6 +98,7 @@ export function GameSettingsPage() {
       <CategoryPicker
         categories={categories}
         isRandom={isRandom}
+        showCounts={admin.canEdit}
         selectedIds={selectedIds}
         onRandom={chooseRandom}
         onToggle={toggleCategory}

@@ -11,19 +11,32 @@ interface ScreenProps {
 
 export function Screen({ children, actions, header, center = false }: ScreenProps) {
   const contextHeader = useContext(ScreenHeaderContext)
-  return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-md flex-col px-4 pt-[max(1rem,env(safe-area-inset-top))]">
+  const content = (
+    <>
       {header ?? contextHeader}
       <main
         className={`flex flex-1 flex-col gap-6 py-6 ${center ? 'items-center justify-center text-center' : ''}`}
       >
         {children}
       </main>
-      {actions && (
-        <div data-screen-actions className="sticky bottom-0 -mx-4 flex flex-col gap-3 bg-gradient-to-t from-ink via-ink/95 to-transparent px-4 pt-6 pb-[max(1.25rem,env(safe-area-inset-bottom))]">
-          {actions}
-        </div>
-      )}
+    </>
+  )
+  const top = 'px-4 pt-[max(1rem,env(safe-area-inset-top))]'
+
+  if (!actions) {
+    return <div className={`mx-auto flex min-h-dvh w-full max-w-md flex-col ${top}`}>{content}</div>
+  }
+  // With pinned actions the screen is exactly one viewport tall and only the content scrolls.
+  // (A sticky footer on a window-scrolled page drifts up the screen on iPhone when Safari's
+  // toolbar collapses at the bottom of a long page.)
+  return (
+    <div className="mx-auto flex h-dvh w-full max-w-md flex-col">
+      <div data-screen-scroll className={`flex flex-1 flex-col overflow-y-auto overscroll-contain ${top}`}>
+        {content}
+      </div>
+      <div data-screen-actions className="relative -mt-6 flex flex-col gap-3 bg-gradient-to-t from-ink via-ink/95 to-transparent px-4 pt-6 pb-[max(1.25rem,env(safe-area-inset-bottom))]">
+        {actions}
+      </div>
     </div>
   )
 }

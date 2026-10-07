@@ -26,13 +26,13 @@ def test_library_is_open_without_passcode(client, category_ids):
     assert resp.status_code == 201
 
 
-def test_passcode_protects_library_changes_only(client, category_ids, monkeypatch):
+def test_passcode_protects_words_and_library_changes(client, category_ids, monkeypatch):
     monkeypatch.setattr(config, "ADMIN_PASSCODE", "s3cret")
     animals = category_ids["Animals"]
     assert client.get("/api/admin/status").json() == {"passcode_required": True}
 
-    # Reads and gameplay stay public.
-    assert client.get("/api/words").status_code == 200
+    # Categories and gameplay stay public; the word list is hidden.
+    assert client.get("/api/categories").status_code == 200
     assert client.post("/api/games", json={"players": ["A", "B", "C"]}).status_code == 201
 
     # Every change needs the right passcode.
@@ -40,15 +40,17 @@ def test_passcode_protects_library_changes_only(client, category_ids, monkeypatc
         ("post", "/api/categories", {"name": "Sports"}),
         ("patch", f"/api/categories/{animals}", {"enabled": False}),
         ("post", "/api/words", {"category_id": animals, "word": "Yak"}),
+        ("get", "/api/words", None),
     ]
     for method, path, body in attempts:
-        assert getattr(client, method)(path, json=body).status_code == 401
+        kwargs = {} if body is None else {"json": body}
+        assert getattr(client, method)(path, **kwargs).status_code == 401
         wrong = {"X-Admin-Passcode": "nope"}
-        assert getattr(client, method)(path, json=body, headers=wrong).status_code == 401
-    word_id = client.get("/api/words").json()[0]["id"]
+        assert getattr(client, method)(path, **kwargs, headers=wrong).status_code == 401
+    ok = {"X-Admin-Passcode": "s3cret"}
+    word_id = client.get("/api/words", headers=ok).json()[0]["id"]
     assert client.delete(f"/api/words/{word_id}").status_code == 401
 
-    ok = {"X-Admin-Passcode": "s3cret"}
     assert (
         client.post(
             "/api/words", json={"category_id": animals, "word": "Yak"}, headers=ok
