@@ -14,10 +14,14 @@ export function Screen({ children, actions, header, center = false }: ScreenProp
   const content = (
     <>
       {header ?? contextHeader}
-      <main
-        className={`flex flex-1 flex-col gap-6 py-6 ${center ? 'items-center justify-center text-center' : ''}`}
-      >
-        {children}
+      <main className={`flex flex-1 flex-col py-6 ${center ? '' : 'gap-6'}`}>
+        {center ? (
+          // m-auto (not justify-center) so overflowing content anchors to the top instead of
+          // being clipped there - iOS Safari won't let the page scroll above a centered item.
+          <div className="m-auto flex w-full flex-col items-center gap-6 text-center">{children}</div>
+        ) : (
+          children
+        )}
       </main>
     </>
   )
