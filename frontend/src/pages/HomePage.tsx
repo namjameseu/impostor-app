@@ -68,7 +68,7 @@ export function HomePage() {
       }
     >
       <div className="flex animate-pop flex-col items-center gap-6">
-        <img src="/favicon.svg" alt="" className="h-28 w-28 drop-shadow-[0_0_40px_rgba(244,63,94,0.45)]" />
+        <img src="/favicon.svg" alt="" className="h-28 w-28" />
         <h1 className="font-display text-6xl tracking-tight sm:text-7xl">
           IMPOS<span className="text-impostor">T</span>OR
         </h1>
