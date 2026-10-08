@@ -27,6 +27,7 @@ RUN useradd --create-home appuser
 USER appuser
 
 EXPOSE 8000
-# Hosts like Render provide $PORT. Migrations, the (idempotent) seed and old-game cleanup
-# run on every start.
-CMD ["sh", "-c", "alembic upgrade head && python -m app.db.seed && python -m app.db.cleanup && exec uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000} --proxy-headers --forwarded-allow-ips='*'"]
+# Hosts like Render provide $PORT. Migrations and the (idempotent) seed run on every start.
+# Gameplay is local-only now (frontend/src/game/), so there are no more server-side games to
+# clean up (the old `python -m app.db.cleanup` step is gone along with that engine).
+CMD ["sh", "-c", "alembic upgrade head && python -m app.db.seed && exec uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000} --proxy-headers --forwarded-allow-ips='*'"]
