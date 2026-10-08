@@ -14,7 +14,7 @@ export default defineConfig({
       // The app decides when to switch to a new version (see components/UpdatePrompt.tsx):
       // immediately outside a game, or when the players tap "Refresh" during one.
       registerType: 'prompt',
-      includeAssets: ['favicon.ico', 'favicon.svg', 'apple-touch-icon-180x180.png'],
+      includeAssets: ['favicon.ico', 'favicon.svg', 'apple-touch-icon-180x180.png', 'words.json'],
       manifest: {
         name: 'Impostor',
         short_name: 'Impostor',

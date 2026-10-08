@@ -2,7 +2,7 @@ from sqlalchemy import func, select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session, joinedload
 
-from app.game.errors import ConflictError, NotFoundError
+from app.core.errors import ConflictError, NotFoundError
 from app.models import Category, Word
 from app.schemas.library import (
     CategoryCreate,
