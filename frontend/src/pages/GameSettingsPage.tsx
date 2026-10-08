@@ -6,11 +6,11 @@ import { CategoryPicker } from '../components/CategoryPicker'
 import { OptionGroup } from '../components/OptionGroup'
 import { RoundsInput } from '../components/RoundsInput'
 import { Screen } from '../components/Screen'
+import { listCategorySummaries, type CategorySummary } from '../game/wordBank'
 import { useAction } from '../hooks/useAction'
 import { useAdmin } from '../hooks/useAdmin'
-import { gameApi, libraryApi } from '../services/api'
+import { gameApi } from '../services/api'
 import { useSetup } from '../stores/setupContext'
-import type { Category } from '../types/api'
 import { rememberGame } from '../utils/history'
 import { MIN_PLAYERS, maxImpostors, plural } from '../utils/players'
 import { BackHeader } from './PlayerSetupPage'
@@ -19,14 +19,13 @@ export function GameSettingsPage() {
   const navigate = useNavigate()
   const { players, settings, setSettings, setActiveGameId } = useSetup()
   // null while loading
-  const [categories, setCategories] = useState<Category[] | null>(null)
+  const [categories, setCategories] = useState<CategorySummary[] | null>(null)
   const [roundsValid, setRoundsValid] = useState(true)
   const { run, pending, error, setError } = useAction()
   const admin = useAdmin()
 
   useEffect(() => {
-    libraryApi
-      .listCategories(false)
+    listCategorySummaries()
       .then((all) => setCategories(all.filter((c) => c.word_count > 0)))
       .catch((err: Error) => setError(err.message))
   }, [setError])

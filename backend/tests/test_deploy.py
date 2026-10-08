@@ -31,9 +31,8 @@ def test_passcode_protects_words_and_library_changes(client, category_ids, monke
     animals = category_ids["Animals"]
     assert client.get("/api/admin/status").json() == {"passcode_required": True}
 
-    # Categories and gameplay stay public; the word list is hidden.
+    # Categories stay public; the word list is hidden.
     assert client.get("/api/categories").status_code == 200
-    assert client.post("/api/games", json={"players": ["A", "B", "C"]}).status_code == 201
 
     # Every change needs the right passcode.
     attempts = [

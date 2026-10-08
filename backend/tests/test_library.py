@@ -39,33 +39,16 @@ def test_word_crud_search_and_filters(client, category_ids):
     assert client.get("/api/words", params={"search": "Wombat"}).json() == []
 
 
-def test_disabled_words_and_categories_are_not_used_in_games(client, category_ids):
+def test_disabled_words_and_categories_are_excluded_from_listings(client, category_ids):
     for name in ("Food", "Places"):
         client.patch(f"/api/categories/{category_ids[name]}", json={"enabled": False})
     animal_words = client.get("/api/words", params={"category_id": category_ids["Animals"]}).json()
     for word in animal_words[1:]:
         client.patch(f"/api/words/{word['id']}", json={"enabled": False})
 
-    game = client.post(
-        "/api/games", json={"players": ["A", "B", "C"], "settings": {"total_rounds": 1}}
+    enabled_categories = client.get("/api/categories", params={"include_disabled": False}).json()
+    assert {c["name"] for c in enabled_categories} == {"Animals"}
+    enabled_words = client.get(
+        "/api/words", params={"category_id": category_ids["Animals"], "include_disabled": False}
     ).json()
-    game = client.post(f"/api/games/{game['id']}/start").json()
-    first = game["players"][0]["id"]
-    role = client.get(f"/api/games/{game['id']}/rounds/current/players/{first}/role").json()
-    if role["role"] == "player":
-        assert role["word"] == animal_words[0]["word"]
-    assert role.get("category", "Animals") == "Animals"
-
-
-def test_deleting_a_used_word_keeps_round_history(client, category_ids):
-    game = client.post(
-        "/api/games",
-        json={
-            "players": ["A", "B", "C"],
-            "settings": {"category_mode": "specific", "category_ids": [category_ids["Animals"]]},
-        },
-    ).json()
-    client.post(f"/api/games/{game['id']}/start")
-    for word in client.get("/api/words", params={"category_id": category_ids["Animals"]}).json():
-        assert client.delete(f"/api/words/{word['id']}").status_code == 204
-    assert client.get(f"/api/games/{game['id']}").status_code == 200
+    assert [w["word"] for w in enabled_words] == [animal_words[0]["word"]]

@@ -1,12 +1,17 @@
 import { useEffect, useId, useRef, useState } from 'react'
-import type { Category } from '../types/api'
 import { OptionButton } from './OptionGroup'
 import { revealAboveActions } from '../utils/scroll'
 import { Loading } from './Spinner'
 
+interface CategorySummary {
+  id: number
+  name: string
+  word_count: number
+}
+
 interface CategoryPickerProps {
   /** null while loading */
-  categories: Category[] | null
+  categories: CategorySummary[] | null
   isRandom: boolean
   /** Show how many words each category has (hidden from players without the admin passcode). */
   showCounts: boolean

@@ -1,11 +1,8 @@
+import * as gameStore from '../game/gameStore'
+import * as statsStore from '../game/stats'
 import type {
   Category,
   CategoryInput,
-  Game,
-  GameResults,
-  GameSettings,
-  PlayerRole,
-  Stats,
   Word,
   WordFilters,
   WordInput,
@@ -72,8 +69,6 @@ function query(params: object): string {
   return text ? `?${text}` : ''
 }
 
-const current = (gameId: number) => `/games/${gameId}/rounds/current`
-
 export const libraryApi = {
   listCategories: (includeDisabled = true) =>
     request<Category[]>('GET', `/categories${query({ include_disabled: includeDisabled })}`),
@@ -88,47 +83,38 @@ export const libraryApi = {
   deleteWord: (id: number) => request<void>('DELETE', `/words/${id}`),
 }
 
-export const statsApi = {
-  forGames: (gameIds: number[]) =>
-    request<Stats>('GET', `/stats?${gameIds.map((id) => `game_ids=${id}`).join('&')}`),
-}
-
 export const adminApi = {
   status: () => request<{ passcode_required: boolean }>('GET', '/admin/status'),
   verify: (passcode: string) => request<void>('POST', '/admin/verify', { passcode }),
 }
 
+// Gameplay runs entirely on-device (see frontend/src/game/) — no network calls, so it works
+// fully offline. Only the word library (above) and admin passcode still talk to the server.
+export const statsApi = {
+  forGames: statsStore.playerStats,
+}
+
 export const gameApi = {
-  create: (players: string[], settings: GameSettings) =>
-    request<Game>('POST', '/games', { players, settings }),
-  get: (gameId: number) => request<Game>('GET', `/games/${gameId}`),
-  start: (gameId: number) => request<Game>('POST', `/games/${gameId}/start`),
+  create: gameStore.createGame,
+  get: gameStore.getGame,
+  start: gameStore.startGame,
   /** Setup or between rounds only. */
-  addPlayer: (gameId: number, name: string) =>
-    request<Game>('POST', `/games/${gameId}/players`, { name }),
-  removePlayer: (gameId: number, playerId: number) =>
-    request<Game>('DELETE', `/games/${gameId}/players/${playerId}`),
+  addPlayer: gameStore.addPlayer,
+  removePlayer: gameStore.removePlayer,
 
-  getRole: (gameId: number, playerId: number) =>
-    request<PlayerRole>('GET', `${current(gameId)}/players/${playerId}/role`),
-  completeReveal: (gameId: number, playerId: number) =>
-    request<Game>('POST', `${current(gameId)}/players/${playerId}/reveal-complete`),
+  getRole: gameStore.getPlayerRole,
+  completeReveal: gameStore.completeReveal,
 
-  startClues: (gameId: number) => request<Game>('POST', `${current(gameId)}/start-clues`),
-  startVoting: (gameId: number) => request<Game>('POST', `${current(gameId)}/start-voting`),
-  selectSuspects: (gameId: number, playerIds: number[]) =>
-    request<Game>('PUT', `${current(gameId)}/suspects`, { player_ids: playerIds }),
-  revealImpostors: (gameId: number) =>
-    request<Game>('POST', `${current(gameId)}/reveal-impostors`),
-  revealWord: (gameId: number) => request<Game>('POST', `${current(gameId)}/reveal-word`),
+  startClues: gameStore.startClueRound,
+  startVoting: gameStore.startVoting,
+  selectSuspects: gameStore.selectSuspects,
+  revealImpostors: gameStore.revealImpostors,
+  revealWord: gameStore.revealWord,
   /** `correctPlayerIds`: caught Impostors whose spoken guess was right. */
-  recordFinalGuess: (gameId: number, correctPlayerIds: number[]) =>
-    request<Game>('POST', `${current(gameId)}/final-guess`, {
-      correct_player_ids: correctPlayerIds,
-    }),
+  recordFinalGuess: gameStore.recordFinalGuess,
 
-  nextRound: (gameId: number) => request<Game>('POST', `/games/${gameId}/rounds`),
-  finish: (gameId: number) => request<Game>('POST', `/games/${gameId}/finish`),
-  results: (gameId: number) => request<GameResults>('GET', `/games/${gameId}/results`),
-  playAgain: (gameId: number) => request<Game>('POST', `/games/${gameId}/play-again`),
+  nextRound: gameStore.nextRound,
+  finish: gameStore.finishGame,
+  results: gameStore.getResults,
+  playAgain: gameStore.playAgain,
 }
