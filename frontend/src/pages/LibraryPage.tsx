@@ -8,6 +8,7 @@ import { Screen } from '../components/Screen'
 import { Loading, Spinner } from '../components/Spinner'
 import { useAction } from '../hooks/useAction'
 import { useAdmin } from '../hooks/useAdmin'
+import { useOnlineStatus } from '../hooks/useOnlineStatus'
 import { libraryApi } from '../services/api'
 import type { Category, Difficulty, Word } from '../types/api'
 import { BackHeader } from './PlayerSetupPage'
@@ -38,6 +39,7 @@ function LabeledField({ label, children }: { label: string; children: ReactNode 
 
 export function LibraryPage() {
   const navigate = useNavigate()
+  const online = useOnlineStatus()
   const [tab, setTab] = useState<Tab>('words')
   const [categories, setCategories] = useState<Category[]>([])
   const [categoriesLoaded, setCategoriesLoaded] = useState(false)
@@ -54,8 +56,19 @@ export function LibraryPage() {
     [run],
   )
   useEffect(() => {
-    loadCategories()
-  }, [loadCategories])
+    if (online) loadCategories()
+  }, [online, loadCategories])
+
+  if (!online) {
+    return (
+      <Screen header={<BackHeader onBack={() => navigate('/')} title="Word library" />}>
+        <p className="py-10 text-center font-bold text-muted">
+          📡 The Word Library can only be viewed or edited while online. Reconnect and try
+          again — gameplay still works offline.
+        </p>
+      </Screen>
+    )
+  }
 
   return (
     <Screen header={<BackHeader onBack={() => navigate('/')} title="Word library" />}>
