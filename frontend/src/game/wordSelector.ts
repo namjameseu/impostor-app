@@ -8,6 +8,7 @@ export interface WordCandidate {
   category_id: number
   category_name: string
   similar_word: string | null
+  hint: string | null
 }
 
 /** Pick a category uniformly, then a word in it, preferring words not yet used this game.

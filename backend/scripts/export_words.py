@@ -23,7 +23,12 @@ def build_bundle(db) -> list[dict]:
     words_by_category: dict[int, list[dict]] = {}
     for word in words:
         words_by_category.setdefault(word.category_id, []).append(
-            {"id": word.id, "word": word.word, "similar_word": word.similar_word}
+            {
+                "id": word.id,
+                "word": word.word,
+                "similar_word": word.similar_word,
+                "hint": word.hint,
+            }
         )
     return [
         {"id": c.id, "name": c.name, "words": words_by_category.get(c.id, [])}

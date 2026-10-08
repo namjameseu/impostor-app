@@ -6,172 +6,206 @@
       {
         "id": 19,
         "word": "Armadillo",
-        "similar_word": "Hedgehog"
+        "similar_word": "Hedgehog",
+        "hint": "Curl"
       },
       {
         "id": 13,
         "word": "Bat",
-        "similar_word": "Owl"
+        "similar_word": "Owl",
+        "hint": "Night"
       },
       {
         "id": 14,
         "word": "Camel",
-        "similar_word": "Llama"
+        "similar_word": "Llama",
+        "hint": "Hump"
       },
       {
         "id": 139,
         "word": "Carabao",
-        "similar_word": "Cow"
+        "similar_word": "Cow",
+        "hint": "Plow"
       },
       {
         "id": 2,
         "word": "Cat",
-        "similar_word": "Dog"
+        "similar_word": "Dog",
+        "hint": "Independent"
       },
       {
         "id": 16,
         "word": "Chameleon",
-        "similar_word": "Iguana"
+        "similar_word": "Iguana",
+        "hint": "Blend"
       },
       {
         "id": 12,
         "word": "Crocodile",
-        "similar_word": "Alligator"
+        "similar_word": "Alligator",
+        "hint": "Snap"
       },
       {
         "id": 1,
         "word": "Dog",
-        "similar_word": "Cat"
+        "similar_word": "Cat",
+        "hint": "Loyal"
       },
       {
         "id": 8,
         "word": "Dolphin",
-        "similar_word": "Shark"
+        "similar_word": "Shark",
+        "hint": "Playful"
       },
       {
         "id": 3,
         "word": "Elephant",
-        "similar_word": "Rhino"
+        "similar_word": "Rhino",
+        "hint": "Circus"
       },
       {
         "id": 131,
         "word": "Flamingo",
-        "similar_word": "Swan"
+        "similar_word": "Swan",
+        "hint": "Flock"
       },
       {
         "id": 4,
         "word": "Giraffe",
-        "similar_word": "Zebra"
+        "similar_word": "Zebra",
+        "hint": "Towering"
       },
       {
         "id": 136,
         "word": "Hedgehog",
-        "similar_word": "Porcupine"
+        "similar_word": "Porcupine",
+        "hint": "Prickly"
       },
       {
         "id": 127,
         "word": "Horse",
-        "similar_word": "Donkey"
+        "similar_word": "Donkey",
+        "hint": "Gallop"
       },
       {
         "id": 18,
         "word": "Jellyfish",
-        "similar_word": "Octopus"
+        "similar_word": "Octopus",
+        "hint": "Drift"
       },
       {
         "id": 10,
         "word": "Kangaroo",
-        "similar_word": "Koala"
+        "similar_word": "Koala",
+        "hint": "Bounce"
       },
       {
         "id": 132,
         "word": "Koala",
-        "similar_word": "Panda"
+        "similar_word": "Panda",
+        "hint": "Sleepy"
       },
       {
         "id": 6,
         "word": "Lion",
-        "similar_word": "Tiger"
+        "similar_word": "Tiger",
+        "hint": "Pride"
       },
       {
         "id": 7,
         "word": "Monkey",
-        "similar_word": "Gorilla"
+        "similar_word": "Gorilla",
+        "hint": "Mischief"
       },
       {
         "id": 20,
         "word": "Narwhal",
-        "similar_word": "Walrus"
+        "similar_word": "Walrus",
+        "hint": "Unicorn"
       },
       {
         "id": 9,
         "word": "Octopus",
-        "similar_word": "Squid"
+        "similar_word": "Squid",
+        "hint": "Ink"
       },
       {
         "id": 11,
         "word": "Owl",
-        "similar_word": "Eagle"
+        "similar_word": "Eagle",
+        "hint": "Wise"
       },
       {
         "id": 133,
         "word": "Peacock",
-        "similar_word": "Parrot"
+        "similar_word": "Parrot",
+        "hint": "Vain"
       },
       {
         "id": 5,
         "word": "Penguin",
-        "similar_word": "Puffin"
+        "similar_word": "Puffin",
+        "hint": "Antarctica"
       },
       {
         "id": 15,
         "word": "Platypus",
-        "similar_word": "Beaver"
+        "similar_word": "Beaver",
+        "hint": "Strange"
       },
       {
         "id": 138,
         "word": "Porcupine",
-        "similar_word": "Hedgehog"
+        "similar_word": "Hedgehog",
+        "hint": "Sharp"
       },
       {
         "id": 128,
         "word": "Rabbit",
-        "similar_word": "Hamster"
+        "similar_word": "Hamster",
+        "hint": "Hop"
       },
       {
         "id": 137,
         "word": "Seahorse",
-        "similar_word": "Starfish"
+        "similar_word": "Starfish",
+        "hint": "Tiny"
       },
       {
         "id": 129,
         "word": "Shark",
-        "similar_word": "Whale"
+        "similar_word": "Whale",
+        "hint": "Ocean"
       },
       {
         "id": 17,
         "word": "Sloth",
-        "similar_word": "Koala"
+        "similar_word": "Koala",
+        "hint": "Lazy"
       },
       {
         "id": 134,
         "word": "Squirrel",
-        "similar_word": "Chipmunk"
+        "similar_word": "Chipmunk",
+        "hint": "Bushy"
       },
       {
         "id": 140,
         "word": "Tarsier",
-        "similar_word": "Lemur"
+        "similar_word": "Lemur",
+        "hint": "Nocturnal"
       },
       {
         "id": 130,
         "word": "Tiger",
-        "similar_word": "Leopard"
+        "similar_word": "Leopard",
+        "hint": "Fierce"
       },
       {
         "id": 135,
         "word": "Turtle",
-        "similar_word": "Tortoise"
+        "similar_word": "Tortoise",
+        "hint": "Patient"
       }
     ]
   },
@@ -182,122 +216,146 @@
       {
         "id": 517,
         "word": "Ankle",
-        "similar_word": "Wrist"
+        "similar_word": "Wrist",
+        "hint": "Sprain"
       },
       {
         "id": 512,
         "word": "Belly Button",
-        "similar_word": "Mole"
+        "similar_word": "Mole",
+        "hint": "Navel"
       },
       {
         "id": 516,
         "word": "Brain",
-        "similar_word": "Heart"
+        "similar_word": "Heart",
+        "hint": "Thoughts"
       },
       {
         "id": 520,
         "word": "Dimple",
-        "similar_word": "Freckles"
+        "similar_word": "Freckles",
+        "hint": "Smile"
       },
       {
         "id": 502,
         "word": "Ear",
-        "similar_word": "Nose"
+        "similar_word": "Nose",
+        "hint": "Lobe"
       },
       {
         "id": 507,
         "word": "Elbow",
-        "similar_word": "Knee"
+        "similar_word": "Knee",
+        "hint": "Bend"
       },
       {
         "id": 501,
         "word": "Eye",
-        "similar_word": "Ear"
+        "similar_word": "Ear",
+        "hint": "Blink"
       },
       {
         "id": 511,
         "word": "Eyebrow",
-        "similar_word": "Eyelash"
+        "similar_word": "Eyelash",
+        "hint": "Arch"
       },
       {
         "id": 521,
         "word": "Fingerprint",
-        "similar_word": "Footprint"
+        "similar_word": "Footprint",
+        "hint": "Unique"
       },
       {
         "id": 505,
         "word": "Foot",
-        "similar_word": "Hand"
+        "similar_word": "Hand",
+        "hint": "Toes"
       },
       {
         "id": 522,
         "word": "Freckles",
-        "similar_word": "Moles"
+        "similar_word": "Moles",
+        "hint": "Speckled"
       },
       {
         "id": 503,
         "word": "Hair",
-        "similar_word": "Beard"
+        "similar_word": "Beard",
+        "hint": "Strands"
       },
       {
         "id": 500,
         "word": "Hand",
-        "similar_word": "Foot"
+        "similar_word": "Foot",
+        "hint": "Grip"
       },
       {
         "id": 514,
         "word": "Heart",
-        "similar_word": "Lungs"
+        "similar_word": "Lungs",
+        "hint": "Pulse"
       },
       {
         "id": 508,
         "word": "Knee",
-        "similar_word": "Elbow"
+        "similar_word": "Elbow",
+        "hint": "Joint"
       },
       {
         "id": 518,
         "word": "Lungs",
-        "similar_word": "Heart"
+        "similar_word": "Heart",
+        "hint": "Breath"
       },
       {
         "id": 504,
         "word": "Mouth",
-        "similar_word": "Lips"
+        "similar_word": "Lips",
+        "hint": "Lips"
       },
       {
         "id": 499,
         "word": "Nose",
-        "similar_word": "Ear"
+        "similar_word": "Ear",
+        "hint": "Sniff"
       },
       {
         "id": 510,
         "word": "Shoulder",
-        "similar_word": "Hip"
+        "similar_word": "Hip",
+        "hint": "Carry"
       },
       {
         "id": 515,
         "word": "Skeleton",
-        "similar_word": "Skull"
+        "similar_word": "Skull",
+        "hint": "Bones"
       },
       {
         "id": 506,
         "word": "Teeth",
-        "similar_word": "Tongue"
+        "similar_word": "Tongue",
+        "hint": "Enamel"
       },
       {
         "id": 513,
         "word": "Thumb",
-        "similar_word": "Big Toe"
+        "similar_word": "Big Toe",
+        "hint": "Grip"
       },
       {
         "id": 509,
         "word": "Tongue",
-        "similar_word": "Teeth"
+        "similar_word": "Teeth",
+        "hint": "Taste"
       },
       {
         "id": 519,
         "word": "Wrist",
-        "similar_word": "Ankle"
+        "similar_word": "Ankle",
+        "hint": "Pulse"
       }
     ]
   },
@@ -308,137 +366,164 @@
       {
         "id": 539,
         "word": "7-Eleven",
-        "similar_word": "Ministop"
+        "similar_word": "Ministop",
+        "hint": "Convenience"
       },
       {
         "id": 532,
         "word": "Adidas",
-        "similar_word": "Puma"
+        "similar_word": "Puma",
+        "hint": "Stripes"
       },
       {
         "id": 537,
         "word": "Amazon",
-        "similar_word": "eBay"
+        "similar_word": "eBay",
+        "hint": "Shipping"
       },
       {
         "id": 524,
         "word": "Apple",
-        "similar_word": "Samsung"
+        "similar_word": "Samsung",
+        "hint": "Silicon"
       },
       {
         "id": 526,
         "word": "Coca-Cola",
-        "similar_word": "Pepsi"
+        "similar_word": "Pepsi",
+        "hint": "Fizzy"
       },
       {
         "id": 529,
         "word": "Disney",
-        "similar_word": "Pixar"
+        "similar_word": "Pixar",
+        "hint": "Fairytale"
       },
       {
         "id": 544,
         "word": "Ferrari",
-        "similar_word": "Lamborghini"
+        "similar_word": "Lamborghini",
+        "hint": "Prancing"
       },
       {
         "id": 528,
         "word": "Google",
-        "similar_word": "Bing"
+        "similar_word": "Bing",
+        "hint": "Search"
       },
       {
         "id": 543,
         "word": "Gucci",
-        "similar_word": "Prada"
+        "similar_word": "Prada",
+        "hint": "Designer"
       },
       {
         "id": 535,
         "word": "IKEA",
-        "similar_word": "Walmart"
+        "similar_word": "Walmart",
+        "hint": "Flatpack"
       },
       {
         "id": 530,
         "word": "Jollibee",
-        "similar_word": "McDonald's"
+        "similar_word": "McDonald's",
+        "hint": "Mascot"
       },
       {
         "id": 531,
         "word": "KFC",
-        "similar_word": "Popeyes"
+        "similar_word": "Popeyes",
+        "hint": "Colonel"
       },
       {
         "id": 549,
         "word": "Lamborghini",
-        "similar_word": "Ferrari"
+        "similar_word": "Ferrari",
+        "hint": "Supercar"
       },
       {
         "id": 547,
         "word": "Louis Vuitton",
-        "similar_word": "Chanel"
+        "similar_word": "Chanel",
+        "hint": "Monogram"
       },
       {
         "id": 525,
         "word": "McDonald's",
-        "similar_word": "Jollibee"
+        "similar_word": "Jollibee",
+        "hint": "Arches"
       },
       {
         "id": 534,
         "word": "Netflix",
-        "similar_word": "Disney+"
+        "similar_word": "Disney+",
+        "hint": "Streaming"
       },
       {
         "id": 523,
         "word": "Nike",
-        "similar_word": "Adidas"
+        "similar_word": "Adidas",
+        "hint": "Swoosh"
       },
       {
         "id": 545,
         "word": "Nintendo",
-        "similar_word": "PlayStation"
+        "similar_word": "PlayStation",
+        "hint": "Console"
       },
       {
         "id": 548,
         "word": "Red Bull",
-        "similar_word": "Monster"
+        "similar_word": "Monster",
+        "hint": "Caffeine"
       },
       {
         "id": 541,
         "word": "Rolex",
-        "similar_word": "Omega"
+        "similar_word": "Omega",
+        "hint": "Timepiece"
       },
       {
         "id": 527,
         "word": "Samsung",
-        "similar_word": "Apple"
+        "similar_word": "Apple",
+        "hint": "Galaxy"
       },
       {
         "id": 540,
         "word": "Shopee",
-        "similar_word": "Lazada"
+        "similar_word": "Lazada",
+        "hint": "Checkout"
       },
       {
         "id": 546,
         "word": "Spotify",
-        "similar_word": "Apple Music"
+        "similar_word": "Apple Music",
+        "hint": "Playlist"
       },
       {
         "id": 533,
         "word": "Starbucks",
-        "similar_word": "Dunkin'"
+        "similar_word": "Dunkin'",
+        "hint": "Mermaid"
       },
       {
         "id": 542,
         "word": "Tesla",
-        "similar_word": "BMW"
+        "similar_word": "BMW",
+        "hint": "Electric"
       },
       {
         "id": 536,
         "word": "Toyota",
-        "similar_word": "Honda"
+        "similar_word": "Honda",
+        "hint": "Reliable"
       },
       {
         "id": 538,
         "word": "YouTube",
-        "similar_word": "TikTok"
+        "similar_word": "TikTok",
+        "hint": "Upload"
       }
     ]
   },
@@ -449,122 +534,146 @@
       {
         "id": 415,
         "word": "Anniversary",
-        "similar_word": "Birthday"
+        "similar_word": "Birthday",
+        "hint": "Milestone"
       },
       {
         "id": 413,
         "word": "Baby Shower",
-        "similar_word": "Bridal Shower"
+        "similar_word": "Bridal Shower",
+        "hint": "Nursery"
       },
       {
         "id": 425,
         "word": "Baptism",
-        "similar_word": "Wedding"
+        "similar_word": "Wedding",
+        "hint": "Font"
       },
       {
         "id": 403,
         "word": "Birthday",
-        "similar_word": "Anniversary"
+        "similar_word": "Anniversary",
+        "hint": "Candles"
       },
       {
         "id": 422,
         "word": "Carnival",
-        "similar_word": "Parade"
+        "similar_word": "Parade",
+        "hint": "Costumed"
       },
       {
         "id": 421,
         "word": "Chinese New Year",
-        "similar_word": "New Year"
+        "similar_word": "New Year",
+        "hint": "Lanterns"
       },
       {
         "id": 404,
         "word": "Christmas",
-        "similar_word": "New Year"
+        "similar_word": "New Year",
+        "hint": "Ornaments"
       },
       {
         "id": 419,
         "word": "Debut",
-        "similar_word": "Prom"
+        "similar_word": "Prom",
+        "hint": "Eighteen"
       },
       {
         "id": 411,
         "word": "Easter",
-        "similar_word": "Christmas"
+        "similar_word": "Christmas",
+        "hint": "Basket"
       },
       {
         "id": 412,
         "word": "Fiesta",
-        "similar_word": "Festival"
+        "similar_word": "Festival",
+        "hint": "Bazaar"
       },
       {
         "id": 416,
         "word": "Fireworks",
-        "similar_word": "Sparklers"
+        "similar_word": "Sparklers",
+        "hint": "Sparkle"
       },
       {
         "id": 423,
         "word": "Funeral",
-        "similar_word": "Wake"
+        "similar_word": "Wake",
+        "hint": "Mourning"
       },
       {
         "id": 410,
         "word": "Graduation",
-        "similar_word": "Prom"
+        "similar_word": "Prom",
+        "hint": "Diploma"
       },
       {
         "id": 406,
         "word": "Halloween",
-        "similar_word": "Costume Party"
+        "similar_word": "Costume Party",
+        "hint": "Costumes"
       },
       {
         "id": 407,
         "word": "New Year",
-        "similar_word": "Christmas"
+        "similar_word": "Christmas",
+        "hint": "Countdown"
       },
       {
         "id": 417,
         "word": "Parade",
-        "similar_word": "Carnival"
+        "similar_word": "Carnival",
+        "hint": "March"
       },
       {
         "id": 408,
         "word": "Party",
-        "similar_word": "Picnic"
+        "similar_word": "Picnic",
+        "hint": "Confetti"
       },
       {
         "id": 414,
         "word": "Picnic",
-        "similar_word": "Barbecue"
+        "similar_word": "Barbecue",
+        "hint": "Blanket"
       },
       {
         "id": 424,
         "word": "Prom",
-        "similar_word": "Debut"
+        "similar_word": "Debut",
+        "hint": "Corsage"
       },
       {
         "id": 418,
         "word": "Reunion",
-        "similar_word": "Party"
+        "similar_word": "Party",
+        "hint": "Nostalgia"
       },
       {
         "id": 426,
         "word": "Sleepover",
-        "similar_word": "Camping"
+        "similar_word": "Camping",
+        "hint": "Overnight"
       },
       {
         "id": 420,
         "word": "Thanksgiving",
-        "similar_word": "Christmas"
+        "similar_word": "Christmas",
+        "hint": "Gratitude"
       },
       {
         "id": 409,
         "word": "Valentine's Day",
-        "similar_word": "Anniversary"
+        "similar_word": "Anniversary",
+        "hint": "Roses"
       },
       {
         "id": 405,
         "word": "Wedding",
-        "similar_word": "Engagement"
+        "similar_word": "Engagement",
+        "hint": "Vows"
       }
     ]
   },
@@ -575,147 +684,176 @@
       {
         "id": 561,
         "word": "Ariana Grande",
-        "similar_word": "Selena Gomez"
+        "similar_word": "Selena Gomez",
+        "hint": "Ponytail"
       },
       {
         "id": 573,
         "word": "Bad Bunny",
-        "similar_word": "J Balvin"
+        "similar_word": "J Balvin",
+        "hint": "Reggaeton"
       },
       {
         "id": 552,
         "word": "Beyonc\u00e9",
-        "similar_word": "Rihanna"
+        "similar_word": "Rihanna",
+        "hint": "Queen"
       },
       {
         "id": 563,
         "word": "Billie Eilish",
-        "similar_word": "Olivia Rodrigo"
+        "similar_word": "Olivia Rodrigo",
+        "hint": "Whisper"
       },
       {
         "id": 568,
         "word": "Bruno Mars",
-        "similar_word": "The Weeknd"
+        "similar_word": "The Weeknd",
+        "hint": "Groovy"
       },
       {
         "id": 571,
         "word": "BTS",
-        "similar_word": "BLACKPINK"
+        "similar_word": "BLACKPINK",
+        "hint": "Kpop"
       },
       {
         "id": 553,
         "word": "Cristiano Ronaldo",
-        "similar_word": "Lionel Messi"
+        "similar_word": "Lionel Messi",
+        "hint": "Forward"
       },
       {
         "id": 564,
         "word": "Dwayne Johnson",
-        "similar_word": "John Cena"
+        "similar_word": "John Cena",
+        "hint": "Wrestler"
       },
       {
         "id": 562,
         "word": "Ed Sheeran",
-        "similar_word": "Shawn Mendes"
+        "similar_word": "Shawn Mendes",
+        "hint": "Acoustic"
       },
       {
         "id": 569,
         "word": "Elon Musk",
-        "similar_word": "Mark Zuckerberg"
+        "similar_word": "Mark Zuckerberg",
+        "hint": "Billionaire"
       },
       {
         "id": 556,
         "word": "Elvis Presley",
-        "similar_word": "Michael Jackson"
+        "similar_word": "Michael Jackson",
+        "hint": "Rockabilly"
       },
       {
         "id": 575,
         "word": "Gordon Ramsay",
-        "similar_word": "Jamie Oliver"
+        "similar_word": "Jamie Oliver",
+        "hint": "Fiery"
       },
       {
         "id": 576,
         "word": "Jackie Chan",
-        "similar_word": "Bruce Lee"
+        "similar_word": "Bruce Lee",
+        "hint": "Stunts"
       },
       {
         "id": 560,
         "word": "Justin Bieber",
-        "similar_word": "Shawn Mendes"
+        "similar_word": "Shawn Mendes",
+        "hint": "Discovered"
       },
       {
         "id": 567,
         "word": "Keanu Reeves",
-        "similar_word": "Tom Cruise"
+        "similar_word": "Tom Cruise",
+        "hint": "Humble"
       },
       {
         "id": 574,
         "word": "Kim Kardashian",
-        "similar_word": "Kylie Jenner"
+        "similar_word": "Kylie Jenner",
+        "hint": "Socialite"
       },
       {
         "id": 557,
         "word": "Lady Gaga",
-        "similar_word": "Madonna"
+        "similar_word": "Madonna",
+        "hint": "Theatrical"
       },
       {
         "id": 579,
         "word": "LeBron James",
-        "similar_word": "Michael Jordan"
+        "similar_word": "Michael Jordan",
+        "hint": "Dunking"
       },
       {
         "id": 559,
         "word": "Leonardo DiCaprio",
-        "similar_word": "Brad Pitt"
+        "similar_word": "Brad Pitt",
+        "hint": "Oscar"
       },
       {
         "id": 554,
         "word": "Lionel Messi",
-        "similar_word": "Cristiano Ronaldo"
+        "similar_word": "Cristiano Ronaldo",
+        "hint": "Dribble"
       },
       {
         "id": 555,
         "word": "Michael Jackson",
-        "similar_word": "Elvis Presley"
+        "similar_word": "Elvis Presley",
+        "hint": "Moonwalk"
       },
       {
         "id": 570,
         "word": "MrBeast",
-        "similar_word": "PewDiePie"
+        "similar_word": "PewDiePie",
+        "hint": "Giveaway"
       },
       {
         "id": 566,
         "word": "Oprah Winfrey",
-        "similar_word": "Ellen DeGeneres"
+        "similar_word": "Ellen DeGeneres",
+        "hint": "Talkshow"
       },
       {
         "id": 558,
         "word": "Rihanna",
-        "similar_word": "Beyonc\u00e9"
+        "similar_word": "Beyonc\u00e9",
+        "hint": "Fenty"
       },
       {
         "id": 578,
         "word": "Selena Gomez",
-        "similar_word": "Ariana Grande"
+        "similar_word": "Ariana Grande",
+        "hint": "Disney"
       },
       {
         "id": 577,
         "word": "Shakira",
-        "similar_word": "Jennifer Lopez"
+        "similar_word": "Jennifer Lopez",
+        "hint": "Hips"
       },
       {
         "id": 551,
         "word": "Taylor Swift",
-        "similar_word": "Katy Perry"
+        "similar_word": "Katy Perry",
+        "hint": "Eras"
       },
       {
         "id": 565,
         "word": "Tom Cruise",
-        "similar_word": "Tom Hanks"
+        "similar_word": "Tom Hanks",
+        "hint": "Daredevil"
       },
       {
         "id": 572,
         "word": "Zendaya",
-        "similar_word": "Tom Holland"
+        "similar_word": "Tom Holland",
+        "hint": "Versatile"
       }
     ]
   },
@@ -726,122 +864,146 @@
       {
         "id": 327,
         "word": "Apron",
-        "similar_word": "Bib"
+        "similar_word": "Bib",
+        "hint": "Stains"
       },
       {
         "id": 325,
         "word": "Barong",
-        "similar_word": "Polo Shirt"
+        "similar_word": "Polo Shirt",
+        "hint": "Embroidered"
       },
       {
         "id": 328,
         "word": "Bow Tie",
-        "similar_word": "Necktie"
+        "similar_word": "Necktie",
+        "hint": "Dapper"
       },
       {
         "id": 330,
         "word": "Crown",
-        "similar_word": "Tiara"
+        "similar_word": "Tiara",
+        "hint": "Royalty"
       },
       {
         "id": 311,
         "word": "Dress",
-        "similar_word": "Skirt"
+        "similar_word": "Skirt",
+        "hint": "Gown"
       },
       {
         "id": 316,
         "word": "Gloves",
-        "similar_word": "Mittens"
+        "similar_word": "Mittens",
+        "hint": "Fingers"
       },
       {
         "id": 308,
         "word": "Hat",
-        "similar_word": "Cap"
+        "similar_word": "Cap",
+        "hint": "Brim"
       },
       {
         "id": 317,
         "word": "Hoodie",
-        "similar_word": "Sweater"
+        "similar_word": "Sweater",
+        "hint": "Casual"
       },
       {
         "id": 312,
         "word": "Jacket",
-        "similar_word": "Coat"
+        "similar_word": "Coat",
+        "hint": "Zipper"
       },
       {
         "id": 310,
         "word": "Jeans",
-        "similar_word": "Shorts"
+        "similar_word": "Shorts",
+        "hint": "Denim"
       },
       {
         "id": 324,
         "word": "Kimono",
-        "similar_word": "Hanbok"
+        "similar_word": "Hanbok",
+        "hint": "Sash"
       },
       {
         "id": 321,
         "word": "Necktie",
-        "similar_word": "Bow Tie"
+        "similar_word": "Bow Tie",
+        "hint": "Formal"
       },
       {
         "id": 326,
         "word": "Overalls",
-        "similar_word": "Jumpsuit"
+        "similar_word": "Jumpsuit",
+        "hint": "Farmhand"
       },
       {
         "id": 314,
         "word": "Pajamas",
-        "similar_word": "Robe"
+        "similar_word": "Robe",
+        "hint": "Bedtime"
       },
       {
         "id": 319,
         "word": "Raincoat",
-        "similar_word": "Poncho"
+        "similar_word": "Poncho",
+        "hint": "Drizzle"
       },
       {
         "id": 320,
         "word": "Sandals",
-        "similar_word": "Slippers"
+        "similar_word": "Slippers",
+        "hint": "Barefoot"
       },
       {
         "id": 315,
         "word": "Scarf",
-        "similar_word": "Shawl"
+        "similar_word": "Shawl",
+        "hint": "Cozy"
       },
       {
         "id": 307,
         "word": "Shirt",
-        "similar_word": "Blouse"
+        "similar_word": "Blouse",
+        "hint": "Button"
       },
       {
         "id": 313,
         "word": "Shoes",
-        "similar_word": "Boots"
+        "similar_word": "Boots",
+        "hint": "Laces"
       },
       {
         "id": 309,
         "word": "Socks",
-        "similar_word": "Stockings"
+        "similar_word": "Stockings",
+        "hint": "Toes"
       },
       {
         "id": 318,
         "word": "Sunglasses",
-        "similar_word": "Eyeglasses"
+        "similar_word": "Eyeglasses",
+        "hint": "Shade"
       },
       {
         "id": 329,
         "word": "Swimsuit",
-        "similar_word": "Wetsuit"
+        "similar_word": "Wetsuit",
+        "hint": "Poolside"
       },
       {
         "id": 323,
         "word": "Tuxedo",
-        "similar_word": "Suit"
+        "similar_word": "Suit",
+        "hint": "Gala"
       },
       {
         "id": 322,
         "word": "Uniform",
-        "similar_word": "Costume"
+        "similar_word": "Costume",
+        "hint": "Matching"
       }
     ]
   },
@@ -852,122 +1014,146 @@
       {
         "id": 290,
         "word": "Australia",
-        "similar_word": "New Zealand"
+        "similar_word": "New Zealand",
+        "hint": "Outback"
       },
       {
         "id": 289,
         "word": "Brazil",
-        "similar_word": "Argentina"
+        "similar_word": "Argentina",
+        "hint": "Carnival"
       },
       {
         "id": 294,
         "word": "Canada",
-        "similar_word": "USA"
+        "similar_word": "USA",
+        "hint": "Maple"
       },
       {
         "id": 286,
         "word": "China",
-        "similar_word": "Japan"
+        "similar_word": "Japan",
+        "hint": "Dynasty"
       },
       {
         "id": 292,
         "word": "Egypt",
-        "similar_word": "Morocco"
+        "similar_word": "Morocco",
+        "hint": "Pharaoh"
       },
       {
         "id": 287,
         "word": "France",
-        "similar_word": "Italy"
+        "similar_word": "Italy",
+        "hint": "Romance"
       },
       {
         "id": 298,
         "word": "Germany",
-        "similar_word": "Austria"
+        "similar_word": "Austria",
+        "hint": "Oktoberfest"
       },
       {
         "id": 301,
         "word": "Greece",
-        "similar_word": "Turkey"
+        "similar_word": "Turkey",
+        "hint": "Mythology"
       },
       {
         "id": 299,
         "word": "Iceland",
-        "similar_word": "Greenland"
+        "similar_word": "Greenland",
+        "hint": "Geysers"
       },
       {
         "id": 293,
         "word": "India",
-        "similar_word": "Nepal"
+        "similar_word": "Nepal",
+        "hint": "Monsoon"
       },
       {
         "id": 288,
         "word": "Italy",
-        "similar_word": "Spain"
+        "similar_word": "Spain",
+        "hint": "Colosseum"
       },
       {
         "id": 284,
         "word": "Japan",
-        "similar_word": "Korea"
+        "similar_word": "Korea",
+        "hint": "Sakura"
       },
       {
         "id": 302,
         "word": "Kenya",
-        "similar_word": "Tanzania"
+        "similar_word": "Tanzania",
+        "hint": "Savanna"
       },
       {
         "id": 295,
         "word": "Korea",
-        "similar_word": "Japan"
+        "similar_word": "Japan",
+        "hint": "Peninsula"
       },
       {
         "id": 291,
         "word": "Mexico",
-        "similar_word": "Spain"
+        "similar_word": "Spain",
+        "hint": "Fiesta"
       },
       {
         "id": 304,
         "word": "Norway",
-        "similar_word": "Sweden"
+        "similar_word": "Sweden",
+        "hint": "Fjords"
       },
       {
         "id": 300,
         "word": "Peru",
-        "similar_word": "Chile"
+        "similar_word": "Chile",
+        "hint": "Andes"
       },
       {
         "id": 283,
         "word": "Philippines",
-        "similar_word": "Indonesia"
+        "similar_word": "Indonesia",
+        "hint": "Archipelago"
       },
       {
         "id": 296,
         "word": "Spain",
-        "similar_word": "Portugal"
+        "similar_word": "Portugal",
+        "hint": "Flamenco"
       },
       {
         "id": 303,
         "word": "Switzerland",
-        "similar_word": "Austria"
+        "similar_word": "Austria",
+        "hint": "Alps"
       },
       {
         "id": 297,
         "word": "Thailand",
-        "similar_word": "Vietnam"
+        "similar_word": "Vietnam",
+        "hint": "Temples"
       },
       {
         "id": 306,
         "word": "Turkey",
-        "similar_word": "Greece"
+        "similar_word": "Greece",
+        "hint": "Bazaar"
       },
       {
         "id": 285,
         "word": "USA",
-        "similar_word": "Canada"
+        "similar_word": "Canada",
+        "hint": "Eagle"
       },
       {
         "id": 305,
         "word": "Vietnam",
-        "similar_word": "Thailand"
+        "similar_word": "Thailand",
+        "hint": "Paddies"
       }
     ]
   },
@@ -978,122 +1164,146 @@
       {
         "id": 439,
         "word": "Alien",
-        "similar_word": "Robot"
+        "similar_word": "Robot",
+        "hint": "Extraterrestrial"
       },
       {
         "id": 446,
         "word": "Aswang",
-        "similar_word": "Manananggal"
+        "similar_word": "Manananggal",
+        "hint": "Folklore"
       },
       {
         "id": 448,
         "word": "Centaur",
-        "similar_word": "Minotaur"
+        "similar_word": "Minotaur",
+        "hint": "Hooves"
       },
       {
         "id": 427,
         "word": "Dragon",
-        "similar_word": "Dinosaur"
+        "similar_word": "Dinosaur",
+        "hint": "Scales"
       },
       {
         "id": 441,
         "word": "Elf",
-        "similar_word": "Dwarf"
+        "similar_word": "Dwarf",
+        "hint": "Archer"
       },
       {
         "id": 432,
         "word": "Fairy",
-        "similar_word": "Angel"
+        "similar_word": "Angel",
+        "hint": "Pixie"
       },
       {
         "id": 440,
         "word": "Genie",
-        "similar_word": "Fairy Godmother"
+        "similar_word": "Fairy Godmother",
+        "hint": "Lamp"
       },
       {
         "id": 429,
         "word": "Ghost",
-        "similar_word": "Zombie"
+        "similar_word": "Zombie",
+        "hint": "Haunting"
       },
       {
         "id": 437,
         "word": "Giant",
-        "similar_word": "Troll"
+        "similar_word": "Troll",
+        "hint": "Towering"
       },
       {
         "id": 449,
         "word": "Griffin",
-        "similar_word": "Phoenix"
+        "similar_word": "Phoenix",
+        "hint": "Talons"
       },
       {
         "id": 445,
         "word": "Kraken",
-        "similar_word": "Sea Serpent"
+        "similar_word": "Sea Serpent",
+        "hint": "Abyss"
       },
       {
         "id": 430,
         "word": "Mermaid",
-        "similar_word": "Siren"
+        "similar_word": "Siren",
+        "hint": "Lagoon"
       },
       {
         "id": 444,
         "word": "Minotaur",
-        "similar_word": "Centaur"
+        "similar_word": "Centaur",
+        "hint": "Labyrinth"
       },
       {
         "id": 443,
         "word": "Phoenix",
-        "similar_word": "Dragon"
+        "similar_word": "Dragon",
+        "hint": "Ashes"
       },
       {
         "id": 438,
         "word": "Pirate",
-        "similar_word": "Viking"
+        "similar_word": "Viking",
+        "hint": "Buccaneer"
       },
       {
         "id": 442,
         "word": "Superhero",
-        "similar_word": "Villain"
+        "similar_word": "Villain",
+        "hint": "Cape"
       },
       {
         "id": 447,
         "word": "Tikbalang",
-        "similar_word": "Kapre"
+        "similar_word": "Kapre",
+        "hint": "Legend"
       },
       {
         "id": 428,
         "word": "Unicorn",
-        "similar_word": "Pegasus"
+        "similar_word": "Pegasus",
+        "hint": "Mythical"
       },
       {
         "id": 433,
         "word": "Vampire",
-        "similar_word": "Werewolf"
+        "similar_word": "Werewolf",
+        "hint": "Fangs"
       },
       {
         "id": 435,
         "word": "Werewolf",
-        "similar_word": "Vampire"
+        "similar_word": "Vampire",
+        "hint": "Howl"
       },
       {
         "id": 436,
         "word": "Witch",
-        "similar_word": "Wizard"
+        "similar_word": "Wizard",
+        "hint": "Cauldron"
       },
       {
         "id": 431,
         "word": "Wizard",
-        "similar_word": "Witch"
+        "similar_word": "Witch",
+        "hint": "Spellbook"
       },
       {
         "id": 450,
         "word": "Yeti",
-        "similar_word": "Bigfoot"
+        "similar_word": "Bigfoot",
+        "hint": "Himalayas"
       },
       {
         "id": 434,
         "word": "Zombie",
-        "similar_word": "Mummy"
+        "similar_word": "Mummy",
+        "hint": "Undead"
       }
     ]
   },
@@ -1104,162 +1314,194 @@
       {
         "id": 619,
         "word": "Barbie",
-        "similar_word": "Ken"
+        "similar_word": "Ken",
+        "hint": "Dreamhouse"
       },
       {
         "id": 624,
         "word": "Buzz Lightyear",
-        "similar_word": "Woody"
+        "similar_word": "Woody",
+        "hint": "Infinity"
       },
       {
         "id": 634,
         "word": "Captain Barbell",
-        "similar_word": "Superman"
+        "similar_word": "Superman",
+        "hint": "Dumbbells"
       },
       {
         "id": 620,
         "word": "Cinderella",
-        "similar_word": "Snow White"
+        "similar_word": "Snow White",
+        "hint": "Slipper"
       },
       {
         "id": 633,
         "word": "Darna",
-        "similar_word": "Wonder Woman"
+        "similar_word": "Wonder Woman",
+        "hint": "Transform"
       },
       {
         "id": 618,
         "word": "Darth Vader",
-        "similar_word": "Voldemort"
+        "similar_word": "Voldemort",
+        "hint": "Sith"
       },
       {
         "id": 632,
         "word": "Dora the Explorer",
-        "similar_word": "Diego"
+        "similar_word": "Diego",
+        "hint": "Backpack"
       },
       {
         "id": 629,
         "word": "Doraemon",
-        "similar_word": "Totoro"
+        "similar_word": "Totoro",
+        "hint": "Gadget"
       },
       {
         "id": 641,
         "word": "Dracula",
-        "similar_word": "Frankenstein"
+        "similar_word": "Frankenstein",
+        "hint": "Transylvania"
       },
       {
         "id": 617,
         "word": "Elsa",
-        "similar_word": "Rapunzel"
+        "similar_word": "Rapunzel",
+        "hint": "Snowflake"
       },
       {
         "id": 638,
         "word": "Garfield",
-        "similar_word": "Tom Cat"
+        "similar_word": "Tom Cat",
+        "hint": "Lasagna"
       },
       {
         "id": 631,
         "word": "Goku",
-        "similar_word": "Naruto"
+        "similar_word": "Naruto",
+        "hint": "Saiyan"
       },
       {
         "id": 635,
         "word": "Gollum",
-        "similar_word": "Dobby"
+        "similar_word": "Dobby",
+        "hint": "Precious"
       },
       {
         "id": 628,
         "word": "Hello Kitty",
-        "similar_word": "My Melody"
+        "similar_word": "My Melody",
+        "hint": "Bow"
       },
       {
         "id": 622,
         "word": "Hermione Granger",
-        "similar_word": "Harry Potter"
+        "similar_word": "Harry Potter",
+        "hint": "Bookworm"
       },
       {
         "id": 626,
         "word": "Homer Simpson",
-        "similar_word": "Peter Griffin"
+        "similar_word": "Peter Griffin",
+        "hint": "Doughnut"
       },
       {
         "id": 623,
         "word": "Iron Man",
-        "similar_word": "Captain America"
+        "similar_word": "Captain America",
+        "hint": "Billionaire"
       },
       {
         "id": 640,
         "word": "Jack Sparrow",
-        "similar_word": "Captain Hook"
+        "similar_word": "Captain Hook",
+        "hint": "Caribbean"
       },
       {
         "id": 643,
         "word": "Luffy",
-        "similar_word": "Naruto"
+        "similar_word": "Naruto",
+        "hint": "Strawhat"
       },
       {
         "id": 615,
         "word": "Mario",
-        "similar_word": "Luigi"
+        "similar_word": "Luigi",
+        "hint": "Mushroom"
       },
       {
         "id": 612,
         "word": "Mickey Mouse",
-        "similar_word": "Donald Duck"
+        "similar_word": "Donald Duck",
+        "hint": "Clubhouse"
       },
       {
         "id": 630,
         "word": "Naruto",
-        "similar_word": "Goku"
+        "similar_word": "Goku",
+        "hint": "Ninja"
       },
       {
         "id": 614,
         "word": "Pikachu",
-        "similar_word": "Jigglypuff"
+        "similar_word": "Jigglypuff",
+        "hint": "Thunderbolt"
       },
       {
         "id": 642,
         "word": "Pinocchio",
-        "similar_word": "Peter Pan"
+        "similar_word": "Peter Pan",
+        "hint": "Puppet"
       },
       {
         "id": 636,
         "word": "Sailor Moon",
-        "similar_word": "Cardcaptor Sakura"
+        "similar_word": "Cardcaptor Sakura",
+        "hint": "Crescent"
       },
       {
         "id": 637,
         "word": "Scooby-Doo",
-        "similar_word": "Snoopy"
+        "similar_word": "Snoopy",
+        "hint": "Mystery"
       },
       {
         "id": 621,
         "word": "Sherlock Holmes",
-        "similar_word": "Detective Conan"
+        "similar_word": "Detective Conan",
+        "hint": "Deduction"
       },
       {
         "id": 627,
         "word": "Sonic",
-        "similar_word": "Pac-Man"
+        "similar_word": "Pac-Man",
+        "hint": "Speedy"
       },
       {
         "id": 613,
         "word": "SpongeBob",
-        "similar_word": "Patrick Star"
+        "similar_word": "Patrick Star",
+        "hint": "Pineapple"
       },
       {
         "id": 616,
         "word": "Superman",
-        "similar_word": "Batman"
+        "similar_word": "Batman",
+        "hint": "Krypton"
       },
       {
         "id": 639,
         "word": "Wednesday Addams",
-        "similar_word": "Coraline"
+        "similar_word": "Coraline",
+        "hint": "Deadpan"
       },
       {
         "id": 625,
         "word": "Winnie the Pooh",
-        "similar_word": "Paddington"
+        "similar_word": "Paddington",
+        "hint": "Honeycomb"
       }
     ]
   },
@@ -1270,182 +1512,218 @@
       {
         "id": 29,
         "word": "Adobo",
-        "similar_word": "Afritada"
+        "similar_word": "Afritada",
+        "hint": "Simmer"
       },
       {
         "id": 152,
         "word": "Balut",
-        "similar_word": "Boiled Egg"
+        "similar_word": "Boiled Egg",
+        "hint": "Dare"
       },
       {
         "id": 156,
         "word": "Bibimbap",
-        "similar_word": "Fried Rice"
+        "similar_word": "Fried Rice",
+        "hint": "Bowl"
       },
       {
         "id": 22,
         "word": "Burger",
-        "similar_word": "Sandwich"
+        "similar_word": "Sandwich",
+        "hint": "Grill"
       },
       {
         "id": 148,
         "word": "Burrito",
-        "similar_word": "Tacos"
+        "similar_word": "Tacos",
+        "hint": "Wrap"
       },
       {
         "id": 151,
         "word": "Cheesecake",
-        "similar_word": "Cupcake"
+        "similar_word": "Cupcake",
+        "hint": "Creamy"
       },
       {
         "id": 144,
         "word": "Chocolate",
-        "similar_word": "Candy"
+        "similar_word": "Candy",
+        "hint": "Sweet"
       },
       {
         "id": 38,
         "word": "Croissant",
-        "similar_word": "Bread"
+        "similar_word": "Bread",
+        "hint": "Bakery"
       },
       {
         "id": 149,
         "word": "Curry",
-        "similar_word": "Stew"
+        "similar_word": "Stew",
+        "hint": "Spicy"
       },
       {
         "id": 145,
         "word": "Donut",
-        "similar_word": "Bagel"
+        "similar_word": "Bagel",
+        "hint": "Glaze"
       },
       {
         "id": 33,
         "word": "Dumplings",
-        "similar_word": "Siomai"
+        "similar_word": "Siomai",
+        "hint": "Steam"
       },
       {
         "id": 36,
         "word": "Fondue",
-        "similar_word": "Hot Pot"
+        "similar_word": "Hot Pot",
+        "hint": "Dip"
       },
       {
         "id": 142,
         "word": "French Fries",
-        "similar_word": "Potato Chips"
+        "similar_word": "Potato Chips",
+        "hint": "Ketchup"
       },
       {
         "id": 26,
         "word": "Fried Chicken",
-        "similar_word": "Chicken Nuggets"
+        "similar_word": "Chicken Nuggets",
+        "hint": "Crispy"
       },
       {
         "id": 34,
         "word": "Halo-Halo",
-        "similar_word": "Mais Con Yelo"
+        "similar_word": "Mais Con Yelo",
+        "hint": "Summer"
       },
       {
         "id": 141,
         "word": "Hotdog",
-        "similar_word": "Sausage"
+        "similar_word": "Sausage",
+        "hint": "Ballpark"
       },
       {
         "id": 23,
         "word": "Ice Cream",
-        "similar_word": "Frozen Yogurt"
+        "similar_word": "Frozen Yogurt",
+        "hint": "Melt"
       },
       {
         "id": 153,
         "word": "Kare-Kare",
-        "similar_word": "Adobo"
+        "similar_word": "Adobo",
+        "hint": "Peanut"
       },
       {
         "id": 39,
         "word": "Kimchi",
-        "similar_word": "Pickles"
+        "similar_word": "Pickles",
+        "hint": "Korea"
       },
       {
         "id": 32,
         "word": "Lasagna",
-        "similar_word": "Spaghetti"
+        "similar_word": "Spaghetti",
+        "hint": "Layers"
       },
       {
         "id": 35,
         "word": "Lechon",
-        "similar_word": "Barbecue"
+        "similar_word": "Barbecue",
+        "hint": "Fiesta"
       },
       {
         "id": 147,
         "word": "Lumpia",
-        "similar_word": "Siomai"
+        "similar_word": "Siomai",
+        "hint": "Fiesta"
       },
       {
         "id": 37,
         "word": "Paella",
-        "similar_word": "Fried Rice"
+        "similar_word": "Fried Rice",
+        "hint": "Spain"
       },
       {
         "id": 24,
         "word": "Pancakes",
-        "similar_word": "Waffles"
+        "similar_word": "Waffles",
+        "hint": "Syrup"
       },
       {
         "id": 155,
         "word": "Pho",
-        "similar_word": "Ramen"
+        "similar_word": "Ramen",
+        "hint": "Vietnam"
       },
       {
         "id": 21,
         "word": "Pizza",
-        "similar_word": "Burger"
+        "similar_word": "Burger",
+        "hint": "Italy"
       },
       {
         "id": 31,
         "word": "Popcorn",
-        "similar_word": "Potato Chips"
+        "similar_word": "Potato Chips",
+        "hint": "Movies"
       },
       {
         "id": 30,
         "word": "Ramen",
-        "similar_word": "Pho"
+        "similar_word": "Pho",
+        "hint": "Slurp"
       },
       {
         "id": 143,
         "word": "Sandwich",
-        "similar_word": "Burger"
+        "similar_word": "Burger",
+        "hint": "Lunch"
       },
       {
         "id": 146,
         "word": "Sinigang",
-        "similar_word": "Tinola"
+        "similar_word": "Tinola",
+        "hint": "Sour"
       },
       {
         "id": 157,
         "word": "Sisig",
-        "similar_word": "Chicharon"
+        "similar_word": "Chicharon",
+        "hint": "Sizzle"
       },
       {
         "id": 25,
         "word": "Spaghetti",
-        "similar_word": "Ramen"
+        "similar_word": "Ramen",
+        "hint": "Twirl"
       },
       {
         "id": 27,
         "word": "Sushi",
-        "similar_word": "Sashimi"
+        "similar_word": "Sashimi",
+        "hint": "Japan"
       },
       {
         "id": 28,
         "word": "Tacos",
-        "similar_word": "Burrito"
+        "similar_word": "Burrito",
+        "hint": "Tuesday"
       },
       {
         "id": 154,
         "word": "Tiramisu",
-        "similar_word": "Cake"
+        "similar_word": "Cake",
+        "hint": "Coffee"
       },
       {
         "id": 150,
         "word": "Waffles",
-        "similar_word": "Pancakes"
+        "similar_word": "Pancakes",
+        "hint": "Brunch"
       }
     ]
   },
@@ -1456,122 +1734,146 @@
       {
         "id": 475,
         "word": "Ball",
-        "similar_word": "Balloon"
+        "similar_word": "Balloon",
+        "hint": "Bounce"
       },
       {
         "id": 481,
         "word": "Balloon",
-        "similar_word": "Ball"
+        "similar_word": "Ball",
+        "hint": "Pop"
       },
       {
         "id": 497,
         "word": "Bingo",
-        "similar_word": "Lottery"
+        "similar_word": "Lottery",
+        "hint": "Numbers"
       },
       {
         "id": 476,
         "word": "Doll",
-        "similar_word": "Action Figure"
+        "similar_word": "Action Figure",
+        "hint": "Playhouse"
       },
       {
         "id": 492,
         "word": "Dominoes",
-        "similar_word": "Jenga"
+        "similar_word": "Jenga",
+        "hint": "Toppling"
       },
       {
         "id": 484,
         "word": "Hide and Seek",
-        "similar_word": "Tag"
+        "similar_word": "Tag",
+        "hint": "Counting"
       },
       {
         "id": 493,
         "word": "Hopscotch",
-        "similar_word": "Jump Rope"
+        "similar_word": "Jump Rope",
+        "hint": "Chalk"
       },
       {
         "id": 485,
         "word": "Jenga",
-        "similar_word": "Dominoes"
+        "similar_word": "Dominoes",
+        "hint": "Wobble"
       },
       {
         "id": 494,
         "word": "Jigsaw Puzzle",
-        "similar_word": "Rubik's Cube"
+        "similar_word": "Rubik's Cube",
+        "hint": "Interlocking"
       },
       {
         "id": 477,
         "word": "Kite",
-        "similar_word": "Paper Plane"
+        "similar_word": "Paper Plane",
+        "hint": "Breeze"
       },
       {
         "id": 480,
         "word": "Lego",
-        "similar_word": "Puzzle"
+        "similar_word": "Puzzle",
+        "hint": "Blocks"
       },
       {
         "id": 489,
         "word": "Marbles",
-        "similar_word": "Jacks"
+        "similar_word": "Jacks",
+        "hint": "Rolling"
       },
       {
         "id": 483,
         "word": "Monopoly",
-        "similar_word": "Scrabble"
+        "similar_word": "Scrabble",
+        "hint": "Bankrupt"
       },
       {
         "id": 491,
         "word": "Pi\u00f1ata",
-        "similar_word": "Balloon"
+        "similar_word": "Balloon",
+        "hint": "Candy"
       },
       {
         "id": 482,
         "word": "Playing Cards",
-        "similar_word": "Dominoes"
+        "similar_word": "Dominoes",
+        "hint": "Deck"
       },
       {
         "id": 486,
         "word": "Rubik's Cube",
-        "similar_word": "Puzzle"
+        "similar_word": "Puzzle",
+        "hint": "Twist"
       },
       {
         "id": 487,
         "word": "Slide",
-        "similar_word": "Swing"
+        "similar_word": "Swing",
+        "hint": "Playground"
       },
       {
         "id": 495,
         "word": "Spinning Top",
-        "similar_word": "Yo-Yo"
+        "similar_word": "Yo-Yo",
+        "hint": "Twirl"
       },
       {
         "id": 498,
         "word": "Sudoku",
-        "similar_word": "Crossword"
+        "similar_word": "Crossword",
+        "hint": "Grid"
       },
       {
         "id": 488,
         "word": "Tag",
-        "similar_word": "Hide and Seek"
+        "similar_word": "Hide and Seek",
+        "hint": "Chase"
       },
       {
         "id": 479,
         "word": "Teddy Bear",
-        "similar_word": "Doll"
+        "similar_word": "Doll",
+        "hint": "Cuddly"
       },
       {
         "id": 496,
         "word": "Trampoline",
-        "similar_word": "Bouncy Castle"
+        "similar_word": "Bouncy Castle",
+        "hint": "Bouncy"
       },
       {
         "id": 490,
         "word": "Water Gun",
-        "similar_word": "Water Balloon"
+        "similar_word": "Water Balloon",
+        "hint": "Squirt"
       },
       {
         "id": 478,
         "word": "Yo-Yo",
-        "similar_word": "Spinning Top"
+        "similar_word": "Spinning Top",
+        "hint": "String"
       }
     ]
   },
@@ -1582,122 +1884,146 @@
       {
         "id": 368,
         "word": "Baking",
-        "similar_word": "Cooking"
+        "similar_word": "Cooking",
+        "hint": "Dough"
       },
       {
         "id": 375,
         "word": "Birdwatching",
-        "similar_word": "Stargazing"
+        "similar_word": "Stargazing",
+        "hint": "Binoculars"
       },
       {
         "id": 377,
         "word": "Calligraphy",
-        "similar_word": "Painting"
+        "similar_word": "Painting",
+        "hint": "Script"
       },
       {
         "id": 363,
         "word": "Camping",
-        "similar_word": "Hiking"
+        "similar_word": "Hiking",
+        "hint": "Tent"
       },
       {
         "id": 378,
         "word": "Chess",
-        "similar_word": "Checkers"
+        "similar_word": "Checkers",
+        "hint": "Checkmate"
       },
       {
         "id": 357,
         "word": "Cooking",
-        "similar_word": "Baking"
+        "similar_word": "Baking",
+        "hint": "Recipe"
       },
       {
         "id": 356,
         "word": "Dancing",
-        "similar_word": "Singing"
+        "similar_word": "Singing",
+        "hint": "Rhythm"
       },
       {
         "id": 358,
         "word": "Drawing",
-        "similar_word": "Painting"
+        "similar_word": "Painting",
+        "hint": "Sketch"
       },
       {
         "id": 360,
         "word": "Fishing",
-        "similar_word": "Boating"
+        "similar_word": "Boating",
+        "hint": "Bait"
       },
       {
         "id": 361,
         "word": "Gaming",
-        "similar_word": "Board Games"
+        "similar_word": "Board Games",
+        "hint": "Console"
       },
       {
         "id": 364,
         "word": "Gardening",
-        "similar_word": "Farming"
+        "similar_word": "Farming",
+        "hint": "Soil"
       },
       {
         "id": 367,
         "word": "Hiking",
-        "similar_word": "Camping"
+        "similar_word": "Camping",
+        "hint": "Trail"
       },
       {
         "id": 376,
         "word": "Juggling",
-        "similar_word": "Magic Tricks"
+        "similar_word": "Magic Tricks",
+        "hint": "Toss"
       },
       {
         "id": 365,
         "word": "Knitting",
-        "similar_word": "Sewing"
+        "similar_word": "Sewing",
+        "hint": "Yarn"
       },
       {
         "id": 374,
         "word": "Magic Tricks",
-        "similar_word": "Juggling"
+        "similar_word": "Juggling",
+        "hint": "Illusion"
       },
       {
         "id": 371,
         "word": "Origami",
-        "similar_word": "Scrapbooking"
+        "similar_word": "Scrapbooking",
+        "hint": "Folding"
       },
       {
         "id": 366,
         "word": "Photography",
-        "similar_word": "Filming"
+        "similar_word": "Filming",
+        "hint": "Lens"
       },
       {
         "id": 373,
         "word": "Pottery",
-        "similar_word": "Sculpting"
+        "similar_word": "Sculpting",
+        "hint": "Clay"
       },
       {
         "id": 370,
         "word": "Puzzles",
-        "similar_word": "Crosswords"
+        "similar_word": "Crosswords",
+        "hint": "Pieces"
       },
       {
         "id": 355,
         "word": "Reading",
-        "similar_word": "Writing"
+        "similar_word": "Writing",
+        "hint": "Novel"
       },
       {
         "id": 372,
         "word": "Scuba Diving",
-        "similar_word": "Snorkeling"
+        "similar_word": "Snorkeling",
+        "hint": "Underwater"
       },
       {
         "id": 362,
         "word": "Shopping",
-        "similar_word": "Thrifting"
+        "similar_word": "Thrifting",
+        "hint": "Mall"
       },
       {
         "id": 359,
         "word": "Singing",
-        "similar_word": "Dancing"
+        "similar_word": "Dancing",
+        "hint": "Tune"
       },
       {
         "id": 369,
         "word": "Yoga",
-        "similar_word": "Meditation"
+        "similar_word": "Meditation",
+        "hint": "Stretch"
       }
     ]
   },
@@ -1708,122 +2034,146 @@
       {
         "id": 469,
         "word": "Attic",
-        "similar_word": "Basement"
+        "similar_word": "Basement",
+        "hint": "Dusty"
       },
       {
         "id": 459,
         "word": "Bathtub",
-        "similar_word": "Shower"
+        "similar_word": "Shower",
+        "hint": "Soak"
       },
       {
         "id": 451,
         "word": "Bed",
-        "similar_word": "Crib"
+        "similar_word": "Crib",
+        "hint": "Mattress"
       },
       {
         "id": 466,
         "word": "Blender",
-        "similar_word": "Mixer"
+        "similar_word": "Mixer",
+        "hint": "Puree"
       },
       {
         "id": 465,
         "word": "Bookshelf",
-        "similar_word": "Cabinet"
+        "similar_word": "Cabinet",
+        "hint": "Shelved"
       },
       {
         "id": 474,
         "word": "Ceiling Fan",
-        "similar_word": "Electric Fan"
+        "similar_word": "Electric Fan",
+        "hint": "Spinning"
       },
       {
         "id": 467,
         "word": "Chandelier",
-        "similar_word": "Lamp"
+        "similar_word": "Lamp",
+        "hint": "Crystals"
       },
       {
         "id": 463,
         "word": "Curtains",
-        "similar_word": "Blinds"
+        "similar_word": "Blinds",
+        "hint": "Drapes"
       },
       {
         "id": 470,
         "word": "Dishwasher",
-        "similar_word": "Sink"
+        "similar_word": "Sink",
+        "hint": "Rinse"
       },
       {
         "id": 454,
         "word": "Door",
-        "similar_word": "Gate"
+        "similar_word": "Gate",
+        "hint": "Hinge"
       },
       {
         "id": 464,
         "word": "Doormat",
-        "similar_word": "Rug"
+        "similar_word": "Rug",
+        "hint": "Welcome"
       },
       {
         "id": 461,
         "word": "Electric Fan",
-        "similar_word": "Aircon"
+        "similar_word": "Aircon",
+        "hint": "Breeze"
       },
       {
         "id": 468,
         "word": "Fireplace",
-        "similar_word": "Heater"
+        "similar_word": "Heater",
+        "hint": "Hearth"
       },
       {
         "id": 453,
         "word": "Fridge",
-        "similar_word": "Freezer"
+        "similar_word": "Freezer",
+        "hint": "Chilled"
       },
       {
         "id": 472,
         "word": "Garage",
-        "similar_word": "Shed"
+        "similar_word": "Shed",
+        "hint": "Toolbox"
       },
       {
         "id": 471,
         "word": "Hammock",
-        "similar_word": "Bed"
+        "similar_word": "Bed",
+        "hint": "Sway"
       },
       {
         "id": 457,
         "word": "Lamp",
-        "similar_word": "Candle"
+        "similar_word": "Candle",
+        "hint": "Glow"
       },
       {
         "id": 462,
         "word": "Rice Cooker",
-        "similar_word": "Slow Cooker"
+        "similar_word": "Slow Cooker",
+        "hint": "Steam"
       },
       {
         "id": 452,
         "word": "Sofa",
-        "similar_word": "Armchair"
+        "similar_word": "Armchair",
+        "hint": "Cushions"
       },
       {
         "id": 456,
         "word": "Table",
-        "similar_word": "Desk"
+        "similar_word": "Desk",
+        "hint": "Surface"
       },
       {
         "id": 458,
         "word": "Toilet",
-        "similar_word": "Sink"
+        "similar_word": "Sink",
+        "hint": "Flush"
       },
       {
         "id": 473,
         "word": "Vacuum Cleaner",
-        "similar_word": "Broom"
+        "similar_word": "Broom",
+        "hint": "Suction"
       },
       {
         "id": 460,
         "word": "Washing Machine",
-        "similar_word": "Dryer"
+        "similar_word": "Dryer",
+        "hint": "Spin"
       },
       {
         "id": 455,
         "word": "Window",
-        "similar_word": "Door"
+        "similar_word": "Door",
+        "hint": "Glass"
       }
     ]
   },
@@ -1834,172 +2184,206 @@
       {
         "id": 122,
         "word": "Architect",
-        "similar_word": "Engineer"
+        "similar_word": "Engineer",
+        "hint": "Blueprint"
       },
       {
         "id": 222,
         "word": "Artist",
-        "similar_word": "Designer"
+        "similar_word": "Designer",
+        "hint": "Canvas"
       },
       {
         "id": 121,
         "word": "Astronaut",
-        "similar_word": "Pilot"
+        "similar_word": "Pilot",
+        "hint": "Spacesuit"
       },
       {
         "id": 220,
         "word": "Baker",
-        "similar_word": "Chef"
+        "similar_word": "Chef",
+        "hint": "Oven"
       },
       {
         "id": 226,
         "word": "Barber",
-        "similar_word": "Hairdresser"
+        "similar_word": "Hairdresser",
+        "hint": "Clippers"
       },
       {
         "id": 112,
         "word": "Chef",
-        "similar_word": "Baker"
+        "similar_word": "Baker",
+        "hint": "Kitchen"
       },
       {
         "id": 116,
         "word": "Dentist",
-        "similar_word": "Doctor"
+        "similar_word": "Doctor",
+        "hint": "Cavity"
       },
       {
         "id": 125,
         "word": "Detective",
-        "similar_word": "Spy"
+        "similar_word": "Spy",
+        "hint": "Clues"
       },
       {
         "id": 234,
         "word": "DJ",
-        "similar_word": "Singer"
+        "similar_word": "Singer",
+        "hint": "Turntable"
       },
       {
         "id": 109,
         "word": "Doctor",
-        "similar_word": "Nurse"
+        "similar_word": "Nurse",
+        "hint": "Stethoscope"
       },
       {
         "id": 221,
         "word": "Driver",
-        "similar_word": "Pilot"
+        "similar_word": "Pilot",
+        "hint": "Route"
       },
       {
         "id": 233,
         "word": "Electrician",
-        "similar_word": "Plumber"
+        "similar_word": "Plumber",
+        "hint": "Wiring"
       },
       {
         "id": 114,
         "word": "Farmer",
-        "similar_word": "Gardener"
+        "similar_word": "Gardener",
+        "hint": "Harvest"
       },
       {
         "id": 111,
         "word": "Firefighter",
-        "similar_word": "Paramedic"
+        "similar_word": "Paramedic",
+        "hint": "Rescue"
       },
       {
         "id": 229,
         "word": "Judge",
-        "similar_word": "Lawyer"
+        "similar_word": "Lawyer",
+        "hint": "Verdict"
       },
       {
         "id": 232,
         "word": "Lawyer",
-        "similar_word": "Judge"
+        "similar_word": "Judge",
+        "hint": "Courtroom"
       },
       {
         "id": 124,
         "word": "Librarian",
-        "similar_word": "Teacher"
+        "similar_word": "Teacher",
+        "hint": "Catalog"
       },
       {
         "id": 117,
         "word": "Lifeguard",
-        "similar_word": "Coast Guard"
+        "similar_word": "Coast Guard",
+        "hint": "Whistle"
       },
       {
         "id": 123,
         "word": "Magician",
-        "similar_word": "Clown"
+        "similar_word": "Clown",
+        "hint": "Illusion"
       },
       {
         "id": 118,
         "word": "Mechanic",
-        "similar_word": "Engineer"
+        "similar_word": "Engineer",
+        "hint": "Engine"
       },
       {
         "id": 120,
         "word": "Nurse",
-        "similar_word": "Doctor"
+        "similar_word": "Doctor",
+        "hint": "Ward"
       },
       {
         "id": 119,
         "word": "Photographer",
-        "similar_word": "Videographer"
+        "similar_word": "Videographer",
+        "hint": "Lens"
       },
       {
         "id": 115,
         "word": "Pilot",
-        "similar_word": "Flight Attendant"
+        "similar_word": "Flight Attendant",
+        "hint": "Cockpit"
       },
       {
         "id": 126,
         "word": "Plumber",
-        "similar_word": "Electrician"
+        "similar_word": "Electrician",
+        "hint": "Pipes"
       },
       {
         "id": 113,
         "word": "Police Officer",
-        "similar_word": "Security Guard"
+        "similar_word": "Security Guard",
+        "hint": "Patrol"
       },
       {
         "id": 224,
         "word": "Scientist",
-        "similar_word": "Inventor"
+        "similar_word": "Inventor",
+        "hint": "Laboratory"
       },
       {
         "id": 219,
         "word": "Singer",
-        "similar_word": "Dancer"
+        "similar_word": "Dancer",
+        "hint": "Melody"
       },
       {
         "id": 225,
         "word": "Soldier",
-        "similar_word": "Police Officer"
+        "similar_word": "Police Officer",
+        "hint": "Battalion"
       },
       {
         "id": 231,
         "word": "Stuntman",
-        "similar_word": "Actor"
+        "similar_word": "Actor",
+        "hint": "Daredevil"
       },
       {
         "id": 110,
         "word": "Teacher",
-        "similar_word": "Principal"
+        "similar_word": "Principal",
+        "hint": "Classroom"
       },
       {
         "id": 228,
         "word": "Tour Guide",
-        "similar_word": "Travel Agent"
+        "similar_word": "Travel Agent",
+        "hint": "Itinerary"
       },
       {
         "id": 227,
         "word": "Veterinarian",
-        "similar_word": "Zookeeper"
+        "similar_word": "Zookeeper",
+        "hint": "Clinic"
       },
       {
         "id": 223,
         "word": "Waiter",
-        "similar_word": "Bartender"
+        "similar_word": "Bartender",
+        "hint": "Order"
       },
       {
         "id": 230,
         "word": "Zookeeper",
-        "similar_word": "Veterinarian"
+        "similar_word": "Veterinarian",
+        "hint": "Enclosure"
       }
     ]
   },
@@ -2010,167 +2394,200 @@
       {
         "id": 83,
         "word": "Avatar",
-        "similar_word": "Titanic"
+        "similar_word": "Titanic",
+        "hint": "Pandora"
       },
       {
         "id": 192,
         "word": "Avengers",
-        "similar_word": "Justice League"
+        "similar_word": "Justice League",
+        "hint": "Teamup"
       },
       {
         "id": 203,
         "word": "Back to the Future",
-        "similar_word": "Jumanji"
+        "similar_word": "Jumanji",
+        "hint": "DeLorean"
       },
       {
         "id": 193,
         "word": "Batman",
-        "similar_word": "Superman"
+        "similar_word": "Superman",
+        "hint": "Gotham"
       },
       {
         "id": 188,
         "word": "Cars",
-        "similar_word": "Planes"
+        "similar_word": "Planes",
+        "hint": "Racetrack"
       },
       {
         "id": 191,
         "word": "Coco",
-        "similar_word": "Encanto"
+        "similar_word": "Encanto",
+        "hint": "Afterlife"
       },
       {
         "id": 194,
         "word": "Encanto",
-        "similar_word": "Coco"
+        "similar_word": "Coco",
+        "hint": "Magic"
       },
       {
         "id": 81,
         "word": "Finding Nemo",
-        "similar_word": "Shark Tale"
+        "similar_word": "Shark Tale",
+        "hint": "Reef"
       },
       {
         "id": 77,
         "word": "Frozen",
-        "similar_word": "Tangled"
+        "similar_word": "Tangled",
+        "hint": "Sisters"
       },
       {
         "id": 196,
         "word": "Ghostbusters",
-        "similar_word": "Men in Black"
+        "similar_word": "Men in Black",
+        "hint": "Paranormal"
       },
       {
         "id": 201,
         "word": "Godzilla",
-        "similar_word": "King Kong"
+        "similar_word": "King Kong",
+        "hint": "Rampage"
       },
       {
         "id": 198,
         "word": "Gravity",
-        "similar_word": "Interstellar"
+        "similar_word": "Interstellar",
+        "hint": "Weightless"
       },
       {
         "id": 84,
         "word": "Harry Potter",
-        "similar_word": "The Lord of the Rings"
+        "similar_word": "The Lord of the Rings",
+        "hint": "Wizardry"
       },
       {
         "id": 197,
         "word": "Home Alone",
-        "similar_word": "Mrs. Doubtfire"
+        "similar_word": "Mrs. Doubtfire",
+        "hint": "Burglars"
       },
       {
         "id": 87,
         "word": "Inception",
-        "similar_word": "Interstellar"
+        "similar_word": "Interstellar",
+        "hint": "Dreamscape"
       },
       {
         "id": 92,
         "word": "Interstellar",
-        "similar_word": "Gravity"
+        "similar_word": "Gravity",
+        "hint": "Wormhole"
       },
       {
         "id": 90,
         "word": "Jaws",
-        "similar_word": "The Meg"
+        "similar_word": "The Meg",
+        "hint": "Beachgoers"
       },
       {
         "id": 80,
         "word": "Jurassic Park",
-        "similar_word": "King Kong"
+        "similar_word": "King Kong",
+        "hint": "Dinosaurs"
       },
       {
         "id": 195,
         "word": "Kung Fu Panda",
-        "similar_word": "Madagascar"
+        "similar_word": "Madagascar",
+        "hint": "Dojo"
       },
       {
         "id": 190,
         "word": "Minions",
-        "similar_word": "Despicable Me"
+        "similar_word": "Despicable Me",
+        "hint": "Goggles"
       },
       {
         "id": 189,
         "word": "Moana",
-        "similar_word": "Frozen"
+        "similar_word": "Frozen",
+        "hint": "Voyage"
       },
       {
         "id": 88,
         "word": "Parasite",
-        "similar_word": "Joker"
+        "similar_word": "Joker",
+        "hint": "Class"
       },
       {
         "id": 199,
         "word": "Ratatouille",
-        "similar_word": "Stuart Little"
+        "similar_word": "Stuart Little",
+        "hint": "Kitchen"
       },
       {
         "id": 79,
         "word": "Shrek",
-        "similar_word": "Puss in Boots"
+        "similar_word": "Puss in Boots",
+        "hint": "Swamp"
       },
       {
         "id": 86,
         "word": "Spider-Man",
-        "similar_word": "Batman"
+        "similar_word": "Batman",
+        "hint": "Webslinger"
       },
       {
         "id": 85,
         "word": "Star Wars",
-        "similar_word": "Star Trek"
+        "similar_word": "Star Trek",
+        "hint": "Galaxy"
       },
       {
         "id": 202,
         "word": "The Godfather",
-        "similar_word": "Scarface"
+        "similar_word": "Scarface",
+        "hint": "Mafia"
       },
       {
         "id": 82,
         "word": "The Lion King",
-        "similar_word": "The Jungle Book"
+        "similar_word": "The Jungle Book",
+        "hint": "Pridelands"
       },
       {
         "id": 89,
         "word": "The Matrix",
-        "similar_word": "Terminator"
+        "similar_word": "Terminator",
+        "hint": "Simulation"
       },
       {
         "id": 76,
         "word": "Titanic",
-        "similar_word": "Avatar"
+        "similar_word": "Avatar",
+        "hint": "Iceberg"
       },
       {
         "id": 200,
         "word": "Top Gun",
-        "similar_word": "Fast & Furious"
+        "similar_word": "Fast & Furious",
+        "hint": "Cockpit"
       },
       {
         "id": 78,
         "word": "Toy Story",
-        "similar_word": "Monsters, Inc."
+        "similar_word": "Monsters, Inc.",
+        "hint": "Playtime"
       },
       {
         "id": 91,
         "word": "Up",
-        "similar_word": "WALL-E"
+        "similar_word": "WALL-E",
+        "hint": "Balloons"
       }
     ]
   },
@@ -2181,122 +2598,146 @@
       {
         "id": 275,
         "word": "Accordion",
-        "similar_word": "Harmonica"
+        "similar_word": "Harmonica",
+        "hint": "Bellows"
       },
       {
         "id": 279,
         "word": "Bagpipes",
-        "similar_word": "Accordion"
+        "similar_word": "Accordion",
+        "hint": "Scotland"
       },
       {
         "id": 282,
         "word": "Cello",
-        "similar_word": "Violin"
+        "similar_word": "Violin",
+        "hint": "Deep"
       },
       {
         "id": 271,
         "word": "Choir",
-        "similar_word": "Orchestra"
+        "similar_word": "Orchestra",
+        "hint": "Harmony"
       },
       {
         "id": 263,
         "word": "Concert",
-        "similar_word": "Festival"
+        "similar_word": "Festival",
+        "hint": "Stage"
       },
       {
         "id": 260,
         "word": "Drums",
-        "similar_word": "Tambourine"
+        "similar_word": "Tambourine",
+        "hint": "Rhythm"
       },
       {
         "id": 273,
         "word": "Flute",
-        "similar_word": "Recorder"
+        "similar_word": "Recorder",
+        "hint": "Woodwind"
       },
       {
         "id": 269,
         "word": "Harmonica",
-        "similar_word": "Flute"
+        "similar_word": "Flute",
+        "hint": "Tiny"
       },
       {
         "id": 276,
         "word": "Harp",
-        "similar_word": "Piano"
+        "similar_word": "Piano",
+        "hint": "Angelic"
       },
       {
         "id": 274,
         "word": "Jazz",
-        "similar_word": "Blues"
+        "similar_word": "Blues",
+        "hint": "Improvise"
       },
       {
         "id": 262,
         "word": "Karaoke",
-        "similar_word": "Concert"
+        "similar_word": "Concert",
+        "hint": "Lyrics"
       },
       {
         "id": 266,
         "word": "Lullaby",
-        "similar_word": "Love Song"
+        "similar_word": "Love Song",
+        "hint": "Sleepy"
       },
       {
         "id": 280,
         "word": "Metronome",
-        "similar_word": "Clock"
+        "similar_word": "Clock",
+        "hint": "Tempo"
       },
       {
         "id": 264,
         "word": "Microphone",
-        "similar_word": "Speaker"
+        "similar_word": "Speaker",
+        "hint": "Amplify"
       },
       {
         "id": 278,
         "word": "Opera",
-        "similar_word": "Musical"
+        "similar_word": "Musical",
+        "hint": "Aria"
       },
       {
         "id": 272,
         "word": "Orchestra",
-        "similar_word": "Band"
+        "similar_word": "Band",
+        "hint": "Conductor"
       },
       {
         "id": 259,
         "word": "Piano",
-        "similar_word": "Organ"
+        "similar_word": "Organ",
+        "hint": "Keys"
       },
       {
         "id": 270,
         "word": "Rap",
-        "similar_word": "Rock"
+        "similar_word": "Rock",
+        "hint": "Verses"
       },
       {
         "id": 267,
         "word": "Saxophone",
-        "similar_word": "Trumpet"
+        "similar_word": "Trumpet",
+        "hint": "Jazzy"
       },
       {
         "id": 281,
         "word": "Tambourine",
-        "similar_word": "Maracas"
+        "similar_word": "Maracas",
+        "hint": "Jingle"
       },
       {
         "id": 265,
         "word": "Trumpet",
-        "similar_word": "Trombone"
+        "similar_word": "Trombone",
+        "hint": "Brass"
       },
       {
         "id": 268,
         "word": "Ukulele",
-        "similar_word": "Guitar"
+        "similar_word": "Guitar",
+        "hint": "Island"
       },
       {
         "id": 261,
         "word": "Violin",
-        "similar_word": "Cello"
+        "similar_word": "Cello",
+        "hint": "Strings"
       },
       {
         "id": 277,
         "word": "Xylophone",
-        "similar_word": "Drums"
+        "similar_word": "Drums",
+        "hint": "Mallets"
       }
     ]
   },
@@ -2307,122 +2748,146 @@
       {
         "id": 402,
         "word": "Aurora",
-        "similar_word": "Rainbow"
+        "similar_word": "Rainbow",
+        "hint": "Polar"
       },
       {
         "id": 390,
         "word": "Cave",
-        "similar_word": "Tunnel"
+        "similar_word": "Tunnel",
+        "hint": "Darkness"
       },
       {
         "id": 393,
         "word": "Cloud",
-        "similar_word": "Fog"
+        "similar_word": "Fog",
+        "hint": "Drift"
       },
       {
         "id": 398,
         "word": "Coral Reef",
-        "similar_word": "Lagoon"
+        "similar_word": "Lagoon",
+        "hint": "Vibrant"
       },
       {
         "id": 395,
         "word": "Earthquake",
-        "similar_word": "Tsunami"
+        "similar_word": "Tsunami",
+        "hint": "Tremor"
       },
       {
         "id": 399,
         "word": "Eclipse",
-        "similar_word": "Full Moon"
+        "similar_word": "Full Moon",
+        "hint": "Shadow"
       },
       {
         "id": 383,
         "word": "Flower",
-        "similar_word": "Plant"
+        "similar_word": "Plant",
+        "hint": "Petals"
       },
       {
         "id": 389,
         "word": "Forest",
-        "similar_word": "Jungle"
+        "similar_word": "Jungle",
+        "hint": "Canopy"
       },
       {
         "id": 397,
         "word": "Glacier",
-        "similar_word": "Iceberg"
+        "similar_word": "Iceberg",
+        "hint": "Frozen"
       },
       {
         "id": 394,
         "word": "Island",
-        "similar_word": "Beach"
+        "similar_word": "Beach",
+        "hint": "Shoreline"
       },
       {
         "id": 380,
         "word": "Moon",
-        "similar_word": "Star"
+        "similar_word": "Star",
+        "hint": "Crescent"
       },
       {
         "id": 385,
         "word": "Mountain",
-        "similar_word": "Hill"
+        "similar_word": "Hill",
+        "hint": "Peak"
       },
       {
         "id": 386,
         "word": "Ocean",
-        "similar_word": "Lake"
+        "similar_word": "Lake",
+        "hint": "Tides"
       },
       {
         "id": 400,
         "word": "Quicksand",
-        "similar_word": "Mud"
+        "similar_word": "Mud",
+        "hint": "Sinking"
       },
       {
         "id": 381,
         "word": "Rain",
-        "similar_word": "Snow"
+        "similar_word": "Snow",
+        "hint": "Puddles"
       },
       {
         "id": 384,
         "word": "Rainbow",
-        "similar_word": "Sunset"
+        "similar_word": "Sunset",
+        "hint": "Arc"
       },
       {
         "id": 391,
         "word": "River",
-        "similar_word": "Lake"
+        "similar_word": "Lake",
+        "hint": "Stream"
       },
       {
         "id": 392,
         "word": "Snow",
-        "similar_word": "Hail"
+        "similar_word": "Hail",
+        "hint": "Flurry"
       },
       {
         "id": 379,
         "word": "Sun",
-        "similar_word": "Star"
+        "similar_word": "Star",
+        "hint": "Daylight"
       },
       {
         "id": 388,
         "word": "Thunder",
-        "similar_word": "Lightning"
+        "similar_word": "Lightning",
+        "hint": "Boom"
       },
       {
         "id": 396,
         "word": "Tornado",
-        "similar_word": "Hurricane"
+        "similar_word": "Hurricane",
+        "hint": "Funnel"
       },
       {
         "id": 382,
         "word": "Tree",
-        "similar_word": "Bush"
+        "similar_word": "Bush",
+        "hint": "Roots"
       },
       {
         "id": 401,
         "word": "Typhoon",
-        "similar_word": "Tornado"
+        "similar_word": "Tornado",
+        "hint": "Gust"
       },
       {
         "id": 387,
         "word": "Waterfall",
-        "similar_word": "River"
+        "similar_word": "River",
+        "hint": "Plunge"
       }
     ]
   },
@@ -2433,157 +2898,188 @@
       {
         "id": 184,
         "word": "Anchor",
-        "similar_word": "Rope"
+        "similar_word": "Rope",
+        "hint": "Harbor"
       },
       {
         "id": 65,
         "word": "Backpack",
-        "similar_word": "Suitcase"
+        "similar_word": "Suitcase",
+        "hint": "Straps"
       },
       {
         "id": 180,
         "word": "Basket",
-        "similar_word": "Bucket"
+        "similar_word": "Bucket",
+        "hint": "Woven"
       },
       {
         "id": 176,
         "word": "Book",
-        "similar_word": "Magazine"
+        "similar_word": "Magazine",
+        "hint": "Pages"
       },
       {
         "id": 186,
         "word": "Calculator",
-        "similar_word": "Abacus"
+        "similar_word": "Abacus",
+        "hint": "Numbers"
       },
       {
         "id": 66,
         "word": "Candle",
-        "similar_word": "Lamp"
+        "similar_word": "Lamp",
+        "hint": "Flicker"
       },
       {
         "id": 59,
         "word": "Chair",
-        "similar_word": "Stool"
+        "similar_word": "Stool",
+        "hint": "Sit"
       },
       {
         "id": 63,
         "word": "Clock",
-        "similar_word": "Watch"
+        "similar_word": "Watch",
+        "hint": "Ticking"
       },
       {
         "id": 71,
         "word": "Compass",
-        "similar_word": "Map"
+        "similar_word": "Map",
+        "hint": "Direction"
       },
       {
         "id": 177,
         "word": "Cup",
-        "similar_word": "Bowl"
+        "similar_word": "Bowl",
+        "hint": "Sip"
       },
       {
         "id": 185,
         "word": "Doorbell",
-        "similar_word": "Alarm"
+        "similar_word": "Alarm",
+        "hint": "Chime"
       },
       {
         "id": 178,
         "word": "Flashlight",
-        "similar_word": "Lantern"
+        "similar_word": "Lantern",
+        "hint": "Beam"
       },
       {
         "id": 70,
         "word": "Guitar",
-        "similar_word": "Ukulele"
+        "similar_word": "Ukulele",
+        "hint": "Strum"
       },
       {
         "id": 181,
         "word": "Hammer",
-        "similar_word": "Screwdriver"
+        "similar_word": "Screwdriver",
+        "hint": "Pound"
       },
       {
         "id": 72,
         "word": "Hourglass",
-        "similar_word": "Stopwatch"
+        "similar_word": "Stopwatch",
+        "hint": "Trickle"
       },
       {
         "id": 175,
         "word": "Key",
-        "similar_word": "Lock"
+        "similar_word": "Lock",
+        "hint": "Unlock"
       },
       {
         "id": 69,
         "word": "Ladder",
-        "similar_word": "Stairs"
+        "similar_word": "Stairs",
+        "hint": "Climb"
       },
       {
         "id": 74,
         "word": "Magnifying Glass",
-        "similar_word": "Binoculars"
+        "similar_word": "Binoculars",
+        "hint": "Zoom"
       },
       {
         "id": 64,
         "word": "Mirror",
-        "similar_word": "Window"
+        "similar_word": "Window",
+        "hint": "Reflection"
       },
       {
         "id": 179,
         "word": "Paintbrush",
-        "similar_word": "Pencil"
+        "similar_word": "Pencil",
+        "hint": "Canvas"
       },
       {
         "id": 187,
         "word": "Paper Clip",
-        "similar_word": "Safety Pin"
+        "similar_word": "Safety Pin",
+        "hint": "Bent"
       },
       {
         "id": 62,
         "word": "Pillow",
-        "similar_word": "Blanket"
+        "similar_word": "Blanket",
+        "hint": "Soft"
       },
       {
         "id": 182,
         "word": "Remote Control",
-        "similar_word": "Phone"
+        "similar_word": "Phone",
+        "hint": "Channels"
       },
       {
         "id": 67,
         "word": "Scissors",
-        "similar_word": "Knife"
+        "similar_word": "Knife",
+        "hint": "Snip"
       },
       {
         "id": 174,
         "word": "Spoon",
-        "similar_word": "Fork"
+        "similar_word": "Fork",
+        "hint": "Scoop"
       },
       {
         "id": 73,
         "word": "Stapler",
-        "similar_word": "Tape"
+        "similar_word": "Tape",
+        "hint": "Clip"
       },
       {
         "id": 183,
         "word": "Telescope",
-        "similar_word": "Binoculars"
+        "similar_word": "Binoculars",
+        "hint": "Stars"
       },
       {
         "id": 75,
         "word": "Thermometer",
-        "similar_word": "Scale"
+        "similar_word": "Scale",
+        "hint": "Fever"
       },
       {
         "id": 61,
         "word": "Toothbrush",
-        "similar_word": "Comb"
+        "similar_word": "Comb",
+        "hint": "Bristles"
       },
       {
         "id": 60,
         "word": "Umbrella",
-        "similar_word": "Raincoat"
+        "similar_word": "Raincoat",
+        "hint": "Rain"
       },
       {
         "id": 68,
         "word": "Wallet",
-        "similar_word": "Purse"
+        "similar_word": "Purse",
+        "hint": "Pocket"
       }
     ]
   },
@@ -2594,162 +3090,194 @@
       {
         "id": 594,
         "word": "Alden Richards",
-        "similar_word": "Dingdong Dantes"
+        "similar_word": "Dingdong Dantes",
+        "hint": "Viral"
       },
       {
         "id": 586,
         "word": "Anne Curtis",
-        "similar_word": "Angel Locsin"
+        "similar_word": "Angel Locsin",
+        "hint": "Host"
       },
       {
         "id": 611,
         "word": "Arnel Pineda",
-        "similar_word": "Gary Valenciano"
+        "similar_word": "Gary Valenciano",
+        "hint": "Frontman"
       },
       {
         "id": 601,
         "word": "BINI",
-        "similar_word": "SB19"
+        "similar_word": "SB19",
+        "hint": "Girlgroup"
       },
       {
         "id": 610,
         "word": "Carlos Yulo",
-        "similar_word": "Hidilyn Diaz"
+        "similar_word": "Hidilyn Diaz",
+        "hint": "Gymnast"
       },
       {
         "id": 591,
         "word": "Catriona Gray",
-        "similar_word": "Pia Wurtzbach"
+        "similar_word": "Pia Wurtzbach",
+        "hint": "Crowned"
       },
       {
         "id": 585,
         "word": "Coco Martin",
-        "similar_word": "Piolo Pascual"
+        "similar_word": "Piolo Pascual",
+        "hint": "Primetime"
       },
       {
         "id": 584,
         "word": "Daniel Padilla",
-        "similar_word": "Enrique Gil"
+        "similar_word": "Enrique Gil",
+        "hint": "Heartthrob"
       },
       {
         "id": 588,
         "word": "Dingdong Dantes",
-        "similar_word": "Alden Richards"
+        "similar_word": "Alden Richards",
+        "hint": "Superhero"
       },
       {
         "id": 602,
         "word": "Dolphy",
-        "similar_word": "Vic Sotto"
+        "similar_word": "Vic Sotto",
+        "hint": "Comedy"
       },
       {
         "id": 599,
         "word": "Enrique Gil",
-        "similar_word": "Daniel Padilla"
+        "similar_word": "Daniel Padilla",
+        "hint": "Dashing"
       },
       {
         "id": 609,
         "word": "Hidilyn Diaz",
-        "similar_word": "Carlos Yulo"
+        "similar_word": "Carlos Yulo",
+        "hint": "Weightlifting"
       },
       {
         "id": 605,
         "word": "Ivana Alawi",
-        "similar_word": "Alex Gonzaga"
+        "similar_word": "Alex Gonzaga",
+        "hint": "Influencer"
       },
       {
         "id": 597,
         "word": "James Reid",
-        "similar_word": "Daniel Padilla"
+        "similar_word": "Daniel Padilla",
+        "hint": "Crooner"
       },
       {
         "id": 608,
         "word": "Jessica Soho",
-        "similar_word": "Korina Sanchez"
+        "similar_word": "Korina Sanchez",
+        "hint": "Journalist"
       },
       {
         "id": 583,
         "word": "Kathryn Bernardo",
-        "similar_word": "Liza Soberano"
+        "similar_word": "Liza Soberano",
+        "hint": "Teleserye"
       },
       {
         "id": 593,
         "word": "Lea Salonga",
-        "similar_word": "Regine Velasquez"
+        "similar_word": "Regine Velasquez",
+        "hint": "Broadway"
       },
       {
         "id": 598,
         "word": "Liza Soberano",
-        "similar_word": "Kathryn Bernardo"
+        "similar_word": "Kathryn Bernardo",
+        "hint": "Beauty"
       },
       {
         "id": 595,
         "word": "Maine Mendoza",
-        "similar_word": "Kathryn Bernardo"
+        "similar_word": "Kathryn Bernardo",
+        "hint": "Dance"
       },
       {
         "id": 580,
         "word": "Manny Pacquiao",
-        "similar_word": "Nonito Donaire"
+        "similar_word": "Nonito Donaire",
+        "hint": "Champion"
       },
       {
         "id": 587,
         "word": "Marian Rivera",
-        "similar_word": "Heart Evangelista"
+        "similar_word": "Heart Evangelista",
+        "hint": "Glamorous"
       },
       {
         "id": 606,
         "word": "Mimiyuuuh",
-        "similar_word": "Ivana Alawi"
+        "similar_word": "Ivana Alawi",
+        "hint": "Vlogger"
       },
       {
         "id": 596,
         "word": "Nadine Lustre",
-        "similar_word": "Liza Soberano"
+        "similar_word": "Liza Soberano",
+        "hint": "Indie"
       },
       {
         "id": 603,
         "word": "Nora Aunor",
-        "similar_word": "Vilma Santos"
+        "similar_word": "Vilma Santos",
+        "hint": "Superstar"
       },
       {
         "id": 590,
         "word": "Pia Wurtzbach",
-        "similar_word": "Catriona Gray"
+        "similar_word": "Catriona Gray",
+        "hint": "Pageant"
       },
       {
         "id": 592,
         "word": "Regine Velasquez",
-        "similar_word": "Sarah Geronimo"
+        "similar_word": "Sarah Geronimo",
+        "hint": "Songbird"
       },
       {
         "id": 582,
         "word": "Sarah Geronimo",
-        "similar_word": "Regine Velasquez"
+        "similar_word": "Regine Velasquez",
+        "hint": "Popstar"
       },
       {
         "id": 600,
         "word": "SB19",
-        "similar_word": "BINI"
+        "similar_word": "BINI",
+        "hint": "Boyband"
       },
       {
         "id": 604,
         "word": "Sharon Cuneta",
-        "similar_word": "Nora Aunor"
+        "similar_word": "Nora Aunor",
+        "hint": "Megastar"
       },
       {
         "id": 607,
         "word": "Toni Gonzaga",
-        "similar_word": "Alex Gonzaga"
+        "similar_word": "Alex Gonzaga",
+        "hint": "Showbiz"
       },
       {
         "id": 589,
         "word": "Vic Sotto",
-        "similar_word": "Joey de Leon"
+        "similar_word": "Joey de Leon",
+        "hint": "Noontime"
       },
       {
         "id": 581,
         "word": "Vice Ganda",
-        "similar_word": "Vhong Navarro"
+        "similar_word": "Vhong Navarro",
+        "hint": "Comedian"
       }
     ]
   },
@@ -2760,177 +3288,212 @@
       {
         "id": 43,
         "word": "Airport",
-        "similar_word": "Train Station"
+        "similar_word": "Train Station",
+        "hint": "Departure"
       },
       {
         "id": 51,
         "word": "Bakery",
-        "similar_word": "Cafe"
+        "similar_word": "Cafe",
+        "hint": "Fresh"
       },
       {
         "id": 166,
         "word": "Barber Shop",
-        "similar_word": "Salon"
+        "similar_word": "Salon",
+        "hint": "Trim"
       },
       {
         "id": 40,
         "word": "Beach",
-        "similar_word": "Pool"
+        "similar_word": "Pool",
+        "hint": "Sandy"
       },
       {
         "id": 54,
         "word": "Casino",
-        "similar_word": "Arcade"
+        "similar_word": "Arcade",
+        "hint": "Jackpot"
       },
       {
         "id": 168,
         "word": "Castle",
-        "similar_word": "Palace"
+        "similar_word": "Palace",
+        "hint": "Kingdom"
       },
       {
         "id": 50,
         "word": "Church",
-        "similar_word": "Temple"
+        "similar_word": "Temple",
+        "hint": "Prayer"
       },
       {
         "id": 48,
         "word": "Cinema",
-        "similar_word": "Theater"
+        "similar_word": "Theater",
+        "hint": "Popcorn"
       },
       {
         "id": 171,
         "word": "Cruise Ship",
-        "similar_word": "Ferry"
+        "similar_word": "Ferry",
+        "hint": "Voyage"
       },
       {
         "id": 172,
         "word": "Desert Island",
-        "similar_word": "Beach"
+        "similar_word": "Beach",
+        "hint": "Stranded"
       },
       {
         "id": 52,
         "word": "Farm",
-        "similar_word": "Ranch"
+        "similar_word": "Ranch",
+        "hint": "Harvest"
       },
       {
         "id": 49,
         "word": "Gym",
-        "similar_word": "Spa"
+        "similar_word": "Spa",
+        "hint": "Workout"
       },
       {
         "id": 170,
         "word": "Haunted House",
-        "similar_word": "Graveyard"
+        "similar_word": "Graveyard",
+        "hint": "Spooky"
       },
       {
         "id": 42,
         "word": "Hospital",
-        "similar_word": "Clinic"
+        "similar_word": "Clinic",
+        "hint": "Emergency"
       },
       {
         "id": 162,
         "word": "Hotel",
-        "similar_word": "Resort"
+        "similar_word": "Resort",
+        "hint": "Lobby"
       },
       {
         "id": 169,
         "word": "Igloo",
-        "similar_word": "Tent"
+        "similar_word": "Tent",
+        "hint": "Arctic"
       },
       {
         "id": 167,
         "word": "Karaoke Bar",
-        "similar_word": "Night Club"
+        "similar_word": "Night Club",
+        "hint": "Sing"
       },
       {
         "id": 46,
         "word": "Library",
-        "similar_word": "Bookstore"
+        "similar_word": "Bookstore",
+        "hint": "Quiet"
       },
       {
         "id": 53,
         "word": "Lighthouse",
-        "similar_word": "Tower"
+        "similar_word": "Tower",
+        "hint": "Coast"
       },
       {
         "id": 159,
         "word": "Mall",
-        "similar_word": "Market"
+        "similar_word": "Market",
+        "hint": "Shops"
       },
       {
         "id": 47,
         "word": "Museum",
-        "similar_word": "Art Gallery"
+        "similar_word": "Art Gallery",
+        "hint": "Exhibit"
       },
       {
         "id": 173,
         "word": "Observatory",
-        "similar_word": "Planetarium"
+        "similar_word": "Planetarium",
+        "hint": "Stargazing"
       },
       {
         "id": 158,
         "word": "Park",
-        "similar_word": "Garden"
+        "similar_word": "Garden",
+        "hint": "Bench"
       },
       {
         "id": 161,
         "word": "Playground",
-        "similar_word": "Park"
+        "similar_word": "Park",
+        "hint": "Recess"
       },
       {
         "id": 58,
         "word": "Prison",
-        "similar_word": "Police Station"
+        "similar_word": "Police Station",
+        "hint": "Guarded"
       },
       {
         "id": 160,
         "word": "Restaurant",
-        "similar_word": "Cafe"
+        "similar_word": "Cafe",
+        "hint": "Menu"
       },
       {
         "id": 41,
         "word": "School",
-        "similar_word": "University"
+        "similar_word": "University",
+        "hint": "Lessons"
       },
       {
         "id": 56,
         "word": "Space Station",
-        "similar_word": "Rocket"
+        "similar_word": "Rocket",
+        "hint": "Orbit"
       },
       {
         "id": 163,
         "word": "Stadium",
-        "similar_word": "Arena"
+        "similar_word": "Arena",
+        "hint": "Crowd"
       },
       {
         "id": 55,
         "word": "Submarine",
-        "similar_word": "Ship"
+        "similar_word": "Ship",
+        "hint": "Depths"
       },
       {
         "id": 45,
         "word": "Supermarket",
-        "similar_word": "Mall"
+        "similar_word": "Mall",
+        "hint": "Groceries"
       },
       {
         "id": 164,
         "word": "Train Station",
-        "similar_word": "Bus Station"
+        "similar_word": "Bus Station",
+        "hint": "Platform"
       },
       {
         "id": 57,
         "word": "Volcano",
-        "similar_word": "Mountain"
+        "similar_word": "Mountain",
+        "hint": "Eruption"
       },
       {
         "id": 165,
         "word": "Water Park",
-        "similar_word": "Amusement Park"
+        "similar_word": "Amusement Park",
+        "hint": "Splash"
       },
       {
         "id": 44,
         "word": "Zoo",
-        "similar_word": "Aquarium"
+        "similar_word": "Aquarium",
+        "hint": "Cages"
       }
     ]
   },
@@ -2941,122 +3504,146 @@
       {
         "id": 252,
         "word": "Archery",
-        "similar_word": "Darts"
+        "similar_word": "Darts",
+        "hint": "Bullseye"
       },
       {
         "id": 243,
         "word": "Badminton",
-        "similar_word": "Tennis"
+        "similar_word": "Tennis",
+        "hint": "Shuttlecock"
       },
       {
         "id": 242,
         "word": "Baseball",
-        "similar_word": "Cricket"
+        "similar_word": "Cricket",
+        "hint": "Diamond"
       },
       {
         "id": 235,
         "word": "Basketball",
-        "similar_word": "Volleyball"
+        "similar_word": "Volleyball",
+        "hint": "Hoop"
       },
       {
         "id": 258,
         "word": "Billiards",
-        "similar_word": "Bowling"
+        "similar_word": "Bowling",
+        "hint": "Cue"
       },
       {
         "id": 246,
         "word": "Bowling",
-        "similar_word": "Billiards"
+        "similar_word": "Billiards",
+        "hint": "Strike"
       },
       {
         "id": 239,
         "word": "Boxing",
-        "similar_word": "Wrestling"
+        "similar_word": "Wrestling",
+        "hint": "Punch"
       },
       {
         "id": 253,
         "word": "Curling",
-        "similar_word": "Bowling"
+        "similar_word": "Bowling",
+        "hint": "Ice"
       },
       {
         "id": 248,
         "word": "Cycling",
-        "similar_word": "Running"
+        "similar_word": "Running",
+        "hint": "Pedal"
       },
       {
         "id": 251,
         "word": "Fencing",
-        "similar_word": "Kendo"
+        "similar_word": "Kendo",
+        "hint": "Duel"
       },
       {
         "id": 236,
         "word": "Football",
-        "similar_word": "Rugby"
+        "similar_word": "Rugby",
+        "hint": "Goalpost"
       },
       {
         "id": 244,
         "word": "Golf",
-        "similar_word": "Billiards"
+        "similar_word": "Billiards",
+        "hint": "Fairway"
       },
       {
         "id": 254,
         "word": "Gymnastics",
-        "similar_word": "Cheerleading"
+        "similar_word": "Cheerleading",
+        "hint": "Flexibility"
       },
       {
         "id": 256,
         "word": "Polo",
-        "similar_word": "Horse Racing"
+        "similar_word": "Horse Racing",
+        "hint": "Mallet"
       },
       {
         "id": 257,
         "word": "Rock Climbing",
-        "similar_word": "Hiking"
+        "similar_word": "Hiking",
+        "hint": "Cliffside"
       },
       {
         "id": 240,
         "word": "Running",
-        "similar_word": "Cycling"
+        "similar_word": "Cycling",
+        "hint": "Marathon"
       },
       {
         "id": 245,
         "word": "Skateboarding",
-        "similar_word": "Surfing"
+        "similar_word": "Surfing",
+        "hint": "Ramp"
       },
       {
         "id": 255,
         "word": "Sumo",
-        "similar_word": "Wrestling"
+        "similar_word": "Wrestling",
+        "hint": "Ring"
       },
       {
         "id": 247,
         "word": "Surfing",
-        "similar_word": "Skateboarding"
+        "similar_word": "Skateboarding",
+        "hint": "Wave"
       },
       {
         "id": 237,
         "word": "Swimming",
-        "similar_word": "Diving"
+        "similar_word": "Diving",
+        "hint": "Lap"
       },
       {
         "id": 249,
         "word": "Table Tennis",
-        "similar_word": "Badminton"
+        "similar_word": "Badminton",
+        "hint": "Paddle"
       },
       {
         "id": 238,
         "word": "Tennis",
-        "similar_word": "Badminton"
+        "similar_word": "Badminton",
+        "hint": "Racket"
       },
       {
         "id": 241,
         "word": "Volleyball",
-        "similar_word": "Basketball"
+        "similar_word": "Basketball",
+        "hint": "Spike"
       },
       {
         "id": 250,
         "word": "Wrestling",
-        "similar_word": "Boxing"
+        "similar_word": "Boxing",
+        "hint": "Grapple"
       }
     ]
   },
@@ -3067,157 +3654,188 @@
       {
         "id": 214,
         "word": "3D Printer",
-        "similar_word": "Printer"
+        "similar_word": "Printer",
+        "hint": "Layering"
       },
       {
         "id": 213,
         "word": "Artificial Intelligence",
-        "similar_word": "Robot"
+        "similar_word": "Robot",
+        "hint": "Algorithm"
       },
       {
         "id": 104,
         "word": "Bluetooth",
-        "similar_word": "Wi-Fi"
+        "similar_word": "Wi-Fi",
+        "hint": "Pairing"
       },
       {
         "id": 97,
         "word": "Camera",
-        "similar_word": "Webcam"
+        "similar_word": "Webcam",
+        "hint": "Snapshot"
       },
       {
         "id": 207,
         "word": "Charger",
-        "similar_word": "Battery"
+        "similar_word": "Battery",
+        "hint": "Battery"
       },
       {
         "id": 107,
         "word": "Cloud Storage",
-        "similar_word": "USB Drive"
+        "similar_word": "USB Drive",
+        "hint": "Backup"
       },
       {
         "id": 98,
         "word": "Drone",
-        "similar_word": "Remote Control Car"
+        "similar_word": "Remote Control Car",
+        "hint": "Aerial"
       },
       {
         "id": 212,
         "word": "Electric Scooter",
-        "similar_word": "Hoverboard"
+        "similar_word": "Hoverboard",
+        "hint": "Commute"
       },
       {
         "id": 218,
         "word": "Emoji",
-        "similar_word": "Sticker"
+        "similar_word": "Sticker",
+        "hint": "Expression"
       },
       {
         "id": 210,
         "word": "Game Console",
-        "similar_word": "Arcade Machine"
+        "similar_word": "Arcade Machine",
+        "hint": "Multiplayer"
       },
       {
         "id": 96,
         "word": "Headphones",
-        "similar_word": "Earbuds"
+        "similar_word": "Earbuds",
+        "hint": "Playlist"
       },
       {
         "id": 204,
         "word": "Keyboard",
-        "similar_word": "Mouse"
+        "similar_word": "Mouse",
+        "hint": "Typing"
       },
       {
         "id": 94,
         "word": "Laptop",
-        "similar_word": "Desktop Computer"
+        "similar_word": "Desktop Computer",
+        "hint": "Portable"
       },
       {
         "id": 102,
         "word": "Microwave",
-        "similar_word": "Oven"
+        "similar_word": "Oven",
+        "hint": "Reheat"
       },
       {
         "id": 215,
         "word": "Password",
-        "similar_word": "PIN Code"
+        "similar_word": "PIN Code",
+        "hint": "Login"
       },
       {
         "id": 211,
         "word": "Power Bank",
-        "similar_word": "Charger"
+        "similar_word": "Charger",
+        "hint": "Recharge"
       },
       {
         "id": 101,
         "word": "Printer",
-        "similar_word": "Scanner"
+        "similar_word": "Scanner",
+        "hint": "Ink"
       },
       {
         "id": 108,
         "word": "QR Code",
-        "similar_word": "Barcode"
+        "similar_word": "Barcode",
+        "hint": "Scan"
       },
       {
         "id": 100,
         "word": "Robot",
-        "similar_word": "Cyborg"
+        "similar_word": "Cyborg",
+        "hint": "Automation"
       },
       {
         "id": 105,
         "word": "Satellite",
-        "similar_word": "Space Station"
+        "similar_word": "Space Station",
+        "hint": "Orbit"
       },
       {
         "id": 217,
         "word": "Self-Driving Car",
-        "similar_word": "Electric Car"
+        "similar_word": "Electric Car",
+        "hint": "Autonomous"
       },
       {
         "id": 208,
         "word": "Selfie Stick",
-        "similar_word": "Tripod"
+        "similar_word": "Tripod",
+        "hint": "Angle"
       },
       {
         "id": 93,
         "word": "Smartphone",
-        "similar_word": "Tablet"
+        "similar_word": "Tablet",
+        "hint": "Apps"
       },
       {
         "id": 99,
         "word": "Smartwatch",
-        "similar_word": "Fitness Tracker"
+        "similar_word": "Fitness Tracker",
+        "hint": "Fitness"
       },
       {
         "id": 216,
         "word": "Solar Panel",
-        "similar_word": "Wind Turbine"
+        "similar_word": "Wind Turbine",
+        "hint": "Sunlight"
       },
       {
         "id": 209,
         "word": "Speaker",
-        "similar_word": "Microphone"
+        "similar_word": "Microphone",
+        "hint": "Volume"
       },
       {
         "id": 205,
         "word": "Tablet",
-        "similar_word": "E-Reader"
+        "similar_word": "E-Reader",
+        "hint": "Touchscreen"
       },
       {
         "id": 95,
         "word": "Television",
-        "similar_word": "Projector"
+        "similar_word": "Projector",
+        "hint": "Broadcast"
       },
       {
         "id": 206,
         "word": "Video Game",
-        "similar_word": "Board Game"
+        "similar_word": "Board Game",
+        "hint": "Controller"
       },
       {
         "id": 106,
         "word": "Virtual Reality",
-        "similar_word": "Augmented Reality"
+        "similar_word": "Augmented Reality",
+        "hint": "Headset"
       },
       {
         "id": 103,
         "word": "Wi-Fi",
-        "similar_word": "Bluetooth"
+        "similar_word": "Bluetooth",
+        "hint": "Signal"
       }
     ]
   },
@@ -3228,122 +3846,146 @@
       {
         "id": 334,
         "word": "Airplane",
-        "similar_word": "Helicopter"
+        "similar_word": "Helicopter",
+        "hint": "Runway"
       },
       {
         "id": 341,
         "word": "Ambulance",
-        "similar_word": "Fire Truck"
+        "similar_word": "Fire Truck",
+        "hint": "Siren"
       },
       {
         "id": 333,
         "word": "Bicycle",
-        "similar_word": "Motorcycle"
+        "similar_word": "Motorcycle",
+        "hint": "Pedal"
       },
       {
         "id": 336,
         "word": "Boat",
-        "similar_word": "Ship"
+        "similar_word": "Ship",
+        "hint": "Harbor"
       },
       {
         "id": 352,
         "word": "Bulldozer",
-        "similar_word": "Excavator"
+        "similar_word": "Excavator",
+        "hint": "Rubble"
       },
       {
         "id": 332,
         "word": "Bus",
-        "similar_word": "Train"
+        "similar_word": "Train",
+        "hint": "Commute"
       },
       {
         "id": 350,
         "word": "Cable Car",
-        "similar_word": "Ski Lift"
+        "similar_word": "Ski Lift",
+        "hint": "Summit"
       },
       {
         "id": 353,
         "word": "Canoe",
-        "similar_word": "Kayak"
+        "similar_word": "Kayak",
+        "hint": "Paddle"
       },
       {
         "id": 331,
         "word": "Car",
-        "similar_word": "Van"
+        "similar_word": "Van",
+        "hint": "Highway"
       },
       {
         "id": 342,
         "word": "Fire Truck",
-        "similar_word": "Police Car"
+        "similar_word": "Police Car",
+        "hint": "Hose"
       },
       {
         "id": 351,
         "word": "Gondola",
-        "similar_word": "Rowboat"
+        "similar_word": "Rowboat",
+        "hint": "Venice"
       },
       {
         "id": 340,
         "word": "Helicopter",
-        "similar_word": "Airplane"
+        "similar_word": "Airplane",
+        "hint": "Rotor"
       },
       {
         "id": 347,
         "word": "Hot Air Balloon",
-        "similar_word": "Blimp"
+        "similar_word": "Blimp",
+        "hint": "Basket"
       },
       {
         "id": 339,
         "word": "Jeepney",
-        "similar_word": "Bus"
+        "similar_word": "Bus",
+        "hint": "Colorful"
       },
       {
         "id": 337,
         "word": "Motorcycle",
-        "similar_word": "Scooter"
+        "similar_word": "Scooter",
+        "hint": "Roar"
       },
       {
         "id": 348,
         "word": "Rocket",
-        "similar_word": "Space Shuttle"
+        "similar_word": "Space Shuttle",
+        "hint": "Launchpad"
       },
       {
         "id": 344,
         "word": "Skateboard",
-        "similar_word": "Scooter"
+        "similar_word": "Scooter",
+        "hint": "Wheels"
       },
       {
         "id": 349,
         "word": "Tank",
-        "similar_word": "Armored Truck"
+        "similar_word": "Armored Truck",
+        "hint": "Armored"
       },
       {
         "id": 338,
         "word": "Taxi",
-        "similar_word": "Limousine"
+        "similar_word": "Limousine",
+        "hint": "Fare"
       },
       {
         "id": 335,
         "word": "Train",
-        "similar_word": "Subway"
+        "similar_word": "Subway",
+        "hint": "Tracks"
       },
       {
         "id": 343,
         "word": "Tricycle",
-        "similar_word": "Pedicab"
+        "similar_word": "Pedicab",
+        "hint": "Sidecar"
       },
       {
         "id": 345,
         "word": "Truck",
-        "similar_word": "Van"
+        "similar_word": "Van",
+        "hint": "Cargo"
       },
       {
         "id": 346,
         "word": "Yacht",
-        "similar_word": "Sailboat"
+        "similar_word": "Sailboat",
+        "hint": "Luxury"
       },
       {
         "id": 354,
         "word": "Zeppelin",
-        "similar_word": "Hot Air Balloon"
+        "similar_word": "Hot Air Balloon",
+        "hint": "Blimp"
       }
     ]
   }

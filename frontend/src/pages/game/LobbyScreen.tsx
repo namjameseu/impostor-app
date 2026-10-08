@@ -42,7 +42,13 @@ export function LobbyScreen({ game, onUpdate }: ScreenProps) {
             : settings.categories.map((c) => c.name).join(', ')}
         </li>
         {settings.impostor_mode === 'classic' && (
-          <li>{settings.impostor_hint === 'category' ? 'Impostor sees the category' : 'No hint for the Impostor'}</li>
+          <li>
+            {settings.impostor_hint === 'category'
+              ? 'Impostor sees the category'
+              : settings.impostor_hint === 'word_hint'
+                ? 'Impostor gets a one-word hint'
+                : 'No hint for the Impostor'}
+          </li>
         )}
       </ul>
     </Screen>

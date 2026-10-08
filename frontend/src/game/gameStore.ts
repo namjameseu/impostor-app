@@ -194,6 +194,7 @@ function wordCandidatesFor(bank: BankCategory[], game: InternalGame): WordCandid
       category_id: c.id,
       category_name: c.name,
       similar_word: w.similar_word,
+      hint: w.hint,
     })),
   )
 }
@@ -221,6 +222,7 @@ async function generateRound(game: InternalGame): Promise<void> {
     word_id: word.id,
     secret_word: word.word,
     impostor_word: impostorWord,
+    word_hint: word.hint,
     starting_player_id: startingId,
     reveal_index: 0,
     suspect_ids: [],
@@ -263,6 +265,7 @@ export async function getPlayerRole(gameId: number, playerId: number): Promise<P
     secretWord: round.secret_word,
     category: round.category_name,
     impostorHint: game.impostor_hint,
+    wordHint: round.word_hint,
     fellowImpostors: fellows,
     impostorWord: similarMode ? round.impostor_word : null,
   }) as PlayerRole

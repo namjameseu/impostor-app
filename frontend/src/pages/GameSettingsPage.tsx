@@ -11,7 +11,6 @@ import { useAction } from '../hooks/useAction'
 import { useAdmin } from '../hooks/useAdmin'
 import { gameApi } from '../services/api'
 import { useSetup } from '../stores/setupContext'
-import { rememberGame } from '../utils/history'
 import { MIN_PLAYERS, maxImpostors, plural } from '../utils/players'
 import { BackHeader } from './PlayerSetupPage'
 
@@ -68,7 +67,6 @@ export function GameSettingsPage() {
       )
       await gameApi.start(created.id)
       setActiveGameId(created.id)
-      rememberGame(created.id)
       navigate(`/game/${created.id}`)
     })
 
@@ -157,6 +155,7 @@ export function GameSettingsPage() {
         onChange={(impostor_hint) => setSettings({ ...settings, impostor_hint })}
         options={[
           { value: 'category', label: 'Show category', hint: 'Easier' },
+          { value: 'word_hint', label: 'Word hint', hint: 'One loose clue word' },
           { value: 'none', label: 'No hint', hint: 'Harder' },
         ]}
       />

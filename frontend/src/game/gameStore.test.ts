@@ -9,27 +9,27 @@ const WORD_BANK: BankCategory[] = [
     id: 1,
     name: 'Animals',
     words: [
-      { id: 101, word: 'Quokka', similar_word: null },
-      { id: 102, word: 'Axolotl', similar_word: null },
-      { id: 103, word: 'Pangolin', similar_word: null },
+      { id: 101, word: 'Quokka', similar_word: null, hint: 'Marsupial' },
+      { id: 102, word: 'Axolotl', similar_word: null, hint: 'Amphibian' },
+      { id: 103, word: 'Pangolin', similar_word: null, hint: 'Scaly' },
     ],
   },
   {
     id: 2,
     name: 'Food',
     words: [
-      { id: 201, word: 'Bibingka', similar_word: null },
-      { id: 202, word: 'Gnocchi', similar_word: null },
-      { id: 203, word: 'Tamale', similar_word: null },
+      { id: 201, word: 'Bibingka', similar_word: null, hint: 'Rice' },
+      { id: 202, word: 'Gnocchi', similar_word: null, hint: 'Potato' },
+      { id: 203, word: 'Tamale', similar_word: null, hint: 'Corn' },
     ],
   },
   {
     id: 3,
     name: 'Places',
     words: [
-      { id: 301, word: 'Zanzibar', similar_word: null },
-      { id: 302, word: 'Kathmandu', similar_word: null },
-      { id: 303, word: 'Reykjavik', similar_word: null },
+      { id: 301, word: 'Zanzibar', similar_word: null, hint: 'Island' },
+      { id: 302, word: 'Kathmandu', similar_word: null, hint: 'Himalayas' },
+      { id: 303, word: 'Reykjavik', similar_word: null, hint: 'Iceland' },
     ],
   },
 ]
@@ -131,7 +131,7 @@ describe('role reveal and secrecy', () => {
     expect(ALL_WORDS).toContain((players[0] as { word: string }).word)
   })
 
-  it.each(['category', 'none'] as const)(
+  it.each(['category', 'word_hint', 'none'] as const)(
     "never puts the word in the Impostor's role (hint=%s)",
     async (hint) => {
       const game = await start((await createGame(NAMES, { impostor_hint: hint })).id)
@@ -140,9 +140,19 @@ describe('role reveal and secrecy', () => {
       expect('word' in impostorRole).toBe(false)
       assertNoSecretWord(impostorRole)
       if (hint === 'none') expect(impostorRole).toEqual({ role: 'impostor' })
+      else if (hint === 'word_hint') expect(Object.keys(impostorRole).sort()).toEqual(['hint', 'role'])
       else expect(Object.keys(impostorRole).sort()).toEqual(['category', 'role'])
     },
   )
+
+  it('gives the Impostor the curated word hint, matching the secret word drawn', async () => {
+    const game = await start((await createGame(NAMES, { impostor_hint: 'word_hint' })).id)
+    const { roles } = await revealAllRoles(game)
+    const impostorRole = Object.values(roles).find((r) => r.role === 'impostor') as { hint?: string }
+    expect(impostorRole.hint).toBeTruthy()
+    const expected = WORD_BANK.flatMap((c) => c.words).find((w) => w.hint === impostorRole.hint)
+    expect(expected).toBeTruthy()
+  })
 
   it('hides secrets from the public game view until reveal', async () => {
     const created = await createGame()

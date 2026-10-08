@@ -5,7 +5,6 @@ import { HomePage } from './pages/HomePage'
 import { LibraryPage } from './pages/LibraryPage'
 import { PlayerSetupPage } from './pages/PlayerSetupPage'
 import { UpdatePrompt } from './components/UpdatePrompt'
-import { StatsPage } from './pages/StatsPage'
 import { SetupProvider } from './stores/setupStore'
 
 export default function App() {
@@ -19,7 +18,6 @@ export default function App() {
           <Route path="/settings" element={<GameSettingsPage />} />
           <Route path="/game/:gameId" element={<GamePage />} />
           <Route path="/library" element={<LibraryPage />} />
-          <Route path="/stats" element={<StatsPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>

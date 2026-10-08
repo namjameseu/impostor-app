@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { Button } from '../../components/Button'
 import { ErrorMessage } from '../../components/ErrorMessage'
 import { BigName, Kicker, Screen } from '../../components/Screen'
@@ -9,7 +9,6 @@ import { gameApi } from '../../services/api'
 import { useSetup } from '../../stores/setupContext'
 import type { GameResults } from '../../types/api'
 import { feedback } from '../../utils/feedback'
-import { rememberGame } from '../../utils/history'
 import { revealAboveActions } from '../../utils/scroll'
 import type { ScreenProps } from './types'
 
@@ -33,7 +32,6 @@ export function GameResultsScreen({ game }: ScreenProps) {
     run(async () => {
       const next = await gameApi.playAgain(game.id)
       setActiveGameId(next.id)
-      rememberGame(next.id)
       navigate(`/game/${next.id}`)
     })
 
@@ -73,12 +71,6 @@ export function GameResultsScreen({ game }: ScreenProps) {
         )}
       </div>
       {!results && !resultsLoad.error && <Loading label="Tallying scores…" />}
-      <Link
-        to="/stats"
-        className="-my-2 text-center text-sm font-extrabold text-muted underline-offset-4 hover:text-white hover:underline"
-      >
-        📊 All-time player stats
-      </Link>
       <ol className="flex flex-col gap-2">
         {results?.standings.map((standing, index) => (
           <li

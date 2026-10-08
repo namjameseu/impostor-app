@@ -1,5 +1,4 @@
 import * as gameStore from '../game/gameStore'
-import * as statsStore from '../game/stats'
 import type {
   Category,
   CategoryInput,
@@ -90,10 +89,6 @@ export const adminApi = {
 
 // Gameplay runs entirely on-device (see frontend/src/game/) — no network calls, so it works
 // fully offline. Only the word library (above) and admin passcode still talk to the server.
-export const statsApi = {
-  forGames: statsStore.playerStats,
-}
-
 export const gameApi = {
   create: gameStore.createGame,
   get: gameStore.getGame,

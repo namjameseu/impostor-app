@@ -1,4 +1,7 @@
+import re
+
 from app.db.seed_data import SEED_DATA
+from app.db.seed_hints import WORD_HINTS
 from app.db.seed_similar import SIMILAR_WORDS
 from app.models.word import DIFFICULTIES
 
@@ -27,3 +30,18 @@ def test_every_seed_word_has_a_similar_word():
         for word, related in similar.items():
             assert related.strip() and related.casefold() != word.casefold(), f"{name}: {word}"
             assert len(related) <= 80
+
+
+def test_every_seed_word_has_a_hint():
+    for name, (_, words_by_difficulty) in SEED_DATA.items():
+        words = {w for ws in words_by_difficulty.values() for w in ws}
+        hints = WORD_HINTS.get(name, {})
+        assert set(hints) == words, (
+            f"{name}: missing {words - set(hints)}, extra {set(hints) - words}"
+        )
+        for word, hint in hints.items():
+            assert hint.strip() and len(hint) <= 40, f"{name}: {word}"
+            assert " " not in hint, f"{name}: {word} hint {hint!r} is not a single word"
+            # The hint must not give away the word itself (as a whole word, e.g. not
+            # flagging "ear" for appearing inside "hear").
+            assert not re.search(rf"\b{re.escape(word)}\b", hint, re.IGNORECASE), f"{name}: {word}"

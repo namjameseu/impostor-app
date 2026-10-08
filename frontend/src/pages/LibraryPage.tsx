@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState, type FormEvent } from 'react'
+import { useCallback, useEffect, useState, type FormEvent, type ReactNode } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button } from '../components/Button'
 import { ErrorMessage } from '../components/ErrorMessage'
@@ -22,6 +22,19 @@ const DIFFICULTY_STYLES: Record<Difficulty, string> = {
 
 const selectClass =
   'min-h-12 w-full rounded-xl border-2 border-line bg-panel px-3 font-bold text-white focus:border-accent focus:outline-none'
+
+const fieldLabelClass = 'text-xs font-extrabold tracking-widest text-muted uppercase'
+
+/** Plain inputs look identical once filled in (placeholders only show when empty), so
+ * fields that aren't self-evident get a persistent label above them. */
+function LabeledField({ label, children }: { label: string; children: ReactNode }) {
+  return (
+    <div className="flex flex-col gap-1">
+      <span className={fieldLabelClass}>{label}</span>
+      {children}
+    </div>
+  )
+}
 
 export function LibraryPage() {
   const navigate = useNavigate()
@@ -118,6 +131,7 @@ function WordsTab({
   const [categoryId, setCategoryId] = useState<number | ''>('')
   const [difficulty, setDifficulty] = useState<Difficulty | ''>('')
   const [editing, setEditing] = useState<Word | 'new' | null>(null)
+  const [deleting, setDeleting] = useState<Word | null>(null)
   const [loaded, setLoaded] = useState(false)
   const { run, pending, error } = useAction()
 
@@ -152,10 +166,11 @@ function WordsTab({
       refresh()
     })
 
-  const remove = (word: Word) => {
-    if (!window.confirm(`Delete "${word.word}"? Disabling keeps it for later.`)) return
+  const confirmDelete = () => {
+    if (!deleting) return
     run(async () => {
-      await libraryApi.deleteWord(word.id)
+      await libraryApi.deleteWord(deleting.id)
+      setDeleting(null)
       refresh()
     })
   }
@@ -216,19 +231,14 @@ function WordsTab({
             className={`flex items-center gap-3 rounded-xl bg-panel px-4 py-3 ${word.enabled ? '' : 'opacity-50'}`}
           >
             <div className="min-w-0 flex-1">
-              <p className="truncate text-lg font-extrabold">
-                {word.word}
-                {word.similar_word && (
-                  <span className="ml-2 text-sm font-bold text-muted" title="Similar word mode">
-                    ≈ {word.similar_word}
-                  </span>
-                )}
-              </p>
+              <p className="truncate text-lg font-extrabold">{word.word}</p>
               <p className="flex flex-wrap items-center gap-2 text-xs font-bold text-muted">
                 {word.category_name}
                 <span className={`rounded-full px-2 py-0.5 capitalize ${DIFFICULTY_STYLES[word.difficulty]}`}>
                   {word.difficulty}
                 </span>
+                {word.similar_word && <span>Similar: {word.similar_word}</span>}
+                {word.hint && <span>Hint: {word.hint}</span>}
                 {!word.enabled && <span>Disabled</span>}
               </p>
             </div>
@@ -237,7 +247,7 @@ function WordsTab({
               enabled={word.enabled}
               onToggle={() => toggle(word)}
               onEdit={() => setEditing(word)}
-              onDelete={() => remove(word)}
+              onDelete={() => setDeleting(word)}
             />
           </li>
         ))}
@@ -254,6 +264,24 @@ function WordsTab({
             refresh()
           }}
         />
+      )}
+
+      {deleting && (
+        <Modal title="Delete word?" onClose={() => setDeleting(null)}>
+          <p className="mb-5 text-lg font-bold text-muted">
+            Delete <span className="font-extrabold text-white">&quot;{deleting.word}&quot;</span>? Disabling keeps
+            it for later.
+          </p>
+          <ErrorMessage error={error} />
+          <div className="grid grid-cols-2 gap-3">
+            <Button variant="secondary" size="md" onClick={() => setDeleting(null)} disabled={pending}>
+              Cancel
+            </Button>
+            <Button variant="danger" size="md" onClick={confirmDelete} loading={pending}>
+              Delete
+            </Button>
+          </div>
+        </Modal>
       )}
     </div>
   )
@@ -276,6 +304,7 @@ function WordForm({
   const [categoryId, setCategoryId] = useState(word?.category_id ?? defaultCategoryId ?? 0)
   const [difficulty, setDifficulty] = useState<Difficulty>(word?.difficulty ?? 'medium')
   const [similar, setSimilar] = useState(word?.similar_word ?? '')
+  const [hint, setHint] = useState(word?.hint ?? '')
   const { run, pending, error } = useAction()
 
   const save = (e: FormEvent) => {
@@ -285,6 +314,7 @@ function WordForm({
       category_id: categoryId,
       difficulty,
       similar_word: similar.trim() || null,
+      hint: hint.trim() || null,
     }
     run(async () => {
       if (word) await libraryApi.updateWord(word.id, data)
@@ -305,14 +335,26 @@ function WordForm({
           aria-label="Word"
           className={inputClass}
         />
-        <input
-          value={similar}
-          onChange={(e) => setSimilar(e.target.value)}
-          placeholder="Similar word (optional), e.g. Puffin"
-          maxLength={80}
-          aria-label="Similar word"
-          className={inputClass}
-        />
+        <LabeledField label="Similar word (Similar Word mode)">
+          <input
+            value={similar}
+            onChange={(e) => setSimilar(e.target.value)}
+            placeholder="Optional, e.g. Puffin"
+            maxLength={80}
+            aria-label="Similar word"
+            className={inputClass}
+          />
+        </LabeledField>
+        <LabeledField label="Word hint (Word Hint mode)">
+          <input
+            value={hint}
+            onChange={(e) => setHint(e.target.value)}
+            placeholder="Optional, one loose word, e.g. Antarctica"
+            maxLength={40}
+            aria-label="Word hint"
+            className={inputClass}
+          />
+        </LabeledField>
         <select
           value={categoryId}
           onChange={(e) => setCategoryId(Number(e.target.value))}

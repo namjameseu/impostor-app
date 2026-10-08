@@ -63,7 +63,6 @@ function ThemePicker({ onClose }: { onClose: () => void }) {
           )
         })}
       </div>
-      <p className="mt-4 text-center text-sm font-bold text-muted">Saved on this device.</p>
     </Modal>
   )
 }

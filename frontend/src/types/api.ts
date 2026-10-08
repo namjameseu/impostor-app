@@ -1,6 +1,6 @@
 export type Difficulty = 'easy' | 'medium' | 'hard'
 export type CategoryMode = 'random' | 'specific'
-export type ImpostorHint = 'none' | 'category'
+export type ImpostorHint = 'none' | 'category' | 'word_hint'
 export type ImpostorMode = 'classic' | 'similar_word'
 export type RoundOutcome = 'group_wins' | 'impostors_win' | 'split'
 
@@ -40,6 +40,8 @@ export interface Word {
   enabled: boolean
   /** Related word for Similar Word mode. */
   similar_word: string | null
+  /** A single loosely-associated word for Word Hint mode. */
+  hint: string | null
   created_at: string
   updated_at: string
 }
@@ -50,6 +52,7 @@ export interface WordInput {
   difficulty: Difficulty
   enabled?: boolean
   similar_word?: string | null
+  hint?: string | null
 }
 
 export interface WordFilters {
@@ -111,7 +114,7 @@ export interface Game {
 
 export type PlayerRole =
   | { role: 'player'; category: string; word: string }
-  | { role: 'impostor'; category?: string; fellow_impostors?: string[] }
+  | { role: 'impostor'; category?: string; hint?: string; fellow_impostors?: string[] }
 
 export interface Standing {
   rank: number
@@ -137,22 +140,4 @@ export interface GameResults {
   state: GameState
   standings: Standing[]
   rounds: RoundSummary[]
-}
-
-export interface PlayerStats {
-  name: string
-  games: number
-  wins: number
-  rounds: number
-  points: number
-  impostor_rounds: number
-  escaped: number
-  caught: number
-  guessed_word: number
-}
-
-export interface Stats {
-  games: number
-  finished_games: number
-  players: PlayerStats[]
 }

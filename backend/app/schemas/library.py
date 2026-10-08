@@ -6,6 +6,7 @@ from pydantic import BaseModel, ConfigDict, Field, StringConstraints
 Difficulty = Literal["easy", "medium", "hard"]
 CategoryName = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=50)]
 WordText = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=80)]
+HintText = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=40)]
 
 
 class CategoryCreate(BaseModel):
@@ -38,6 +39,7 @@ class WordCreate(BaseModel):
     difficulty: Difficulty = "medium"
     enabled: bool = True
     similar_word: WordText | None = None
+    hint: HintText | None = None
 
 
 class WordUpdate(BaseModel):
@@ -46,6 +48,7 @@ class WordUpdate(BaseModel):
     difficulty: Difficulty | None = None
     enabled: bool | None = None
     similar_word: WordText | None = None
+    hint: HintText | None = None
 
 
 class WordRead(BaseModel):
@@ -58,5 +61,6 @@ class WordRead(BaseModel):
     difficulty: Difficulty
     enabled: bool
     similar_word: str | None
+    hint: str | None
     created_at: datetime
     updated_at: datetime

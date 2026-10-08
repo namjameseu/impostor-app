@@ -6,6 +6,7 @@ export interface BankWord {
   id: number
   word: string
   similar_word: string | null
+  hint: string | null
 }
 
 export interface BankCategory {

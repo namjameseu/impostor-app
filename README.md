@@ -13,7 +13,6 @@ Features:
 - Vote confirmation, sound and vibration on the reveals (with a mute toggle; private role
   screens only ever use the same neutral buzz for everyone).
 - Players can leave or join between rounds; past rounds keep their saved points.
-- Player stats (wins, points, best liar, ...) from the games played on each device.
 
 - **frontend/** – React + TypeScript + Vite + Tailwind CSS (http://localhost:5173)
 - **backend/** – FastAPI + SQLAlchemy + Alembic (http://localhost:8000, API docs at `/docs`)
@@ -188,7 +187,6 @@ at the word. Points are worked out per Impostor and added together:
 | GET | `/api/games/{id}/results` | standings + round history |
 | POST | `/api/games/{id}/players` | `{"name": ...}` late arrival (setup / between rounds) |
 | DELETE | `/api/games/{id}/players/{pid}` | player leaves (setup / between rounds); history kept |
-| GET | `/api/stats?game_ids=1&game_ids=2` | player stats across those games |
 | GET | `/api/admin/status` | whether library edits need a passcode |
 | POST | `/api/admin/verify` | check a passcode (send it as `X-Admin-Passcode` on library edits) |
 | POST | `/api/games/{id}/play-again` | new game, same players and settings |

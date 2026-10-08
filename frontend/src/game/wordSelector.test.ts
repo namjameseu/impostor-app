@@ -4,9 +4,9 @@ import { chooseImpostorWord, selectWord, type WordCandidate } from './wordSelect
 
 function candidates(): WordCandidate[] {
   return [
-    { id: 1, word: 'Penguin', category_id: 1, category_name: 'Animals', similar_word: null },
-    { id: 2, word: 'Dolphin', category_id: 1, category_name: 'Animals', similar_word: null },
-    { id: 3, word: 'Pizza', category_id: 2, category_name: 'Food', similar_word: null },
+    { id: 1, word: 'Penguin', category_id: 1, category_name: 'Animals', similar_word: null, hint: null },
+    { id: 2, word: 'Dolphin', category_id: 1, category_name: 'Animals', similar_word: null, hint: null },
+    { id: 3, word: 'Pizza', category_id: 2, category_name: 'Food', similar_word: null, hint: null },
   ]
 }
 
@@ -47,6 +47,7 @@ describe('chooseImpostorWord', () => {
       category_id: 1,
       category_name: 'Animals',
       similar_word: 'Puffin',
+      hint: null,
     }
     expect(chooseImpostorWord(penguin, candidates())).toBe('Puffin')
   })
@@ -58,6 +59,7 @@ describe('chooseImpostorWord', () => {
       category_id: 1,
       category_name: 'Animals',
       similar_word: null,
+      hint: null,
     }
     for (let i = 0; i < 50; i++) {
       expect(chooseImpostorWord(penguin, candidates())).toBe('Dolphin')
@@ -71,6 +73,7 @@ describe('chooseImpostorWord', () => {
       category_id: 1,
       category_name: 'Animals',
       similar_word: 'penguin',
+      hint: null,
     }
     expect(chooseImpostorWord(penguin, candidates())).toBe('Dolphin')
   })
@@ -82,6 +85,7 @@ describe('chooseImpostorWord', () => {
       category_id: 2,
       category_name: 'Food',
       similar_word: null,
+      hint: null,
     }
     expect(['Penguin', 'Dolphin']).toContain(chooseImpostorWord(pizza, candidates()))
     expect(() => chooseImpostorWord(pizza, [pizza])).toThrow(GameValidationError)

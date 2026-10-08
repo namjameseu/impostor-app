@@ -118,6 +118,7 @@ function RoleCard({ role, impostorCount }: { role: PlayerRole; impostorCount: nu
           {impostorCount > 1 ? 'You are an Impostor' : 'You are the Impostor'}
         </p>
         {role.category && <p className="text-lg font-extrabold">Category: {role.category}</p>}
+        {role.hint && <p className="text-lg font-extrabold">Hint: {role.hint}</p>}
         {role.fellow_impostors && role.fellow_impostors.length > 0 ? (
           <div className="rounded-xl border border-impostor/50 bg-impostor/10 px-4 py-2">
             <p className="text-xs font-extrabold tracking-widest text-muted uppercase">

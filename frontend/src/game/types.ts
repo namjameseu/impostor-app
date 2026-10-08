@@ -30,6 +30,8 @@ export interface InternalRound {
   word_id: number | null
   secret_word: string
   impostor_word: string | null
+  /** A single loosely-associated word for Word Hint mode; snapshotted like the rest of the round. */
+  word_hint: string | null
   starting_player_id: number
   reveal_index: number
   suspect_ids: number[]

@@ -50,20 +50,12 @@ export function HomePage() {
               <span className="text-white">Add to Home Screen</span>
             </p>
           )}
-          <div className="grid grid-cols-2">
-            <Link
-              to="/library"
-              className="flex min-h-14 items-center justify-center font-display text-base tracking-wide text-muted uppercase hover:text-white"
-            >
-              Word library
-            </Link>
-            <Link
-              to="/stats"
-              className="flex min-h-14 items-center justify-center font-display text-base tracking-wide text-muted uppercase hover:text-white"
-            >
-              Player stats
-            </Link>
-          </div>
+          <Link
+            to="/library"
+            className="flex min-h-14 items-center justify-center font-display text-base tracking-wide text-muted uppercase hover:text-white"
+          >
+            Word library
+          </Link>
         </>
       }
     >

@@ -28,6 +28,8 @@ export interface RoleView {
   role: 'player' | 'impostor'
   category?: string
   word?: string
+  /** A single loosely-associated word, shown in "Word hint" mode. */
+  hint?: string
   /** Other Impostors' names; only ever given to an Impostor. */
   fellow_impostors?: string[]
 }
@@ -42,16 +44,18 @@ export function buildRoleView(opts: {
   secretWord: string
   category: string
   impostorHint: ImpostorHint
+  wordHint?: string | null
   fellowImpostors?: string[]
   impostorWord?: string | null
 }): RoleView {
-  const { isImpostor, secretWord, category, impostorHint, fellowImpostors, impostorWord } = opts
+  const { isImpostor, secretWord, category, impostorHint, wordHint, fellowImpostors, impostorWord } = opts
   if (isImpostor && impostorWord != null) {
     return { role: 'player', category, word: impostorWord }
   }
   if (isImpostor) {
     const view: RoleView = { role: 'impostor' }
     if (impostorHint === 'category') view.category = category
+    if (impostorHint === 'word_hint' && wordHint) view.hint = wordHint
     if (fellowImpostors !== undefined) view.fellow_impostors = fellowImpostors
     return view
   }
